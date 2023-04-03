@@ -5,7 +5,6 @@
 <style>
 .img-container{
     text-align: center;
-
 }
 line{
   border: 1px solid black;

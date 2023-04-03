@@ -11,11 +11,11 @@ import LocationModel.Location;
 public class InitialData {
 	public static List<Location> getAuthors() throws IOException {
 		List<Location> LocationList = new ArrayList<Location>();
-		ReadCSV readAuthors = new ReadCSV("authors.csv");
+		ReadCSV readLocations = new ReadCSV("Locations.csv");
 		try {
 			
 			while (true) {
-				List<String> tuple = readAuthors.next();
+				List<String> tuple = readLocations.next();
 				if (tuple == null) {
 					break;
 				}
@@ -33,7 +33,7 @@ public class InitialData {
 			}
 			return LocationList;
 		} finally {
-			readAuthors.close();
+			readLocations.close();
 		}
 	}
 }

@@ -51,7 +51,7 @@ public class GetLocation {
 				FactorsSatisfied ++;
 			}
 			//check to see if cost of living factor is satisfied
-			if(CurrentLocation.getCostOfLiving() <= CostOfLivingFactor && CurrentLocation.getCostOfLiving() >= (CrimeFactor - 15)) {
+			if(CurrentLocation.getCostOfLiving() <= CostOfLivingFactor && CurrentLocation.getCostOfLiving() >= (CostOfLivingFactor - 15)) {
 				FactorsSatisfied ++;
 			}
 			

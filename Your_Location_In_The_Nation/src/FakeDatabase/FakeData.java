@@ -1,6 +1,7 @@
 package FakeDatabase;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,4 +32,9 @@ public class FakeData {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
 	}
+	
+	public ArrayList<Location> getLocationList() {
+		return (ArrayList<Location>) LocationList;
+	}
+	
 }

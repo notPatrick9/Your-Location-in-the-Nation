@@ -14,7 +14,7 @@ public class ReadCSV implements Closeable {
 	
 	public ReadCSV(String resourceName) throws IOException {
 		//LocationDatares is the package that contains the location data CSV file
-		InputStream in = this.getClass().getClassLoader().getResourceAsStream("LocationDatares" + resourceName);
+		InputStream in = this.getClass().getClassLoader().getResourceAsStream("LocationDatares/" + resourceName);
 		if (in == null) {
 			throw new IOException("Couldn't open " + resourceName);
 		}
