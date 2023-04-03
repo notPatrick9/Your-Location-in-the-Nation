@@ -53,8 +53,8 @@ public class AboutTheArea {
 		
 		String jsonInputString = "{\r\n"
 				+ "    \"model\": \"text-davinci-003\",\r\n"
-				+ "    \"prompt\": \"Give information and fun things to do for the zipcode " + Zipcode +"\",\r\n"
-				+ "    \"max_tokens\": 200,\r\n"
+				+ "    \"prompt\": \"Give information and fun things to do for the zipcode " + Zipcode +"dont include name of the town its in\",\r\n"
+				+ "    \"max_tokens\": 350,\r\n"
 				+ "    \"temperature\": 0\r\n"
 				+ "  }";
 		
