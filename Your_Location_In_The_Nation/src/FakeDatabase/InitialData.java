@@ -9,7 +9,7 @@ import LocationModel.Location;
 
 //need to implement later
 public class InitialData {
-	public static List<Location> getAuthors() throws IOException {
+	public static List<Location> getLocations() throws IOException {
 		List<Location> LocationList = new ArrayList<Location>();
 		ReadCSV readLocations = new ReadCSV("Locations.csv");
 		try {

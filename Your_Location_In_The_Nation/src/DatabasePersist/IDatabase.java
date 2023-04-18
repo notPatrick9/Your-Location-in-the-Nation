@@ -2,9 +2,7 @@ package DatabasePersist;
 
 import java.util.List;
 
-import edu.ycp.cs320.booksdb.model.Author;
-import edu.ycp.cs320.booksdb.model.Book;
-import edu.ycp.cs320.booksdb.model.Pair;
+//This interface will include all of the functions we use for our database operations
 
 public interface IDatabase {
 	

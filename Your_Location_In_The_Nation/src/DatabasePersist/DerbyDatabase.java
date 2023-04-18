@@ -10,10 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import edu.ycp.cs320.booksdb.model.Author;
-import edu.ycp.cs320.booksdb.model.Book;
-import edu.ycp.cs320.booksdb.model.Pair;
-import edu.ycp.cs320.sqldemo.DBUtil;
+import FakeDatabase.InitialData;
+import LocationModel.Location;
+
 
 public class DerbyDatabase implements IDatabase {
 	static {
@@ -33,153 +32,7 @@ public class DerbyDatabase implements IDatabase {
 	
 	
 	@SuppressWarnings("resource")
-	public boolean InsertNewBookAndAuthor(String firstname, String lastname, String title, String ISBN, int year) throws Exception{
-		// load Derby JDBC driver
-			try {
-				Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-			} catch (Exception e) {
-				System.err.println("Could not load Derby JDBC driver");
-				System.err.println(e.getMessage());
-				System.exit(1);
-			}
-
-			Connection conn = null;
-			PreparedStatement stmt = null;
-			ResultSet resultSet = null;
-
-			boolean Insert = true;
-			int author_id = 0;
-			
-			
-			try {
-				// connect to the database
-				conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
-			}
-			catch(SQLException e) {
-				System.err.println("Bad Connection");
-			}
-
-			
-			
-			
-			try {
-				conn.setAutoCommit(true);
-				// a canned query to find book information (including author name) from title
-				stmt = conn.prepareStatement(
-						"select authors.author_id "
-						+ "from authors "
-						+ "where authors.lastname = ? and authors.firstname = ?"
-				);
-
-				// substitute the title entered by the user for the placeholder in the query
-				stmt.setString(1, lastname);
-				stmt.setString(2, firstname);
-				
-				
-
-				// execute the query
-				resultSet = stmt.executeQuery();
-				
-				if(resultSet.next()) {
-					author_id = resultSet.getInt(1);
-				}
-				else {
-					try {
-						stmt = conn.prepareStatement(
-								"insert into authors(lastname, firstname) "
-								+ "values (?, ?)"
-						);
-						stmt.setString(1, lastname);
-						stmt.setString(2, firstname);
-						stmt.execute();
-					
-					}
-					catch(SQLException e) {
-						System.err.println("Error insertint new author");
-					}
-					finally {
-						
-					}
-					
-					try {
-						stmt = conn.prepareStatement(
-								"select authors.author_id "
-								+ "from authors "
-								+ "where authors.lastname = ? and authors.firstname = ?"
-								);
-						// substitute the title entered by the user for the placeholder in the query
-						stmt.setString(1, lastname);
-						stmt.setString(2, firstname);
-						
-						
-
-						// execute the query
-						resultSet = stmt.executeQuery();
-						
-						if(resultSet.next()) {
-							author_id = resultSet.getInt(1);
-						}
-					
-					}
-					catch(SQLException e) {
-						System.err.println("Error getting new author_id");
-					}
-					finally {
-						
-					}
-					
-						
-				}
-				
-				
-			}
-			
-			finally {
-				// close result set, statement, connection
-				DBUtil.closeQuietly(resultSet);
-				DBUtil.closeQuietly(stmt);
-				DBUtil.closeQuietly(conn);
-			}
-			
-			try {
-					
-				conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
-				conn.setAutoCommit(true);
-				// a canned query to find book information (including author name) from title
-				stmt = conn.prepareStatement(
-						"insert into books(author_id, title, ISBN, published) "
-						+ "values (?, ?, ?, ?)"
-				);
-
-				// substitute the title entered by the user for the placeholder in the query
-				
-				stmt.setInt(1, author_id);
-				stmt.setString(2, title);
-				stmt.setString(3, ISBN);
-				stmt.setInt(4, year);
-				
-
-				// execute the query
-				Insert = stmt.execute();
-				
-				
-				
-				
-			}
-			catch(SQLException e) {
-				System.err.println("Error insertint new author into books table");
-			}
-			finally {
-				// close result set, statement, connection
-				DBUtil.closeQuietly(resultSet);
-				DBUtil.closeQuietly(stmt);
-				DBUtil.closeQuietly(conn);
-			}
-
-			return Insert;
-		
-			
-		}
+	
 	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
@@ -233,21 +86,17 @@ public class DerbyDatabase implements IDatabase {
 		
 		return conn;
 	}
-	
+	//need to reimplement this function for Locations to load a location
+	/*
 	private void loadAuthor(Author author, ResultSet resultSet, int index) throws SQLException {
 		author.setAuthorId(resultSet.getInt(index++));
 		author.setLastname(resultSet.getString(index++));
 		author.setFirstname(resultSet.getString(index++));
 	}
+	*/
 	
-	private void loadBook(Book book, ResultSet resultSet, int index) throws SQLException {
-		book.setBookId(resultSet.getInt(index++));
-		book.setAuthorId(resultSet.getInt(index++));
-		book.setTitle(resultSet.getString(index++));
-		book.setIsbn(resultSet.getString(index++));
-		book.setPublished(resultSet.getInt(index++));		
-	}
-	
+	//need to reimplement this function for all of our tables 
+	/*
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
@@ -286,17 +135,18 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	
+	*/
+	//need to reimplement this for all of our tables
+	/*
 	public void loadInitialData() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
-				List<Author> authorList;
-				List<Book> bookList;
+				List<Location> LocationList;
+				
 				
 				try {
-					authorList = InitialData.getAuthors();
-					bookList = InitialData.getBooks();
+					LocationList = InitialData.getLocations();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -336,7 +186,8 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	
+	*/
+	/*
 	// The main method creates the database tables and loads the initial data.
 	public static void main(String[] args) throws IOException {
 		System.out.println("Creating tables...");
@@ -348,4 +199,5 @@ public class DerbyDatabase implements IDatabase {
 		
 		System.out.println("Success!");
 	}
+	*/
 }

@@ -26,7 +26,7 @@ public class FakeData {
 
 	public void readInitialData() {
 		try {
-			LocationList.addAll(InitialData.getAuthors());
+			LocationList.addAll(InitialData.getLocations());
 			
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
