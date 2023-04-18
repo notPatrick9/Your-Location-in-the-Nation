@@ -17,7 +17,7 @@ line{
 <body>
 
  
- <a href="/Lab_1/welcomeG.html">
+ <a href="welcomeG.html">
  <p>Home</p>
  </a>
 <h1>Results!</h1>

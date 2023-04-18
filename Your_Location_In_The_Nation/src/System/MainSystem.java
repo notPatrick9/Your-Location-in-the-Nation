@@ -17,7 +17,7 @@ public class MainSystem {
 		FakeData Database  = new FakeData();
 		List<Location> LocationList = new ArrayList<Location>();
 		//get list of locations
-		LocationList = Database.getLocationList();
+		LocationList = Database.getLocationList();                                                   //copy
 		
 		//System.out.print(LocationList.get(0).getCrimeRate());
 		//get user input
@@ -87,7 +87,7 @@ public class MainSystem {
 		//call constructor for GetLocation, giving it user input, and location database list
 		GetLocation Locationgetter = new GetLocation(CrimeRateFactor, AveragesalaryFactor, CostOfLivingFactor, LocationList);
 		//get the best Location based on user input
-		Location bestlocation = Locationgetter.FindBestLocation();
+		Location bestlocation = Locationgetter.FindBestLocation();   //copy 2 above
 		
 		//ensure that a location was returned
 		if(bestlocation != null) {
