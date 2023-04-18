@@ -7,7 +7,9 @@ public class Location {
 	private String County;
 	private String City;
 	private String State;
-	private int CostOfLiving;
+	private int CostOfLivingRent;
+	private int CostOfLivingOwnWithMortgage;
+	private int CostOfLivingOwnNoMortgage;
 	private int AvgSalary;
 	private int CrimeRate;
 	
@@ -26,11 +28,23 @@ public class Location {
 	public void setAvgSalaryPerHouse(int avgSalary) {
 		AvgSalary = avgSalary;
 	}
-	public int getCostOfLiving() {
-		return CostOfLiving;
+	public int getCostOfLivingRent() {
+		return CostOfLivingRent;
 	}
-	public void setCostOfLiving(int costOfLiving) {
-		CostOfLiving = costOfLiving;
+	public void setCostOfLivingRent(int costOfLiving) {
+		CostOfLivingRent = costOfLiving;
+	}
+	public int getCostOfLivingOwnWithMortgage() {
+		return CostOfLivingOwnWithMortgage;
+	}
+	public void setCostOfLivingOwnWithMortgage(int costOfLiving) {
+		CostOfLivingOwnWithMortgage = costOfLiving;
+	}
+	public int getCostOfLivingOwnNoMortgage() {
+		return CostOfLivingOwnNoMortgage;
+	}
+	public void setCostOfLivingOwnNoMortgage(int costOfLiving) {
+		CostOfLivingOwnNoMortgage = costOfLiving;
 	}
 	public String getCounty() {
 		return County;
