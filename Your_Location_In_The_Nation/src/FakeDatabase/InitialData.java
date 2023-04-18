@@ -31,7 +31,7 @@ public class InitialData {
 				Loc.setCostOfLivingOwnNoMortgage(Integer.parseInt(i.next()));
 				Loc.setCrimeRate(Integer.parseInt(i.next()));
 				Loc.setRegion(i.next());
-				Loc.setPopulation(Integer.parseInt(i.next()));
+				Loc.setPopulation(i.next());
 				
 				LocationList.add(Loc);
 			}

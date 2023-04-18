@@ -8,12 +8,12 @@ public class Location {
 	private String City;
 	private String State;
 	private String Region;
+	private String Population;
 	private int CostOfLivingRent;
 	private int CostOfLivingOwnWithMortgage;
 	private int CostOfLivingOwnNoMortgage;
 	private int AvgSalary;
 	private int CrimeRate;
-	private int Population;
 	
 	public Location() {
 		
@@ -78,10 +78,10 @@ public class Location {
 	public void setState(String state) {
 		State = state;
 	}
-	public int getPopulation() {
+	public String getPopulation() {
 		return Population;
 	}
-	public void setPopulation(int popNum) {
+	public void setPopulation(String popNum) {
 		Population = popNum;
 	}
 	public String getRegion() {
