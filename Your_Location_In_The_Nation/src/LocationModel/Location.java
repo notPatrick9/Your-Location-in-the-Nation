@@ -7,11 +7,13 @@ public class Location {
 	private String County;
 	private String City;
 	private String State;
+	private String Region;
 	private int CostOfLivingRent;
 	private int CostOfLivingOwnWithMortgage;
 	private int CostOfLivingOwnNoMortgage;
 	private int AvgSalary;
 	private int CrimeRate;
+	private int Population;
 	
 	public Location() {
 		
@@ -76,5 +78,16 @@ public class Location {
 	public void setState(String state) {
 		State = state;
 	}
-	
+	public int getPopulation() {
+		return Population;
+	}
+	public void setPopulation(int popNum) {
+		Population = popNum;
+	}
+	public String getRegion() {
+		return Region;
+	}
+	public void setRegion(String regionName) {
+		Region = regionName;
+	}
 }
