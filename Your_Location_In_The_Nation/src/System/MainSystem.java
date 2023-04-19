@@ -51,7 +51,7 @@ public class MainSystem {
 		//make sure that user numbers all add up to 10
 		//maybe check for other exceptions later
 		while(CrimeRateFactor + AveragesalaryFactor + CostOfLivingFactor != 10) {
-			//reinstantiate points left 
+			//re-instantiate points left 
 			PointsLeft = 10;
 			//get crime rate factor 
 			System.out.print("Needs to add to 10. Retry please.\nPoints Left: "+PointsLeft + "\n");
