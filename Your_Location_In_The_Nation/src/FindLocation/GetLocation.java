@@ -20,7 +20,7 @@ public class GetLocation {
 	int CostOfLivingFactor;
 	int CostOfLivingType;					//0 for rent, 1 for a mortgage, 2+ for own no mortgage
 	int AvgSalaryPerHouseFactor;
-	public GetLocation(int UserCrimeScale, int UserAvgSalaryScale, int UserCostOfLivingScale, List<Location> Locations, int COLType) throws ClassNotFoundException, IOException {
+	public GetLocation(int UserCrimeScale, int UserAvgSalaryScale, int UserCostOfLivingScale, int COLType, List<Location> Locations) throws ClassNotFoundException, IOException {
 		
 		//User inputed scales;
 		this.UserCrimeScale = UserCrimeScale;
