@@ -18,6 +18,7 @@ public class GetLocation {
 	List<Location> TopLocations;
 	int CrimeFactor;
 	int CostOfLivingFactor;
+	int CostOfLivingType;					//0 for rent, 1 for a mortgage, 2+ for own no mortgage
 	int AvgSalaryPerHouseFactor;
 	public GetLocation(int UserCrimeScale, int UserAvgSalaryScale, int UserCostOfLivingScale, List<Location> Locations) throws ClassNotFoundException, IOException {
 		
@@ -60,7 +61,9 @@ public class GetLocation {
 				FactorsSatisfied = FactorsSatisfied + 1;
 			}
 			//check to see if cost of living factor is satisfied
-			if(CurrentLocation.getCostOfLiving() < CostOfLivingFactor) {
+			if((CostOfLivingType == 0 && CurrentLocation.getCostOfLivingRent() < CostOfLivingFactor) ||
+					(CostOfLivingType == 1 && CurrentLocation.getCostOfLivingOwnWithMortgage() < CostOfLivingFactor) ||
+					(CostOfLivingType > 1 && CurrentLocation.getCostOfLivingOwnNoMortgage() < CostOfLivingFactor)) {
 				/*if(CurrentLocation.getCostOfLiving() >= (CostOfLivingFactor - 30)) {
 					FactorsSatisfied = FactorsSatisfied + 1;
 				}*/
@@ -99,7 +102,9 @@ public class GetLocation {
 		    	TopLocations.sort(new AvgSalaryComparator());
 		    }
 		    else {
-		    	TopLocations.sort(new CostOfLivingComparator());
+		    	if (CostOfLivingType == 0) TopLocations.sort(new CostOfLivingRentComparator());
+		    	if (CostOfLivingType == 1) TopLocations.sort(new CostOfLivingOwnWithMortgageComparator());
+		    	if (CostOfLivingType > 1) TopLocations.sort(new CostOfLivingOwnNoMortgageComparator());
 		    }
 		    
 		    //return the location that has all factors satisfied and is the best in terms of the users most important factor
