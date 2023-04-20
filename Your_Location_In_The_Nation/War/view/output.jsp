@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Florida</title>
+<title>Results</title>
 <style>
 .img-container{
     text-align: center;
@@ -11,6 +11,21 @@ line{
   margin: auto;  
   padding: 0.1px;
   
+}
+
+body{
+animation: transition 0.75s;
+}
+@keyframes transition {
+    from{
+opacity: 0;
+transform: translate(-10px);
+
+    }
+  to{
+    opacity: 1;
+    transform: translate(0);
+  }  
 }
 </style>
 </head>
