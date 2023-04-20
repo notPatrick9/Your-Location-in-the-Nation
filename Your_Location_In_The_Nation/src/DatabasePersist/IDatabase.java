@@ -1,10 +1,24 @@
 package DatabasePersist;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import UserModel.PopularLocations;
+import UserModel.SavedLocations;
 
 //This interface will include all of the functions we use for our database operations
 
 public interface IDatabase {
 	
+	public boolean Login(String Username, String Password) throws SQLException;
+	
+	public boolean CreateUser(String Username, String Password) throws SQLException;
+	
+	public List<PopularLocations> ViewPopularLocatons() throws SQLException;
+	//function for viewing saved locations for a user
+	public List<String> ViewSavedLocations(String Username) throws SQLException;
+	
+	//function for saving a location(will also save into popular locations
+	public boolean SaveLocation(String Username, String Zipcode) throws SQLException;
 	
 }

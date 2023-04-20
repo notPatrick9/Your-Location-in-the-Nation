@@ -1,2 +1,16 @@
 /DatabasePersist/
 /FakeDatabase/
+/FindLocation/
+/LocationDatares/
+/LocationModel/
+/SQLData/
+/System/
+/ThingsToDo/
+/UserDatares/
+/UserModel/
+/testFactorGetter.class
+/testLogin.class
+/testCreateUser.class
+/testViewPopularLocation.class
+/testViewSavedLocations.class
+/testSaveLocation.class
