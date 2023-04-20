@@ -85,15 +85,22 @@ public class MainSystem {
 		keyboard.close();
 		
 		//call constructor for GetLocation, giving it user input, and location database list
-		GetLocation Locationgetter = new GetLocation(CrimeRateFactor, AveragesalaryFactor, CostOfLivingFactor, LocationList);
+		//Temp: COLType = 1
+		GetLocation Locationgetter = new GetLocation(CrimeRateFactor, AveragesalaryFactor, CostOfLivingFactor, 1, LocationList);
 		//get the best Location based on user input
 		Location bestlocation = Locationgetter.FindBestLocation();
 		
 		//ensure that a location was returned
 		if(bestlocation != null) {
+			//Get CostOfLiving string
+			//Temp: Temp conditions
+			String COLString = " Cost of Living: ";
+			if(1 == 0) COLString += bestlocation.getCostOfLivingRent();
+			else if(1 > 0) COLString += bestlocation.getCostOfLivingOwnWithMortgage() + " with a mortgage, " + bestlocation.getCostOfLivingOwnNoMortgage() + " without one";
+			
 			//Give information about the selected location
 			System.out.print("The location that best matched your criteria is " + bestlocation.getCounty()+" County located in "+bestlocation.getCity()+"\n");
-			System.out.print("The statistics are as follows, Crime Rate: " + bestlocation.getCrimeRate() + " Average Salary Per Household: "+ bestlocation.getAvgSalaryPerHouse()+ " Cost of Living: "+bestlocation.getCostOfLiving()+ "\n");
+			System.out.print("The statistics are as follows, Crime Rate: " + bestlocation.getCrimeRate() + " Average Salary Per Household: " + bestlocation.getAvgSalaryPerHouse() + COLString + "\n");
 			//fun things to do
 			AboutTheArea getfunThings = new AboutTheArea();
 			System.out.print("Here are some fun things to do in " +bestlocation.getCounty()+ " County");
