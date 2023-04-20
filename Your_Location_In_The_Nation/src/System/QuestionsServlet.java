@@ -19,7 +19,7 @@ public class QuestionsServlet extends HttpServlet {
     
     private FakeData database;
     private List<Location> LocationList;
-
+  
     @Override
     public void init() throws ServletException {
         super.init();
@@ -64,7 +64,10 @@ public class QuestionsServlet extends HttpServlet {
             }
         } catch (NumberFormatException e) {
             errorMessage = "Invalid int";
-        }
+        } catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Add parameters as request attributes
 		// this creates attributes named "first" and "second for the response, and grabs the

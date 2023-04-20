@@ -10,20 +10,7 @@
     <servlet-name>QuestionsServlet</servlet-name>
     <servlet-class>System.QuestionsServlet</servlet-class>
   </servlet>
-  <servlet>
-    <servlet-name>AddNumbersServlet</servlet-name>
-    <servlet-class>edu.ycp.cs320.lab02.servlet.AddNumbersServlet</servlet-class>
-  </servlet>
-  
-  <servlet>
-    <servlet-name>MultiplyNumbersServlet</servlet-name>
-    <servlet-class>edu.ycp.cs320.lab02.servlet.MultiplyNumbersServlet</servlet-class>
-  </servlet>
-  
-  <servlet>
-    <servlet-name>GuessingGameServlet</servlet-name>
-    <servlet-class>edu.ycp.cs320.lab02.servlet.GuessingGameServlet</servlet-class>
-  </servlet>
+ 
   
   <!-- AJAX servlets. -->
   <servlet>
