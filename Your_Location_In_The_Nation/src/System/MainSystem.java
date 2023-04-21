@@ -42,6 +42,10 @@ public class MainSystem {
 		PointsLeft -= AveragesalaryFactor;
 		//get cost of living factor 
 		System.out.print("Points Left: "+PointsLeft + "\n");
+		
+		System.out.print("What type of homeownership are you looking for(0 = Rent, 1 = Own)?: \n");
+		int COLType = Integer.parseInt(keyboard.next());
+		
 		System.out.print("On a scale from 1-10, how important is the cost of living of an area?: \n");
 		
 		int CostOfLivingFactor = Integer.parseInt(keyboard.next());
@@ -72,6 +76,10 @@ public class MainSystem {
 			
 			//get cost of living factor 
 			System.out.print("Points Left: "+PointsLeft + "\n");
+			
+			System.out.print("What type of homeownership are you looking for(0 = Rent, 1 = Own)?: \n");
+			COLType = Integer.parseInt(keyboard.next());
+			
 			System.out.print("On a scale from 1-10, how important is the cost of living of an area?: \n");
 			
 			CostOfLivingFactor = Integer.parseInt(keyboard.next());
@@ -85,18 +93,16 @@ public class MainSystem {
 		keyboard.close();
 		
 		//call constructor for GetLocation, giving it user input, and location database list
-		//Temp: COLType = 1
-		GetLocation Locationgetter = new GetLocation(CrimeRateFactor, AveragesalaryFactor, CostOfLivingFactor, 1, LocationList);
+		GetLocation Locationgetter = new GetLocation(CrimeRateFactor, AveragesalaryFactor, CostOfLivingFactor, COLType, LocationList);
 		//get the best Location based on user input
 		Location bestlocation = Locationgetter.FindBestLocation();
 		
 		//ensure that a location was returned
 		if(bestlocation != null) {
 			//Get CostOfLiving string
-			//Temp: Temp conditions
 			String COLString = " Cost of Living: ";
-			if(1 == 0) COLString += bestlocation.getCostOfLivingRent();
-			else if(1 > 0) COLString += bestlocation.getCostOfLivingOwnWithMortgage() + " with a mortgage, " + bestlocation.getCostOfLivingOwnNoMortgage() + " without one";
+			if(COLType == 0) COLString += bestlocation.getCostOfLivingRent();
+			else if(COLType > 0) COLString += bestlocation.getCostOfLivingOwnWithMortgage() + " with a mortgage, " + bestlocation.getCostOfLivingOwnNoMortgage() + " without one";
 			
 			//Give information about the selected location
 			System.out.print("The location that best matched your criteria is " + bestlocation.getCounty()+" County located in "+bestlocation.getCity()+"\n");
