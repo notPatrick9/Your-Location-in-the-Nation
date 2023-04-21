@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Florida</title>
+<title>Results</title>
 <style>
 .img-container{
     text-align: center;
@@ -12,12 +12,27 @@ line{
   padding: 0.1px;
   
 }
+
+body{
+animation: transition 0.75s;
+}
+@keyframes transition {
+    from{
+opacity: 0;
+transform: translate(-10px);
+
+    }
+  to{
+    opacity: 1;
+    transform: translate(0);
+  }  
+}
 </style>
 </head>
 <body>
 
  
- <a href="/Lab_1/welcomeG.html">
+ <a href="welcomeG.html">
  <p>Home</p>
  </a>
 <h1>Results!</h1>
@@ -25,31 +40,6 @@ line{
 
 <h2>Based on the data you entered, Here are a list of information!</h2>
 
-<?php
-
-$crime = $_POST["crime"];
-$cost = $_POST["CostOfLiving"];
-$salary = $_POST["AvgSalary"];
-
-//dont know the database info to fill in "select" and "from"
-$sql = "SELECT  FROM  WHERE crime >= $crime AND CostOfliving >= $CostOfLiving AND AvgSalary >= $AvgSalary";
-$result = $conn->query($sql);
-
-
-if ($result->num_rows > 0) {
-    echo "<ul>";
-  
-    while($row = $result->fetch_assoc()) {
-        echo "<li>" . $row["crime"] . "</li>";
-        echo "<li>" . $row["CostOfLiving"] . "</li>";
-        echo "<li>" . $row["AvgSalary"] . "</li>";
-    }
-    echo "</ul>";
-} else {
-    echo "No data found.";
-}
-
-?>
 
 </body>
 </html> 

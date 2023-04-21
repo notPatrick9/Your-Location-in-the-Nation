@@ -18,7 +18,7 @@ public class MainSystem {
 		FakeData Database  = new FakeData();
 		List<Location> LocationList = new ArrayList<Location>();
 		//get list of locations
-		LocationList = Database.getLocationList();
+		LocationList = Database.getLocationList();                                                   //copy
 		
 		//System.out.print(LocationList.get(0).getCrimeRate());
 		//get user input
@@ -56,7 +56,7 @@ public class MainSystem {
 		//make sure that user numbers all add up to 10
 		//maybe check for other exceptions later
 		while(CrimeRateFactor + AveragesalaryFactor + CostOfLivingFactor != 10) {
-			//reinstantiate points left 
+			//re-instantiate points left 
 			PointsLeft = 10;
 			//get crime rate factor 
 			System.out.print("Needs to add to 10. Retry please.\nPoints Left: "+PointsLeft + "\n");
@@ -96,7 +96,7 @@ public class MainSystem {
 		//call constructor for GetLocation, giving it user input, and location database list
 		GetLocation Locationgetter = new GetLocation(CrimeRateFactor, AveragesalaryFactor, CostOfLivingFactor, COLType, LocationList);
 		//get the best Location based on user input
-		Location bestlocation = Locationgetter.FindBestLocation();
+		Location bestlocation = Locationgetter.FindBestLocation();   //copy 2 above
 		
 		//ensure that a location was returned
 		if(bestlocation != null) {
