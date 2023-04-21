@@ -37,7 +37,8 @@ transform: translate(-10px);
 			<div class="error">${errorMessage}</div>
 		</c:if>
 	
-		<form method="post" action="${pageContext.request.contextPath}/questions">
+		<form  action="${pageContext.request.contextPath}/questions" method="post">
+		
     <label for="CrimeRateFactor">On a scale from 1-10, how important is the Crime Rate of an area?:</label>
     <input type="number" name="crimeRateFactor" id="crimeRateFactor" min="0" max="10" required>
     <br><br>
