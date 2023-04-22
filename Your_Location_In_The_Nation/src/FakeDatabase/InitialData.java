@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import LocationModel.AverageSalary;
+import LocationModel.CrimeRate;
 import LocationModel.Location;
 import UserModel.PopularLocations;
 import UserModel.SavedLocations;
@@ -121,4 +124,58 @@ public class InitialData {
 		}
 		
 	}
+	//function for getting all attributes from CrimeRate
+public static List<CrimeRate> getCrimeRate() throws IOException {
+	
+		
+		List<CrimeRate> CrimeRateList = new ArrayList<CrimeRate>();
+		ReadCSV readCrimeRate = new ReadCSV("CrimeRateScales.csv");
+		try {
+			
+			while (true) {
+				List<String> tuple = readCrimeRate.next();
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				CrimeRate CR = new CrimeRate();
+				CR.setScale(Integer.parseInt(i.next()));
+				CR.setRatePerHundredThousand(Integer.parseInt(i.next()));
+				
+				
+				CrimeRateList.add(CR);
+			}
+			return CrimeRateList;
+		} finally {
+			readCrimeRate.close();
+		}
+		
+	}
+//function for getting all attributes for AverageSalary table
+public static List<AverageSalary> getAverageSalary() throws IOException {
+	
+	
+	List<AverageSalary> AverageSalaryList = new ArrayList<AverageSalary>();
+	ReadCSV readAveragSalary = new ReadCSV("AverageSalaryHouseholdScales.csv");
+	try {
+		
+		while (true) {
+			List<String> tuple = readAveragSalary.next();
+			if (tuple == null) {
+				break;
+			}
+			Iterator<String> i = tuple.iterator();
+			AverageSalary AvgSal = new AverageSalary();
+			AvgSal.setScale(Integer.parseInt(i.next()));
+			AvgSal.setAvgSalaryPerHousehold(Integer.parseInt(i.next()));
+			
+			
+			AverageSalaryList.add(AvgSal);
+		}
+		return AverageSalaryList;
+	} finally {
+		readAveragSalary.close();
+	}
+	
+}
 }
