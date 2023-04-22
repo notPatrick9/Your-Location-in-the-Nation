@@ -61,7 +61,7 @@ public class QuestionsServlet extends HttpServlet {
             if (crimeRateFactor + averageSalaryFactor + costOfLivingFactor != 10) {
                 errorMessage = "Please answer all the questions and make them equal to 10.";
             } else {
-                GetLocation locationGetter = new GetLocation(crimeRateFactor, averageSalaryFactor, costOfLivingFactor, LocationList);
+                GetLocation locationGetter = new GetLocation(crimeRateFactor, averageSalaryFactor, costOfLivingFactor, 1, LocationList);
              
                 bestLocation = locationGetter.FindBestLocation();
             }
