@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <html>
 <head>
   <title>Questions</title>
@@ -33,9 +36,6 @@ transform: translate(-10px);
 <hr>
 <h3>Please answer each question.</h3>
 
-	<c:if test="${! empty errorMessage}">
-			<div class="error">${errorMessage}</div>
-		</c:if>
 	
 		<form  action="${pageContext.request.contextPath}/questions" method="post">
 		
