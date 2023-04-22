@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
 <title>Results</title>
 <style>
 .img-container{
@@ -26,6 +27,18 @@ transform: translate(-10px);
     opacity: 1;
     transform: translate(0);
   }  
+=======
+<title>Florida</title>
+<style>
+.img-container{
+    text-align: center;
+}
+line{
+  border: 1px solid black;
+  margin: auto;  
+  padding: 0.1px;
+  
+>>>>>>> refs/remotes/Ryan/master
 }
 </style>
 </head>

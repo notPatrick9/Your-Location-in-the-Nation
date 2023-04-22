@@ -11,10 +11,15 @@
 /ThingsToDo/
 /UserDatares/
 /UserModel/
+/servlet/
+/testCreateUser.class
 /testFactorGetter.class
 /testLogin.class
-/testCreateUser.class
+/testSaveLocation.class
 /testViewPopularLocation.class
 /testViewSavedLocations.class
+<<<<<<< HEAD
 /testSaveLocation.class
+>>>>>>> refs/remotes/Ryan/master
+=======
 >>>>>>> refs/remotes/Ryan/master

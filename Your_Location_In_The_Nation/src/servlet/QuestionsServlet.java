@@ -1,7 +1,6 @@
-package System;
+package servlet;
 
 import java.io.IOException;
-
 
 
 
@@ -44,7 +43,7 @@ public class QuestionsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        System.out.println("Questions Servlet: doPost");
+        System.out.println("Question Servlet: doPost");
 
         // holds the error message text, if there is any
         String errorMessage = null;
@@ -81,9 +80,9 @@ public class QuestionsServlet extends HttpServlet {
         req.setAttribute("crimeRateFactor", req.getParameter("crimeRateFactor"));
         req.setAttribute("averageSalaryFactor", req.getParameter("averageSalaryFactor"));
         req.setAttribute("costOfLivingFactor", req.getParameter("costOfLivingFactor"));
-        req.setAttribute("bestLocation", bestLocation);
-     // this adds the errorMessage text and the result to the response
        
+     // this adds the errorMessage text and the result to the response
+        req.setAttribute("bestLocation", bestLocation);
         req.setAttribute("errorMessage", errorMessage);
 
 

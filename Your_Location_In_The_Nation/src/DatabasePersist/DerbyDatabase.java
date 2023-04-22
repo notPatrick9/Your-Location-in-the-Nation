@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import FakeDatabase.InitialData;
+import LocationModel.AverageSalary;
+import LocationModel.CrimeRate;
 import LocationModel.Location;
 import UserModel.PopularLocations;
 import UserModel.SavedLocations;
@@ -460,13 +462,15 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
 				PreparedStatement stmt3 = null;
+				PreparedStatement stmt4 = null;
+				PreparedStatement stmt5 = null;
 				//this will create the table used for storing our users username and password
 				try {
 					
 					stmt1 = conn.prepareStatement(
 						"create table UserDatabase (" +
 						" Username varchar(40)," +
-						" Password varchar(40)"+
+						" Password varchar(40) "+
 						")"
 					);	
 					stmt1.executeUpdate();
@@ -474,7 +478,7 @@ public class DerbyDatabase implements IDatabase {
 					stmt2 = conn.prepareStatement(
 							"create table SavedLocations (" +
 							" Username varchar(40)," +
-							" Zipcode varchar(20)"
+							" Zipcode varchar(20) "
 							+")"
 					);
 					stmt2.executeUpdate();
@@ -482,10 +486,25 @@ public class DerbyDatabase implements IDatabase {
 					stmt3 = conn.prepareStatement(
 							"create table PopularLocations (" +
 							" Zipcode varchar(20), "+
-							" NumberOfSaves int" +
+							" NumberOfSaves int " +
 							")"
 						);
 					stmt3.executeUpdate();
+					//create AverageSalary
+					stmt4 = conn.prepareStatement(
+						"create table AverageSalary (" +
+						" Scale int, " +
+						" AvgSalaryPerHousehold int "
+						+")"
+					);
+					stmt4.executeUpdate();
+					//create CrimeRate table
+					stmt5 = conn.prepareStatement(
+						"create table CrimeRate (" +
+							" Scale int, " +
+							" RatePerHundredThousand int "
+							+")"
+						);
 					
 					return true;
 				} finally {
@@ -507,6 +526,9 @@ public class DerbyDatabase implements IDatabase {
 				List<Users> UsersList;
 				List<SavedLocations> SavedLocationsList;
 				List<PopularLocations> PopularLocationsList;
+				List<AverageSalary> AverageSalaryList;
+				List<CrimeRate> CrimeRateList;
+				
 				
 				
 				try {
@@ -514,6 +536,8 @@ public class DerbyDatabase implements IDatabase {
 					UsersList = InitialData.getUsers();
 					SavedLocationsList = InitialData.getSavedLocations();
 					PopularLocationsList = InitialData.getPopularLocations();
+					AverageSalaryList = InitialData.getAverageSalary();
+					CrimeRateList = InitialData.getCrimeRate();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -521,6 +545,8 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement insertUser = null;
 				PreparedStatement insertSavedLocation = null;
 				PreparedStatement insertPopularLocation  = null;
+				PreparedStatement insertAverageSalary = null;
+				PreparedStatement insertCrimeRate = null;
 
 				try {
 					// populate UserDatabase table
@@ -553,6 +579,31 @@ public class DerbyDatabase implements IDatabase {
 						insertPopularLocation.addBatch();
 					}
 					insertPopularLocation.executeBatch();
+					
+					
+					
+					// populate AveragSalary table
+					insertAverageSalary = conn.prepareStatement("insert into AverageSalary (Scale, AvgSalaryPerHousehold) values (?, ?)");
+					for (AverageSalary AvgSal : AverageSalaryList) {
+//						
+						insertAverageSalary.setInt(1, AvgSal.getScale());
+						insertAverageSalary.setInt(2, AvgSal.getAvgSalaryPerHousehold());
+						insertAverageSalary.addBatch();
+					}
+					insertAverageSalary.executeBatch();
+					
+					
+					// populate CrimeRate table
+					insertCrimeRate = conn.prepareStatement("insert into CrimeRate (Scale, RatePerHundredThousand) values (?, ?)");
+					for (CrimeRate CR : CrimeRateList) {
+//						
+						insertCrimeRate.setInt(1, CR.getScale());
+						insertCrimeRate.setInt(2, CR.getRatePerHundredThousand());
+						insertCrimeRate.addBatch();
+					}
+					insertCrimeRate.executeBatch();
+					
+					
 					
 					return true;
 				} finally {

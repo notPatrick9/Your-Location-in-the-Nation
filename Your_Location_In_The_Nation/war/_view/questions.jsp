@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <html>
+<<<<<<< HEAD
 <head>
   <title>Questions</title>
   
@@ -50,7 +51,9 @@ transform: translate(-10px);
     <br><br>
     <input type="submit" value="Submit">
 </form>
-		
+=======
+
+
 
 </body>
 </html>
