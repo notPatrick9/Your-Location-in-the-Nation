@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+/System/
+=======
 /DatabasePersist/
 /FakeDatabase/
 /FindLocation/
@@ -15,3 +18,8 @@
 /testSaveLocation.class
 /testViewPopularLocation.class
 /testViewSavedLocations.class
+<<<<<<< HEAD
+/testSaveLocation.class
+>>>>>>> refs/remotes/Ryan/master
+=======
+>>>>>>> refs/remotes/Ryan/master

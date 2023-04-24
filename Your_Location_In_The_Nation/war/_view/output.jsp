@@ -1,6 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
+<title>Results</title>
+<style>
+.img-container{
+    text-align: center;
+}
+line{
+  border: 1px solid black;
+  margin: auto;  
+  padding: 0.1px;
+  
+}
+
+body{
+animation: transition 0.75s;
+}
+@keyframes transition {
+    from{
+opacity: 0;
+transform: translate(-10px);
+
+    }
+  to{
+    opacity: 1;
+    transform: translate(0);
+  }  
+=======
 <title>Florida</title>
 <style>
 .img-container{
@@ -11,6 +38,7 @@ line{
   margin: auto;  
   padding: 0.1px;
   
+>>>>>>> refs/remotes/Ryan/master
 }
 </style>
 </head>

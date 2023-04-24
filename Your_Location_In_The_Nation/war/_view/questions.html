@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Questions</title>
+</head>
+<body>
+
+<h1>location in the nation </h1>
+<hr>
+<h3>Please answer each question.</h3>
+
+<p>Which type of are do you prefer?:</p>
+
+<form>
+  <input type="radio" id="city" name="AreaType" value="City">
+  <label for="city">City<br>
+  <input type="radio" id="rural" name="AreaType" value="Rural">
+  <label for="rural">Rural</label><br>
+  <input type="radio" id="sub" name="AreaType" value="Suburban">
+  <label for="sub">Suburban</label>
+
+
+
+<p>What type of climate would you like to live in?:</p>
+
+
+  <input type="radio" id="trop" name="climate" value="Tropical">
+  <label for="trop">Tropical<br>
+  <input type="radio" id="polar" name="climate" value="Polar">
+  <label for="polar">Polar</label><br>
+  <input type="radio" id="temp" name="climate" value="Temperate">
+  <label for="temp">Temperate</label>
+  </form>
+
+<p>How important are the following on a scale of 1-10?</p>
+
+<form action="/action_page.php">
+  <label for="Crime">Crime Rate (between 1 and 10):</label>
+  <input type="number" id="crime" name="Crime" min="1" max="10">
+</form>
+
+
+
+<form action="/action_page.php">
+  <label for="Cost">Cost of living (between 1 and 10):</label>
+  <input type="number" id="cost" name="Cost" min="1" max="10">
+  </form>
+
+
+
+  <form action="/action_page.php">
+  <label for="salary">Avg. Salary (between 1 and 10):</label>
+  <input type="number" id="salary" name="salary" min="1" max="10">
+  </form>
+
+
+
+  <form action="/action_page.php">
+  <label for="Todo">Things to do (between 1 and 10):</label>
+  <input type="number" id="Todo" name="Todo" min="1" max="10">
+  </form>
+
+<button onclick="document.location='output.html'">Continue!</button>
+
+</body>
+</html>
