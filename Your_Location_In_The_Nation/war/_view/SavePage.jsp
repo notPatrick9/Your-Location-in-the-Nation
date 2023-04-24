@@ -29,7 +29,7 @@ transform: translate(-10px);
  <a href="/Lab_1/welcomeG.html">
     <p>Home</p>
     </a>
-<h1>Here are your saved locations:</h1>
+<h1>Here are your saved locations: </h1>
 <hr>
 
 

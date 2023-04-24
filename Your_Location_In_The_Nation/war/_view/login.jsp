@@ -32,6 +32,5 @@ transform: translate(-10px);
 <h1>Sign up here!</h1>
 <hr>
 
-
 </body>
 </html>
