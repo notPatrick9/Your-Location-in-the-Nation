@@ -1,33 +1,19 @@
 ----------------------------------------------------------------
-<<<<<<< HEAD
-<<<<<<< HEAD
-Tue Apr 18 17:13:39 EDT 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0187-9637-4c8e-000004bc65b0 
+Sun Apr 23 21:15:45 EDT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0187-b0d4-bfd0-000004be28c0 
 on database directory C:\Users\Douglas\git\Your-Location-in-the-Nation-1\Your_Location_In_The_Nation\test.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/Douglas/eclipse-workspace/CS320_Derby/lib/derby.jar
-=======
-Thu Apr 20 14:22:15 EDT 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0187-9fe7-1acf-00000e6204c0 
-on database directory C:\Users\Ryan\git\Your_Location_In_The_Nation_Repo\Your_Location_In_The_Nation\test.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
-Loaded from file:/C:/CS320_2023/CS320_Derby/CS320_Derby/lib/derby.jar
->>>>>>> refs/remotes/Ryan/master
-=======
-Sat Apr 22 18:20:27 EDT 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0187-ab0d-e41a-00000e623658 
-on database directory C:\Users\Ryan\git\Your_Location_In_The_Nation_Repo\Your_Location_In_The_Nation\test.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
-Loaded from file:/C:/CS320_2023/CS320_Derby/CS320_Derby/lib/derby.jar
->>>>>>> refs/remotes/Ryan/master
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_301-b09
-user.dir=C:\Users\Ryan\git\Your_Location_In_The_Nation_Repo\Your_Location_In_The_Nation
+user.dir=C:\Users\Douglas\git\Your-Location-in-the-Nation-1\Your_Location_In_The_Nation
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
 ----------------------------------------------------------------
-Sat Apr 22 18:20:27 EDT 2023:
-Shutting down instance a816c00e-0187-ab0d-e41a-00000e623658 on database directory C:\Users\Ryan\git\Your_Location_In_The_Nation_Repo\Your_Location_In_The_Nation\test.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
-Sat Apr 22 18:20:27 EDT 2023 Thread[main,5,main] Cleanup action starting
+Sun Apr 23 21:15:45 EDT 2023:
+Shutting down instance a816c00e-0187-b0d4-bfd0-000004be28c0 on database directory C:\Users\Douglas\git\Your-Location-in-the-Nation-1\Your_Location_In_The_Nation\test.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Sun Apr 23 21:15:45 EDT 2023 Thread[main,5,main] Cleanup action starting
 java.sql.SQLException: Failed to start database 'test.db' with class loader sun.misc.Launcher$AppClassLoader@73d16e93, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
@@ -41,22 +27,18 @@ java.sql.SQLException: Failed to start database 'test.db' with class loader sun.
 	at org.apache.derby.jdbc.AutoloadedDriver.connect(Unknown Source)
 	at java.sql.DriverManager.getConnection(Unknown Source)
 	at java.sql.DriverManager.getConnection(Unknown Source)
-	at DatabasePersist.DerbyDatabase.connect(DerbyDatabase.java:89)
-	at DatabasePersist.DerbyDatabase.doExecuteTransaction(DerbyDatabase.java:54)
-	at DatabasePersist.DerbyDatabase.executeTransaction(DerbyDatabase.java:47)
-	at DatabasePersist.DerbyDatabase.createTables(DerbyDatabase.java:459)
-	at DatabasePersist.DerbyDatabase.main(DerbyDatabase.java:623)
+	at SQLData.SQLDemo.main(SQLDemo.java:43)
 Caused by: java.sql.SQLException: Failed to start database 'test.db' with class loader sun.misc.Launcher$AppClassLoader@73d16e93, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	... 17 more
+	... 13 more
 Caused by: java.sql.SQLException: Java exception: ': java.io.EOFException'.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.javaException(Unknown Source)
-	... 14 more
+	... 10 more
 Caused by: java.io.EOFException
 	at java.io.RandomAccessFile.readInt(Unknown Source)
 	at org.apache.derby.impl.store.raw.log.LogToFile.verifyLogFormat(Unknown Source)
@@ -87,7 +69,7 @@ Caused by: java.io.EOFException
 	at org.apache.derby.impl.services.monitor.BaseMonitor.findProviderAndStartService(Unknown Source)
 	at org.apache.derby.impl.services.monitor.BaseMonitor.startPersistentService(Unknown Source)
 	at org.apache.derby.iapi.services.monitor.Monitor.startPersistentService(Unknown Source)
-	... 14 more
+	... 10 more
 ============= begin nested exception, level (1) ===========
 java.sql.SQLException: Java exception: ': java.io.EOFException'.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
@@ -102,15 +84,11 @@ java.sql.SQLException: Java exception: ': java.io.EOFException'.
 	at org.apache.derby.jdbc.AutoloadedDriver.connect(Unknown Source)
 	at java.sql.DriverManager.getConnection(Unknown Source)
 	at java.sql.DriverManager.getConnection(Unknown Source)
-	at DatabasePersist.DerbyDatabase.connect(DerbyDatabase.java:89)
-	at DatabasePersist.DerbyDatabase.doExecuteTransaction(DerbyDatabase.java:54)
-	at DatabasePersist.DerbyDatabase.executeTransaction(DerbyDatabase.java:47)
-	at DatabasePersist.DerbyDatabase.createTables(DerbyDatabase.java:459)
-	at DatabasePersist.DerbyDatabase.main(DerbyDatabase.java:623)
+	at SQLData.SQLDemo.main(SQLDemo.java:43)
 Caused by: java.sql.SQLException: Java exception: ': java.io.EOFException'.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	... 17 more
+	... 13 more
 Caused by: java.io.EOFException
 	at java.io.RandomAccessFile.readInt(Unknown Source)
 	at org.apache.derby.impl.store.raw.log.LogToFile.verifyLogFormat(Unknown Source)
@@ -141,7 +119,7 @@ Caused by: java.io.EOFException
 	at org.apache.derby.impl.services.monitor.BaseMonitor.findProviderAndStartService(Unknown Source)
 	at org.apache.derby.impl.services.monitor.BaseMonitor.startPersistentService(Unknown Source)
 	at org.apache.derby.iapi.services.monitor.Monitor.startPersistentService(Unknown Source)
-	... 14 more
+	... 10 more
 ============= end nested exception, level (1) ===========
 ============= begin nested exception, level (2) ===========
 java.sql.SQLException: Java exception: ': java.io.EOFException'.
@@ -159,11 +137,7 @@ java.sql.SQLException: Java exception: ': java.io.EOFException'.
 	at org.apache.derby.jdbc.AutoloadedDriver.connect(Unknown Source)
 	at java.sql.DriverManager.getConnection(Unknown Source)
 	at java.sql.DriverManager.getConnection(Unknown Source)
-	at DatabasePersist.DerbyDatabase.connect(DerbyDatabase.java:89)
-	at DatabasePersist.DerbyDatabase.doExecuteTransaction(DerbyDatabase.java:54)
-	at DatabasePersist.DerbyDatabase.executeTransaction(DerbyDatabase.java:47)
-	at DatabasePersist.DerbyDatabase.createTables(DerbyDatabase.java:459)
-	at DatabasePersist.DerbyDatabase.main(DerbyDatabase.java:623)
+	at SQLData.SQLDemo.main(SQLDemo.java:43)
 Caused by: java.io.EOFException
 	at java.io.RandomAccessFile.readInt(Unknown Source)
 	at org.apache.derby.impl.store.raw.log.LogToFile.verifyLogFormat(Unknown Source)
@@ -194,7 +168,7 @@ Caused by: java.io.EOFException
 	at org.apache.derby.impl.services.monitor.BaseMonitor.findProviderAndStartService(Unknown Source)
 	at org.apache.derby.impl.services.monitor.BaseMonitor.startPersistentService(Unknown Source)
 	at org.apache.derby.iapi.services.monitor.Monitor.startPersistentService(Unknown Source)
-	... 14 more
+	... 10 more
 ============= end nested exception, level (2) ===========
 ============= begin nested exception, level (3) ===========
 java.io.EOFException
@@ -236,10 +210,6 @@ java.io.EOFException
 	at org.apache.derby.jdbc.AutoloadedDriver.connect(Unknown Source)
 	at java.sql.DriverManager.getConnection(Unknown Source)
 	at java.sql.DriverManager.getConnection(Unknown Source)
-	at DatabasePersist.DerbyDatabase.connect(DerbyDatabase.java:89)
-	at DatabasePersist.DerbyDatabase.doExecuteTransaction(DerbyDatabase.java:54)
-	at DatabasePersist.DerbyDatabase.executeTransaction(DerbyDatabase.java:47)
-	at DatabasePersist.DerbyDatabase.createTables(DerbyDatabase.java:459)
-	at DatabasePersist.DerbyDatabase.main(DerbyDatabase.java:623)
+	at SQLData.SQLDemo.main(SQLDemo.java:43)
 ============= end nested exception, level (3) ===========
 Cleanup action completed
