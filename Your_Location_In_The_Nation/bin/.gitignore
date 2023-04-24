@@ -1,3 +1,29 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/System/
+=======
+/DatabasePersist/
+/FakeDatabase/
+/FindLocation/
+/LocationDatares/
+/LocationModel/
+/SQLData/
+>>>>>>> refs/remotes/Ryan/master
 /System/
 /servlet/
+<<<<<<< HEAD
 /FakeDatabase/
+=======
+/testCreateUser.class
+/testFactorGetter.class
+/testLogin.class
+/testSaveLocation.class
+/testViewPopularLocation.class
+/testViewSavedLocations.class
+<<<<<<< HEAD
+/testSaveLocation.class
+>>>>>>> refs/remotes/Ryan/master
+=======
+>>>>>>> refs/remotes/Ryan/master
+>>>>>>> refs/remotes/Ryan/master
