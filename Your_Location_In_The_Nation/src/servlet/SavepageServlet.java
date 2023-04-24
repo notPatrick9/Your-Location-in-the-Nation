@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import DatabasePersist.DerbyDatabase;
 
+//   make List<Popular locations> and set equal to ViewSavedLocations
+//print list of popular locations
+//print zip code and number of saves
 public class SavepageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DerbyDatabase database;

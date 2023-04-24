@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import DatabasePersist.DerbyDatabase;
 
+////   make List<String> and set equal to popular locations, then give username of current session
+//print list of saved locations
+
 public class PopularlocationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DerbyDatabase database;
