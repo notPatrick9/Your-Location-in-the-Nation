@@ -75,7 +75,7 @@
   </servlet-mapping>
  
   <welcome-file-list>
-    <welcome-file>Index.html</welcome-file>
+    <welcome-file>welcomeG.html</welcome-file>
   </welcome-file-list>
   
   
