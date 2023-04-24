@@ -505,6 +505,7 @@ public class DerbyDatabase implements IDatabase {
 							" RatePerHundredThousand int "
 							+")"
 						);
+					stmt5.executeUpdate();
 					
 					return true;
 				} finally {
