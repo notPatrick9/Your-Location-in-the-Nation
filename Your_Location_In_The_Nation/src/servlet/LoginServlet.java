@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			if (database.Login(username, password)) {
 				// redirect the user to the home page after successful login
-				resp.sendRedirect(req.getContextPath() + "/home");
+				resp.sendRedirect(req.getContextPath() + "/welcomeG");
 				return;
 			} else {
 				// display an error message to the user
