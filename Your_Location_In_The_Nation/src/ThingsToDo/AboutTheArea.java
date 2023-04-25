@@ -40,7 +40,7 @@ public class AboutTheArea {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String API_Key = "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";
+		String API_Key = "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";
 		URLConnection conn = (HttpURLConnection) url.openConnection();
 		
 		

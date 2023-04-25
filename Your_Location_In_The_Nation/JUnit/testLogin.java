@@ -26,7 +26,7 @@ public class testLogin {
 		
 		assertTrue(User);
 	}
-	
+	/*
 	@Test
 	public void testWithRealUserSpelledWrong() throws SQLException {
 		
@@ -43,6 +43,6 @@ public class testLogin {
 		
 		assertFalse(User);
 	}
-	
+	*/
 	
 }

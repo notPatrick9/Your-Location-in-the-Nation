@@ -18,7 +18,10 @@ public interface IDatabase {
 	//function for viewing saved locations for a user
 	public List<String> ViewSavedLocations(String Username) throws SQLException;
 	
-	//function for saving a location(will also save into popular locations
+	//for each loop for saved location and popular location
+	
+	//function for saving a location(will also save into popular location
+
 	public boolean SaveLocation(String Username, String Zipcode) throws SQLException;
 	
 }

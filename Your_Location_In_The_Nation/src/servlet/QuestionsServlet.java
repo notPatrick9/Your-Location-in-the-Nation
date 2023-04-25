@@ -54,19 +54,36 @@ public class QuestionsServlet extends HttpServlet {
 
         // decode POSTed form parameters and dispatch to controller
         try {
-            int crimeRateFactor = Integer.parseInt(req.getParameter("crimeRateFactor"));
-            int averageSalaryFactor = Integer.parseInt(req.getParameter("averageSalaryFactor"));
-            int costOfLivingFactor = Integer.parseInt(req.getParameter("costOfLivingFactor"));
-
+            int crimeRateFactor = getIntFromParameter(req.getParameter("crimeRate"));
+            int averageSalaryFactor = getIntFromParameter(req.getParameter("averageSalary"));
+            int costOfLivingFactor = getIntFromParameter(req.getParameter("costOfLiving"));
+            
+            
+            System.out.print(crimeRateFactor);
+            System.out.print(averageSalaryFactor);
+            System.out.print(costOfLivingFactor);
+            
+            
+            
             if (crimeRateFactor + averageSalaryFactor + costOfLivingFactor != 10) {
                 errorMessage = "Please answer all the questions and make them equal to 10.";
             } else {
                 GetLocation locationGetter = new GetLocation(crimeRateFactor, averageSalaryFactor, costOfLivingFactor, LocationList);
              
                 bestLocation = locationGetter.FindBestLocation();
+                
+                if(bestLocation != null) {
+                	 // store user object in session
+        			req.getSession().setAttribute("bestLocation", bestLocation);
+
+        			// redirect to /index page
+        			resp.sendRedirect(req.getContextPath() + "/output");
+
+        			return;
+                }
+                
             }
-        } catch (NumberFormatException e) {
-            errorMessage = "Invalid int";
+        
         } catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,18 +95,26 @@ public class QuestionsServlet extends HttpServlet {
 		// they don't have to be named the same, but in this case, since we are passing them back
 		// and forth, it's a good idea
    
-        req.setAttribute("crimeRateFactor", req.getParameter("crimeRateFactor"));
-        req.setAttribute("averageSalaryFactor", req.getParameter("averageSalaryFactor"));
-        req.setAttribute("costOfLivingFactor", req.getParameter("costOfLivingFactor"));
+        req.setAttribute("crimeRate", req.getParameter("crimeRate"));
+        req.setAttribute("averageSalary", req.getParameter("averageSalary"));
+        req.setAttribute("costOfLiving", req.getParameter("costOfLiving"));
        
-     // this adds the errorMessage text and the result to the response
-        req.setAttribute("bestLocation", bestLocation);
+    
         req.setAttribute("errorMessage", errorMessage);
 
 
 		// Forward to view to render the result HTML document
         req.getRequestDispatcher("/_view/questions.jsp").forward(req, resp);
     }
+    
+ // gets double from the request with attribute named s
+ 	private int getIntFromParameter(String s) {
+ 		if (s == null || s.equals("")) {
+ 			return 0;
+ 		} else {
+ 			return Integer.parseInt(s);
+ 		}
+ 	}
 
 }
 

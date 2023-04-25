@@ -54,5 +54,34 @@ line{
 <h2>Based on the data you entered, Here are a list of information!</h2>
 
 
+<table>
+				<tr>
+					<td class="label">Crime rate:</td>
+					<td>${CrimeRate}</td>
+				</tr>
+				<tr>
+					<td class="label">Average salary: </td>
+					<td>${AvgSalary}</td>
+				</tr>
+				<tr>
+					<td class="label">Cost of living:</td>
+					<td>${CostOfLiving}</td>
+					
+				</tr>
+				<tr>
+					<td class="label">County: :</td>
+					<td>${County}</td>
+				
+				</tr>
+				<tr> 
+					<td class="label">Fun things to do: </td>
+					<td>${FunThingsToDo}</td>
+				</tr>
+			</table>
+
+
+
+
+
 </body>
 </html> 

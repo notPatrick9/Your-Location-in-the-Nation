@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import DatabasePersist.DerbyDatabase;
 
-public class SavepageServlet extends HttpServlet {
+public class PopularlocationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DerbyDatabase database;
 

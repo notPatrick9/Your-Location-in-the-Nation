@@ -36,24 +36,26 @@ transform: translate(-10px);
 <h1>Your Location In Then Nation </h1>
 <hr>
 <h3>Please answer each question.</h3>
-
+		<c:if test="${! empty errorMessage}">
+			<div class="error">${errorMessage}</div>
+		</c:if>
 	
-		<form  action="${pageContext.request.contextPath}/questions" method="post">
-		
-    <label for="CrimeRateFactor">On a scale from 1-10, how important is the Crime Rate of an area?:</label>
-    <input type="number" name="crimeRateFactor" id="crimeRateFactor" min="0" max="10" required>
-    <br><br>
-    <label for="AveragesalaryFactor">On a scale from 1-10, how important is the average salary per household of an area?:</label>
-    <input type="number" name="averageSalaryFactor" id="averageSalaryFactor" min="0" max="10" required>
-    <br><br>
-    <label for="CostOfLivingFactor">On a scale from 1-10, how important is the cost of living of an area?:</label>
-    <input type="number" name="CostOfLivingFactor" id="CostOfLivingFactor" min="0" max="10" required>
-    <br><br>
-    <input type="submit" value="Submit">
-</form>
-=======
-
-
-
-</body>
+		<form action="${pageContext.servletContext.contextPath}/questions" method="post">
+			<table>
+				<tr>
+					<td class="label">Crime rate:</td>
+					<td><input type="text" name="crimeRate" size="12" value="${crimeRate}" /></td>
+				</tr>
+				<tr>
+					<td class="label">Average salary:</td>
+					<td><input type="text" name="averageSalary" size="12" value="${averageSalary}" /></td>
+				</tr>
+				<tr>
+					<td class="label">Cost of living:</td>
+					<td><input type="text" name="costOfLiving" size="12" value="${costOfLiving}" /></td>
+				</tr>
+			</table>
+			<input type="Submit" name="submit" value="QuestionsDone">
+		</form>
+	</body>
 </html>

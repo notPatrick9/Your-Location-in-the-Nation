@@ -506,7 +506,7 @@ public class DerbyDatabase implements IDatabase {
 							+")"
 						);
 					stmt5.executeUpdate();
-					
+
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);

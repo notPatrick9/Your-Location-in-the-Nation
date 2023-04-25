@@ -2,14 +2,14 @@ package LocationModel;
 
 public class Location {
 	
-	private String Zipcode;
-	private String LocationName;
-	private String County;
-	private String City;
-	private String State;
-	private int CostOfLiving;
-	private int AvgSalary;
-	private int CrimeRate;
+	public String Zipcode;
+	public String LocationName;
+	public String County;
+	public  String City;
+	public  String State;
+	public  int CostOfLiving;
+	public  int AvgSalary;
+	public  int CrimeRate;
 	
 	public Location() {
 		
