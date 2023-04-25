@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import DatabasePersist.DerbyDatabase;
 
-//   make List<Popular locations> and set equal to ViewSavedLocations
-//print list of popular locations
-//print zip code and number of saves
+//needs database import
+
+
 public class SavepageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DerbyDatabase database;
@@ -27,13 +27,27 @@ public class SavepageServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("Login Servlet: doGet");
-		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/SavePage.jsp").forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("Login Servlet: doPost");
+		System.out.println("Savepage Servlet: doPost");
 
-	
-}
+		 String username = (String) req.getSession().getAttribute("Username");
+
+		  //needs database attribute
+		    List<String> SavedAreas;
+		    try {
+		        SavedAreas = database.(Username);
+		    } catch (SQLException e) {
+		        throw new ServletException("Error retrieving saved areas from database", e);
+		    }
+
+		    
+		    req.setAttribute("savedAreas", SavedAreas);
+
+		   
+		    req.getRequestDispatcher("/_view/SavePage.jsp").forward(req, resp);
+		}
 }

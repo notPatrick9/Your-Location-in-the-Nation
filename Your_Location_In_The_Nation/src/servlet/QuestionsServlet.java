@@ -67,7 +67,7 @@ public class QuestionsServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             errorMessage = "Invalid int";
         } catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 

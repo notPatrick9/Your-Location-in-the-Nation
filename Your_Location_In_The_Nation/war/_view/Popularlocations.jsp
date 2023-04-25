@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Saved</title>
+    <title>Popular Locations</title>
     <style>
         .img-container{
             text-align: center;
@@ -26,22 +26,17 @@ transform: translate(-10px);
 </head>
 <body>
     
- <a href="/Lab_1/welcomeG.html">
+ <a href="welcomeG.html">
     <p>Home</p>
     </a>
-<h1>Here are your saved locations: </h1>
+<h1>Here are some Popular Locations:</h1>
 <hr>
-<c:if test="${not empty savedAreas}">
-    <ul>
-        <c:forEach var="area" items="${savedAreas}">
-        
-    (needs editing probably)        <li>${area}</li>
-    
+<c:forEach items="${popularLocations}" var="location">
+            <tr>
+         (needs editing probably)       <td>${location.name}</td>
+        (needs editing probably)        <td>${location.numSaves}</td>
+            </tr>
         </c:forEach>
-    </ul>
-</c:if>
-
-
 
 </body>
 </html>
