@@ -62,6 +62,13 @@ public class OutputServlet extends HttpServlet {
 		// values that were originally assigned to the request attributes, also named "first" and "second"
 		// they don't have to be named the same, but in this case, since we are passing them back
 		// and forth, it's a good idea
+		
+		
+		
+		//fixes null pointer exception that was being thrown before
+		Zipcode = bestLoc.getZipcode();
+		System.out.print("ZIPCODE: " +Zipcode);
+		
 		req.setAttribute("CrimeRate", bestLoc.getCrimeRate());
 		req.setAttribute("AvgSalary", bestLoc.getAvgSalaryPerHouse());
 		req.setAttribute("CostOfLiving", bestLoc.getCostOfLiving());

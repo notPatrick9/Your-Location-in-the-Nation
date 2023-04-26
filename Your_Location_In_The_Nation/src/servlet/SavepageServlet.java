@@ -37,7 +37,7 @@ public class SavepageServlet extends HttpServlet {
 			System.out.print("USERNAME"+username);
 			SavedLocations = database.ViewSavedLocations(username);
 			
-			System.out.print("SAVEDLOCS: " + SavedLocations.get(0));
+			
 			  
 		     req.setAttribute("SavedLocations", SavedLocations);
 		} catch (SQLException e) {

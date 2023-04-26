@@ -32,7 +32,8 @@
 					<td><input type="text" name="password" size="12" value="${Password}" /></td>
 				</tr>
 			</table>
-			<input type="Submit" name="submit" value="Login">
+			<input type="Submit" name="login" value="Login">
+			<input type="Submit" name="createuser" value="Create Account">
 		</form>
 	</body>
 </html>
