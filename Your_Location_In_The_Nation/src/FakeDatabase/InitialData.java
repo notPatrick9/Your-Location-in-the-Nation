@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import LocationModel.AverageSalary;
+import LocationModel.CostOfLiving;
 import LocationModel.CrimeRate;
 import LocationModel.Location;
 import UserModel.PopularLocations;
@@ -174,4 +175,34 @@ public static List<AverageSalary> getAverageSalary() throws IOException {
 	}
 	
 }
+
+
+public static List<CostOfLiving> getCostOfLiving() throws IOException {
+	
+	
+	List<CostOfLiving> CostOfLivingList = new ArrayList<CostOfLiving>();
+	ReadCSV readCostOfLiving = new ReadCSV("CostOfLivingScales.csv");
+	try {
+		
+		while (true) {
+			List<String> tuple = readCostOfLiving.next();
+			if (tuple == null) {
+				break;
+			}
+			Iterator<String> i = tuple.iterator();
+			CostOfLiving COL = new CostOfLiving();
+			COL.setScale(Integer.parseInt(i.next()));
+			COL.setCostOfLivingIndex(Integer.parseInt(i.next()));
+			
+			
+			CostOfLivingList.add(COL);
+		}
+		return CostOfLivingList;
+	} finally {
+		readCostOfLiving.close();
+	}
+	
+}
+
+
 }

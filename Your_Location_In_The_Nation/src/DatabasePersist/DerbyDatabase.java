@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 import FakeDatabase.InitialData;
 import LocationModel.AverageSalary;
+import LocationModel.CostOfLiving;
 import LocationModel.CrimeRate;
 import LocationModel.Location;
 import UserModel.PopularLocations;
@@ -465,6 +466,7 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt3 = null;
 				PreparedStatement stmt4 = null;
 				PreparedStatement stmt5 = null;
+				PreparedStatement stmt6 = null;
 				//this will create the table used for storing our users username and password
 				try {
 					
@@ -507,6 +509,15 @@ public class DerbyDatabase implements IDatabase {
 							+")"
 						);
 					stmt5.executeUpdate();
+					
+					stmt6 = conn.prepareStatement(
+							"create table CostOfLiving (" +
+								" Scale int, " +
+								" CostOfLivingIndex int "
+								+")"
+							);
+					stmt6.executeUpdate();
+					
 
 					return true;
 				} finally {
@@ -530,7 +541,7 @@ public class DerbyDatabase implements IDatabase {
 				List<PopularLocations> PopularLocationsList;
 				List<AverageSalary> AverageSalaryList;
 				List<CrimeRate> CrimeRateList;
-				
+				List<CostOfLiving> CostOfLivingList;
 				
 				
 				try {
@@ -540,6 +551,7 @@ public class DerbyDatabase implements IDatabase {
 					PopularLocationsList = InitialData.getPopularLocations();
 					AverageSalaryList = InitialData.getAverageSalary();
 					CrimeRateList = InitialData.getCrimeRate();
+					CostOfLivingList = InitialData.getCostOfLiving();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -549,6 +561,7 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement insertPopularLocation  = null;
 				PreparedStatement insertAverageSalary = null;
 				PreparedStatement insertCrimeRate = null;
+				PreparedStatement insertCOL = null;
 
 				try {
 					// populate UserDatabase table
@@ -604,7 +617,15 @@ public class DerbyDatabase implements IDatabase {
 						insertCrimeRate.addBatch();
 					}
 					insertCrimeRate.executeBatch();
-					
+					// populate CostOfLiving table
+					insertCOL = conn.prepareStatement("insert into CostOfLiving (Scale, CostOfLivingIndex) values (?, ?)");
+					for (CostOfLiving C : CostOfLivingList) {
+//						
+						insertCOL.setInt(1, C.getScale());
+						insertCOL.setInt(2, C.getCostOfLivingIndex());
+						insertCOL.addBatch();
+					}
+					insertCOL.executeBatch();
 					
 					
 					return true;
