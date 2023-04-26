@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <html>
-<<<<<<< HEAD
+
 <head>
   <title>Questions</title>
   
@@ -33,7 +33,7 @@ transform: translate(-10px);
 </head>
 <body>
 
-<h1>Your Location In Then Nation </h1>
+<h1>Your Location In Then Nation! </h1>
 <hr>
 <h3>Please answer each question.</h3>
 		<c:if test="${! empty errorMessage}">
@@ -55,7 +55,8 @@ transform: translate(-10px);
 					<td><input type="text" name="costOfLiving" size="12" value="${costOfLiving}" /></td>
 				</tr>
 			</table>
-			<input type="Submit" name="submit" value="QuestionsDone">
+			<input type="Submit" name="submit" value="Submit!">
+			<input type="Submit" name="Backtoindex" value="Back to index">
 		</form>
 	</body>
 </html>

@@ -1,19 +1,33 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import FakeDatabase.FakeData;
 import LocationModel.Location;
 import ThingsToDo.AboutTheArea;
+import DatabasePersist.DerbyDatabase;
+
 
 
 public class OutputServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	String Zipcode;
+	
+	@Override
+    public void init() throws ServletException {
+        super.init();
+        
+        
+    }
+	
+	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -37,6 +51,7 @@ public class OutputServlet extends HttpServlet {
 			bestLoc = (Location) req.getSession().getAttribute("bestLocation");
 			System.out.print("BEST LOC: " + bestLoc.getAvgSalaryPerHouse());
 			FunThingsToDo = about.getThingsTodo(bestLoc.getZipcode());
+			Zipcode = bestLoc.getZipcode();
 			
 		} catch (Exception e) {
 			errorMessage = "Error getting information";
@@ -66,10 +81,44 @@ public class OutputServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		System.out.print("Output Servlet doPost");
+		DerbyDatabase database = new DerbyDatabase();
+		String username = (String) req.getSession().getAttribute("user");
+		// holds the error message text, if there is any
+		String errorMessage = null;
+		boolean saved = false;
+		
+		if(req.getParameter("submitquestions") != null) {
+			resp.sendRedirect(req.getContextPath() + "/questions");
+			return;
+		}
+		else if(req.getParameter("SaveLocation") != null) {
+			
+			try {
+				saved = database.SaveLocation(username, Zipcode);
+				System.out.print(username);
+				System.out.print(Zipcode);
+			} catch (SQLException e) {
+				errorMessage = "Database error";
+				
+			}
+			
+			if(saved == false) {
+				errorMessage = "Failed to save location. It may already be saved in your account";
+			}
+			else {
+				String success = "Saved!";
+				req.setAttribute("success", success);
+			}
+			req.setAttribute("errorMessage", errorMessage);
+			
+			
+			// Forward to view to render the result HTML document
+			req.getRequestDispatcher("/_view/output.jsp").forward(req, resp);
+		}
 		
 		
-		// Forward to view to render the result HTML document
-		req.getRequestDispatcher("/_view/output.jsp").forward(req, resp);
+		
 	}
 
 }

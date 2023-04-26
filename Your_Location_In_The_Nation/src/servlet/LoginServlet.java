@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 				System.out.print("Login failed");
 			} 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 			System.out.print("Failed to validate login cause of database error");
 		}

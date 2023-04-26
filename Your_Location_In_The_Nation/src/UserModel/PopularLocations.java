@@ -1,8 +1,8 @@
 package UserModel;
 
 public class PopularLocations {
-	private String Zipcode;
-	private int NumberOfSaves;
+	public String Zipcode;
+	public int NumberOfSaves;
 	
 	
 	

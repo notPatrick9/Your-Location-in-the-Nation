@@ -78,12 +78,12 @@
   
     <servlet-mapping>
     <servlet-name>SavepageServlet</servlet-name>
-    <url-pattern>/Save Page</url-pattern>
+    <url-pattern>/SavePage</url-pattern>
   </servlet-mapping>
   
     <servlet-mapping>
     <servlet-name>PopularlocationServlet</servlet-name>
-    <url-pattern>/Popular Locations</url-pattern>
+    <url-pattern>/PopularLocations</url-pattern>
   </servlet-mapping>
  
   <welcome-file-list>

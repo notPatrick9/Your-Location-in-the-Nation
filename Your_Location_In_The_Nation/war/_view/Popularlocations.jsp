@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
-    <title>Saved</title>
+    <title>Popular Locations</title>
     <style>
         .img-container{
             text-align: center;
@@ -29,8 +29,7 @@ transform: translate(-10px);
 <body>
     
  
-<h1>Here are your saved locations: </h1>
-<hr>
+<h1>Here are some Popular Locations:</h1>
 <body>
 		<c:if test="${! empty errorMessage}">
 			<div class="error">${errorMessage}</div>
@@ -39,13 +38,13 @@ transform: translate(-10px);
 		<table>
 			 <tr>
        			<td class="nameColHeading">Zipcode</td>
-       			     				
+       			<td class="nameColHeading">Number of saves</td>       				
 			   </tr>
 			        
-			   <c:forEach items="${SavedLocations}" var="SavedLocations">
+			   <c:forEach items="${PopularLocations}" var="PopularLocations">
 			      <tr class="PopularLocationsRow">
-			           <td class="nameCol">${SavedLocations}</td>
-			            		            
+			           <td class="nameCol">${PopularLocations.zipcode}</td>
+			            <td class="nameCol">${PopularLocations.numberOfSaves}</td>			            
 			        </tr>
 			    </c:forEach>
 			</table>
@@ -53,8 +52,4 @@ transform: translate(-10px);
 			<input type="Submit" name="submithome" value="Home">
 		</form>
 	</body>
-
-
-
-</body>
 </html>

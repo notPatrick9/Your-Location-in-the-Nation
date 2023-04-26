@@ -368,8 +368,9 @@ public class DerbyDatabase implements IDatabase {
 			
 				try {
 					//should check to see if its already there
-					stmt1 = conn.prepareStatement("select Zipcode from SavedLocations where Username = ?");
+					stmt1 = conn.prepareStatement("select Zipcode from SavedLocations where Username = ? and Zipcode = ?");
 					stmt1.setString(1, Username);
+					stmt1.setString(2, Zipcode);
 					
 					resultSet1 = stmt1.executeQuery();
 					
@@ -393,8 +394,8 @@ public class DerbyDatabase implements IDatabase {
 					
 					
 					
-				
-					boolean executed = stmt.execute();
+					//was boolean executed = 
+					stmt.execute();
 					/*
 					if(executed == false) {
 						return false;
@@ -424,12 +425,12 @@ public class DerbyDatabase implements IDatabase {
 							stmt3.setString(1, Zipcode);
 							stmt3.setInt(2, NumberOfSaves);
 							
-							executed  = stmt3.execute();
+							stmt3.execute();
 				//	}
 
 					
 					
-					return executed;
+					return true;
 			} finally {
 				DBUtil.closeQuietly(resultSet);
 				DBUtil.closeQuietly(stmt);
