@@ -50,6 +50,7 @@ public class OutputServlet extends HttpServlet {
 			about = new AboutTheArea();
 			bestLoc = (Location) req.getSession().getAttribute("bestLocation");
 			System.out.print("BEST LOC: " + bestLoc.getAvgSalaryPerHouse());
+			System.out.print("ZIPCODE: " +bestLoc.getZipcode());
 			FunThingsToDo = about.getThingsTodo(bestLoc.getZipcode());
 			Zipcode = bestLoc.getZipcode();
 			
@@ -67,7 +68,7 @@ public class OutputServlet extends HttpServlet {
 		
 		//fixes null pointer exception that was being thrown before
 		Zipcode = bestLoc.getZipcode();
-		System.out.print("ZIPCODE: " +Zipcode);
+		
 		
 		req.setAttribute("CrimeRate", bestLoc.getCrimeRate());
 		req.setAttribute("AvgSalary", bestLoc.getAvgSalaryPerHouse());

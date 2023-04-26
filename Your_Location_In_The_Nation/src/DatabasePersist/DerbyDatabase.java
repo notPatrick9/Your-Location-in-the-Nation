@@ -159,14 +159,9 @@ public class DerbyDatabase implements IDatabase {
 	@Override
 	public boolean CreateUser(String Username, String Password) throws SQLException {
 		
-		boolean UserExists = Login(Username, Password);
 		
-		//check to see if the user already exists
-		if(UserExists == true) {
-			return true;
-		}
-		//User does not exist, so add them to the UserDatabase table
-		else {
+		
+	
 			// load Derby JDBC driver
 			try {
 				Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
@@ -178,6 +173,7 @@ public class DerbyDatabase implements IDatabase {
 
 			Connection conn = null;
 			PreparedStatement stmt = null;
+			PreparedStatement stmt1 = null;
 			ResultSet resultSet = null;
 
 			
@@ -192,6 +188,34 @@ public class DerbyDatabase implements IDatabase {
 			}
 	
 			try {
+				
+				
+				boolean UserExists = false;
+				
+				//check to see if the user already exists
+				
+				
+				stmt1 = conn.prepareStatement("select Username"
+						+ "	from UserDatabase"
+						+ "	where Username = ?");
+				
+				stmt1.setString(1, Username);
+				
+				resultSet = stmt1.executeQuery();
+				
+				if(resultSet.next()) {
+					UserExists = true;
+				}
+				
+				if(UserExists == true) {
+					return true;
+				}
+				//User does not exist, so add them to the UserDatabase table
+				
+				
+				
+				
+				
 	
 				stmt = conn.prepareStatement(
 						"insert into UserDatabase (Username, Password) values (?, ?)"
@@ -211,7 +235,7 @@ public class DerbyDatabase implements IDatabase {
 		DBUtil.closeQuietly(resultSet);
 		DBUtil.closeQuietly(stmt);
 	}
-		}
+		
 		
 	}
 	//returns list of popular locations and all of their values
