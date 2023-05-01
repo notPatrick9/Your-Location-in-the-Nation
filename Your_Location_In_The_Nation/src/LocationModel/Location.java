@@ -13,7 +13,7 @@ public class Location {
 	private int CostOfLivingOwnNoMortgage;
 	private int AvgSalary;
 	private int CrimeRate;
-	private int population;
+	private int Population;
 	
 	public Location() {
 		
