@@ -485,6 +485,7 @@ public class DerbyDatabase implements IDatabase {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
+				preparedStatement stmt0 = null;
 				PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
 				PreparedStatement stmt3 = null;
@@ -493,6 +494,21 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt6 = null;
 				//this will create the table used for storing our users username and password
 				try {
+					stmt0 = conn.prepareStatement(
+							"create table LocationsDatabase (" +
+							" Name varchar(40), " +
+							" County varchar(40), " +
+							" State varchar(2), " +
+							" Zip varchar(5), " +
+							" Income int, " +
+							" Rent int, " +
+							" Mortgage int, " +
+							" NoMortgage int, " +
+							" CrimeRate int, " +
+							" Region varchar(40), " +
+							" Population int"
+							);
+					stmt0.executeUpdate();
 					
 					stmt1 = conn.prepareStatement(
 						"create table UserDatabase (" +
@@ -580,6 +596,7 @@ public class DerbyDatabase implements IDatabase {
 					throw new SQLException("Couldn't read initial data", e);
 				}
 
+				PreparedStatement insertLocation = null;
 				PreparedStatement insertUser = null;
 				PreparedStatement insertSavedLocation = null;
 				PreparedStatement insertPopularLocation  = null;
@@ -588,6 +605,9 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement insertCOL = null;
 
 				try {
+					// populate Locations table
+					//insertLocation = conn.prepareStatement("insert into UserDatabase ()")
+					
 					// populate UserDatabase table
 					insertUser = conn.prepareStatement("insert into UserDatabase (Username, Password) values (?, ?)");
 					for (Users user : UsersList) {
