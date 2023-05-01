@@ -20,7 +20,7 @@ public class testSaveLocation {
 	public void SaveNewLocation() throws SQLException {
 		
 		
-		boolean Saved = data.SaveLocation("", "");
+		boolean Saved = data.SaveLocation("BillyBob", "17347");
 		
 		assertTrue(Saved);
 	}

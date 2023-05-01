@@ -53,6 +53,7 @@ public class QuestionsServlet extends HttpServlet {
         Location bestLocation = null;
 
         // decode POSTed form parameters and dispatch to controller
+<<<<<<< HEAD
         try {
             int crimeRateFactor = Integer.parseInt(req.getParameter("crimeRateFactor"));
             int averageSalaryFactor = Integer.parseInt(req.getParameter("averageSalaryFactor"));
@@ -70,26 +71,78 @@ public class QuestionsServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+=======
+        
+        if(req.getParameter("Backtoindex") != null) {
+			resp.sendRedirect(req.getContextPath() + "/index");
+			return;
+>>>>>>> refs/remotes/Ryan/master
 		}
+        else {
+        	try {
+                int crimeRateFactor = getIntFromParameter(req.getParameter("crimeRate"));
+                int averageSalaryFactor = getIntFromParameter(req.getParameter("averageSalary"));
+                int costOfLivingFactor = getIntFromParameter(req.getParameter("costOfLiving"));
+                
+                
+                System.out.print(crimeRateFactor);
+                System.out.print(averageSalaryFactor);
+                System.out.print(costOfLivingFactor);
+                
+                
+                
+                if (crimeRateFactor + averageSalaryFactor + costOfLivingFactor != 10) {
+                    errorMessage = "Please answer all the questions and make them equal to 10.";
+                } else {
+                    GetLocation locationGetter = new GetLocation(crimeRateFactor, averageSalaryFactor, costOfLivingFactor, LocationList);
+                 
+                    bestLocation = locationGetter.FindBestLocation();
+                    
+                    if(bestLocation != null) {
+                    	 // store user object in session
+            			req.getSession().setAttribute("bestLocation", bestLocation);
 
-		// Add parameters as request attributes
-		// this creates attributes named "first" and "second for the response, and grabs the
-		// values that were originally assigned to the request attributes, also named "first" and "second"
-		// they don't have to be named the same, but in this case, since we are passing them back
-		// and forth, it's a good idea
-   
-        req.setAttribute("crimeRateFactor", req.getParameter("crimeRateFactor"));
-        req.setAttribute("averageSalaryFactor", req.getParameter("averageSalaryFactor"));
-        req.setAttribute("costOfLivingFactor", req.getParameter("costOfLivingFactor"));
+            			// redirect to /index page
+            			resp.sendRedirect(req.getContextPath() + "/output");
+
+            			return;
+                    }
+                    
+                }
+            
+            } catch (ClassNotFoundException e) {
+    		
+    			e.printStackTrace();
+    		}
+
+    		// Add parameters as request attributes
+    		// this creates attributes named "first" and "second for the response, and grabs the
+    		// values that were originally assigned to the request attributes, also named "first" and "second"
+    		// they don't have to be named the same, but in this case, since we are passing them back
+    		// and forth, it's a good idea
        
-     // this adds the errorMessage text and the result to the response
-        req.setAttribute("bestLocation", bestLocation);
-        req.setAttribute("errorMessage", errorMessage);
+            req.setAttribute("crimeRate", req.getParameter("crimeRate"));
+            req.setAttribute("averageSalary", req.getParameter("averageSalary"));
+            req.setAttribute("costOfLiving", req.getParameter("costOfLiving"));
+           
+        
+            req.setAttribute("errorMessage", errorMessage);
 
 
-		// Forward to view to render the result HTML document
-        req.getRequestDispatcher("/_view/questions.jsp").forward(req, resp);
+    		// Forward to view to render the result HTML document
+            req.getRequestDispatcher("/_view/questions.jsp").forward(req, resp);
+        }
+        
     }
+    
+ // gets double from the request with attribute named s
+ 	private int getIntFromParameter(String s) {
+ 		if (s == null || s.equals("")) {
+ 			return 0;
+ 		} else {
+ 			return Integer.parseInt(s);
+ 		}
+ 	}
 
 }
 

@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 import FakeDatabase.InitialData;
 import LocationModel.AverageSalary;
+import LocationModel.CostOfLiving;
 import LocationModel.CrimeRate;
 import LocationModel.Location;
 import UserModel.PopularLocations;
@@ -158,14 +159,9 @@ public class DerbyDatabase implements IDatabase {
 	@Override
 	public boolean CreateUser(String Username, String Password) throws SQLException {
 		
-		boolean UserExists = Login(Username, Password);
 		
-		//check to see if the user already exists
-		if(UserExists == true) {
-			return true;
-		}
-		//User does not exist, so add them to the UserDatabase table
-		else {
+		
+	
 			// load Derby JDBC driver
 			try {
 				Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
@@ -177,6 +173,7 @@ public class DerbyDatabase implements IDatabase {
 
 			Connection conn = null;
 			PreparedStatement stmt = null;
+			PreparedStatement stmt1 = null;
 			ResultSet resultSet = null;
 
 			
@@ -191,6 +188,34 @@ public class DerbyDatabase implements IDatabase {
 			}
 	
 			try {
+				
+				
+				boolean UserExists = false;
+				
+				//check to see if the user already exists
+				
+				
+				stmt1 = conn.prepareStatement("select Username"
+						+ "	from UserDatabase"
+						+ "	where Username = ?");
+				
+				stmt1.setString(1, Username);
+				
+				resultSet = stmt1.executeQuery();
+				
+				if(resultSet.next()) {
+					UserExists = true;
+				}
+				
+				if(UserExists == true) {
+					return true;
+				}
+				//User does not exist, so add them to the UserDatabase table
+				
+				
+				
+				
+				
 	
 				stmt = conn.prepareStatement(
 						"insert into UserDatabase (Username, Password) values (?, ?)"
@@ -210,7 +235,7 @@ public class DerbyDatabase implements IDatabase {
 		DBUtil.closeQuietly(resultSet);
 		DBUtil.closeQuietly(stmt);
 	}
-		}
+		
 		
 	}
 	//returns list of popular locations and all of their values
@@ -368,8 +393,9 @@ public class DerbyDatabase implements IDatabase {
 			
 				try {
 					//should check to see if its already there
-					stmt1 = conn.prepareStatement("select Zipcode from SavedLocations where Username = ?");
+					stmt1 = conn.prepareStatement("select Zipcode from SavedLocations where Username = ? and Zipcode = ?");
 					stmt1.setString(1, Username);
+					stmt1.setString(2, Zipcode);
 					
 					resultSet1 = stmt1.executeQuery();
 					
@@ -393,8 +419,8 @@ public class DerbyDatabase implements IDatabase {
 					
 					
 					
-				
-					boolean executed = stmt.execute();
+					//was boolean executed = 
+					stmt.execute();
 					/*
 					if(executed == false) {
 						return false;
@@ -424,12 +450,12 @@ public class DerbyDatabase implements IDatabase {
 							stmt3.setString(1, Zipcode);
 							stmt3.setInt(2, NumberOfSaves);
 							
-							executed  = stmt3.execute();
+							stmt3.execute();
 				//	}
 
 					
 					
-					return executed;
+					return true;
 			} finally {
 				DBUtil.closeQuietly(resultSet);
 				DBUtil.closeQuietly(stmt);
@@ -464,6 +490,7 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt3 = null;
 				PreparedStatement stmt4 = null;
 				PreparedStatement stmt5 = null;
+				PreparedStatement stmt6 = null;
 				//this will create the table used for storing our users username and password
 				try {
 					
@@ -505,7 +532,17 @@ public class DerbyDatabase implements IDatabase {
 							" RatePerHundredThousand int "
 							+")"
 						);
+					stmt5.executeUpdate();
 					
+					stmt6 = conn.prepareStatement(
+							"create table CostOfLiving (" +
+								" Scale int, " +
+								" CostOfLivingIndex int "
+								+")"
+							);
+					stmt6.executeUpdate();
+					
+
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
@@ -528,7 +565,7 @@ public class DerbyDatabase implements IDatabase {
 				List<PopularLocations> PopularLocationsList;
 				List<AverageSalary> AverageSalaryList;
 				List<CrimeRate> CrimeRateList;
-				
+				List<CostOfLiving> CostOfLivingList;
 				
 				
 				try {
@@ -538,6 +575,7 @@ public class DerbyDatabase implements IDatabase {
 					PopularLocationsList = InitialData.getPopularLocations();
 					AverageSalaryList = InitialData.getAverageSalary();
 					CrimeRateList = InitialData.getCrimeRate();
+					CostOfLivingList = InitialData.getCostOfLiving();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -547,6 +585,7 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement insertPopularLocation  = null;
 				PreparedStatement insertAverageSalary = null;
 				PreparedStatement insertCrimeRate = null;
+				PreparedStatement insertCOL = null;
 
 				try {
 					// populate UserDatabase table
@@ -602,7 +641,15 @@ public class DerbyDatabase implements IDatabase {
 						insertCrimeRate.addBatch();
 					}
 					insertCrimeRate.executeBatch();
-					
+					// populate CostOfLiving table
+					insertCOL = conn.prepareStatement("insert into CostOfLiving (Scale, CostOfLivingIndex) values (?, ?)");
+					for (CostOfLiving C : CostOfLivingList) {
+//						
+						insertCOL.setInt(1, C.getScale());
+						insertCOL.setInt(2, C.getCostOfLivingIndex());
+						insertCOL.addBatch();
+					}
+					insertCOL.executeBatch();
 					
 					
 					return true;

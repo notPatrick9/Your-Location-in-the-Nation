@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<h1>location in the nation!</h1>
+<h1>Your Location in the Nation!</h1>
 <hr>
 
 <div class="img-container">
@@ -20,7 +20,18 @@
 <h3>Hello! we are here to help you find a place to live.</h3>
 
 
-<button onclick="document.location='/questions.html'">Get Started!</button>
+<form action="${pageContext.servletContext.contextPath}/index" method="post">
+		<div class = "Questions">
+		<input type="Submit" name="GotoQuestions" value="Get Started!">
+		</div>
+		<div class = "PopLocs">
+		<input type="Submit" name="GotoPopLocs" value="View Popular Locations!">
+		</div>
+		<div class = "SavedLocs">
+		<input type="Submit" name="GotoSavedLocs" value="View Your Saved Locations!">
+		</div>
+		
+	</form>
 
 
 

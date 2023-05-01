@@ -2,6 +2,7 @@ package ThingsToDo;
 
 import java.net.URI;
 
+
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Iterator;
@@ -25,7 +26,7 @@ public class AboutTheArea {
 		
 		
 		String About = null;
-		
+		//String Zipcode = "17402";
 		
 		//Check to see if the caller passed a valid Zipcode
 		if(Integer.parseInt(Zipcode) < 00501 || Integer.parseInt(Zipcode) > 99950) {
@@ -40,7 +41,7 @@ public class AboutTheArea {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String API_Key = "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";
+		String API_Key = "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";
 		URLConnection conn = (HttpURLConnection) url.openConnection();
 		
 		

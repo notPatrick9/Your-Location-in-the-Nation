@@ -20,5 +20,21 @@ public class IndexServlet extends HttpServlet {
 			
 		req.getRequestDispatcher("/_view/Index.jsp").forward(req, resp);
 	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	{
+		if(req.getParameter("GotoQuestions") != null) {
+			req.getRequestDispatcher("/_view/questions.jsp").forward(req, resp);
+		}
+		else if(req.getParameter("GotoPopLocs") != null) {
+			resp.sendRedirect(req.getContextPath() + "/PopularLocations");
+			return;
+		}
+		else if(req.getParameter("GotoSavedLocs") != null) {
+			resp.sendRedirect(req.getContextPath() + "/SavePage");
+			return;
+		}
+		
+	}
 	
 }

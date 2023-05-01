@@ -29,7 +29,7 @@ public class testCreateUser {
 		public void AttemptToCreateUserThatExists() throws SQLException {
 			
 			
-			boolean Created = data.CreateUser("Micheal", "Jordan");
+			boolean Created = data.CreateUser("BillyBob", "1234");
 			
 			assertTrue(Created);
 		}

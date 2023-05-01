@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
     <title>Saved</title>
@@ -26,11 +28,32 @@ transform: translate(-10px);
 </head>
 <body>
     
- <a href="/Lab_1/welcomeG.html">
-    <p>Home</p>
-    </a>
+ 
 <h1>Here are your saved locations: </h1>
 <hr>
+<body>
+		<c:if test="${! empty errorMessage}">
+			<div class="error">${errorMessage}</div>
+		</c:if>
+	
+		<table>
+			 <tr>
+       			<td class="nameColHeading">Zipcode</td>
+       			     				
+			   </tr>
+			        
+			   <c:forEach items="${SavedLocations}" var="SavedLocations">
+			      <tr class="PopularLocationsRow">
+			           <td class="nameCol">${SavedLocations}</td>
+			            		            
+			        </tr>
+			    </c:forEach>
+			</table>
+		<form action="${pageContext.servletContext.contextPath}/PopularLocations" method="post">
+			<input type="Submit" name="submithome" value="Home">
+		</form>
+	</body>
+
 
 
 </body>

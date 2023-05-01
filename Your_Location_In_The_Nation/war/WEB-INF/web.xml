@@ -12,7 +12,10 @@
     <servlet-class>servlet.AddNumbersServlet</servlet-class>
   </servlet>
   
-  
+  <servlet>
+    <servlet-name>OutputServlet</servlet-name>
+    <servlet-class>servlet.OutputServlet</servlet-class>
+  </servlet>
   
   
   <servlet>
@@ -25,7 +28,20 @@
     <servlet-class>servlet.IndexServlet</servlet-class>
   </servlet>
  
+   <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>servlet.LoginServlet</servlet-class>
+  </servlet>
   
+   <servlet>
+    <servlet-name>PopularlocationServlet</servlet-name>
+    <servlet-class>servlet.PopularlocationServlet</servlet-class>
+  </servlet>
+  
+   <servlet>
+    <servlet-name>SavepageServlet</servlet-name>
+    <servlet-class>servlet.SavepageServlet</servlet-class>
+  </servlet>
   
 
   <!-- Servlet mappings -->
@@ -41,13 +57,37 @@
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
   
+  
+  
+  <servlet-mapping>
+    <servlet-name>OutputServlet</servlet-name>
+    <url-pattern>/output</url-pattern>
+  </servlet-mapping>
+  
+  
+  
   <servlet-mapping>
     <servlet-name>QuestionsServlet</servlet-name>
     <url-pattern>/questions</url-pattern>
   </servlet-mapping>
+  
+    <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  
+    <servlet-mapping>
+    <servlet-name>SavepageServlet</servlet-name>
+    <url-pattern>/SavePage</url-pattern>
+  </servlet-mapping>
+  
+    <servlet-mapping>
+    <servlet-name>PopularlocationServlet</servlet-name>
+    <url-pattern>/PopularLocations</url-pattern>
+  </servlet-mapping>
  
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>welcomeG.html</welcome-file>
   </welcome-file-list>
   
   

@@ -15,7 +15,11 @@
 			<attribute name="javadoc_location" value="http://db.apache.org/derby/docs/10.10/publishedapi/jdbc4/"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/Douglas/Downloads/json-simple-1.1.jar/json-simple-1.1.jar"/>
+>>>>>>> refs/remotes/Ryan/master
+=======
+	<classpathentry kind="lib" path="C:/Users/Ryan/Downloads/json-simple-1.1.jar/json-simple-1.1.jar"/>
 >>>>>>> refs/remotes/Ryan/master
 	<classpathentry kind="output" path="bin"/>
 </classpath>
