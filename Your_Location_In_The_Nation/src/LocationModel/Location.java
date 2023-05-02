@@ -39,7 +39,7 @@ public class Location {
 		return CostOfLivingRent;
 	}
 	
-	public void setCostOfLivingRent(int costOfLiving) {
+	public void setCostOfLivingRent(float costOfLiving) {
 		CostOfLivingRent = costOfLiving;
 	}
 	
@@ -47,7 +47,7 @@ public class Location {
 		return CostOfLivingOwnWithMortgage;
 	}
 	
-	public void setCostOfLivingOwnWithMortgage(int costOfLiving) {
+	public void setCostOfLivingOwnWithMortgage(float costOfLiving) {
 		CostOfLivingOwnWithMortgage = costOfLiving;
 	}
 	
@@ -55,7 +55,7 @@ public class Location {
 		return CostOfLivingOwnNoMortgage;
 	}
 	
-	public void setCostOfLivingOwnNoMortgage(int costOfLiving) {
+	public void setCostOfLivingOwnNoMortgage(float costOfLiving) {
 		CostOfLivingOwnNoMortgage = costOfLiving;
 	}
 	
