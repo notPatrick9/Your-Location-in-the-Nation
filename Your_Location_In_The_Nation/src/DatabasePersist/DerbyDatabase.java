@@ -606,7 +606,23 @@ public class DerbyDatabase implements IDatabase {
 
 				try {
 					// populate Locations table
-					//insertLocation = conn.prepareStatement("insert into UserDatabase ()")
+					insertLocation = conn.prepareStatement("insert into UserDatabase "
+							+ "(Name, County, State, Zip, Income, Rent, Mortgage, NoMortgage, CrimeRate, Region, Population)"
+							+ "calues (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					for (Location loc : LocationList) {
+						insertLocation.setString(1, loc.getCity());
+						insertLocation.setString(2, loc.getCounty());
+						insertLocation.setString(3, loc.getState());
+						insertLocation.setString(4, loc.getZipcode());
+						insertLocation.setInt(5, loc.getAvgSalaryPerHouse());
+						insertLocation.setInt(6, loc.getCostOfLivingRent());
+						insertLocation.setInt(7, loc.getCostOfLivingOwnWithMortgage());
+						insertLocation.setInt(8, loc.getCostOfLivingOwnNoMortgage());
+						insertLocation.setInt(9, loc.getCrimeRate());
+						insertLocation.setString(10, loc.getPopulation());
+						insertLocation.setInt(11, loc.getRegion());
+					}
+					insertLocation.executeBatch();
 					
 					// populate UserDatabase table
 					insertUser = conn.prepareStatement("insert into UserDatabase (Username, Password) values (?, ?)");
