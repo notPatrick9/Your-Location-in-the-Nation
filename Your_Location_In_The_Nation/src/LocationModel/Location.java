@@ -8,9 +8,9 @@ public class Location {
 	private String City;
 	private String State;
 	private String Region;
-	private int CostOfLivingRent;
-	private int CostOfLivingOwnWithMortgage;
-	private int CostOfLivingOwnNoMortgage;
+	private float CostOfLivingRent;
+	private float CostOfLivingOwnWithMortgage;
+	private float CostOfLivingOwnNoMortgage;
 	private int AvgSalary;
 	private int CrimeRate;
 	private int Population;
@@ -35,7 +35,7 @@ public class Location {
 		AvgSalary = avgSalary;
 	}
 	
-	public int getCostOfLivingRent() {
+	public float getCostOfLivingRent() {
 		return CostOfLivingRent;
 	}
 	
@@ -43,7 +43,7 @@ public class Location {
 		CostOfLivingRent = costOfLiving;
 	}
 	
-	public int getCostOfLivingOwnWithMortgage() {
+	public float getCostOfLivingOwnWithMortgage() {
 		return CostOfLivingOwnWithMortgage;
 	}
 	
@@ -51,7 +51,7 @@ public class Location {
 		CostOfLivingOwnWithMortgage = costOfLiving;
 	}
 	
-	public int getCostOfLivingOwnNoMortgage() {
+	public float getCostOfLivingOwnNoMortgage() {
 		return CostOfLivingOwnNoMortgage;
 	}
 	
