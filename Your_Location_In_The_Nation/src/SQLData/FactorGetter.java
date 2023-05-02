@@ -155,7 +155,7 @@ public class FactorGetter {
 		
 	}
 	//public static void main(String args[]) {
-	public int Get_CostofLiving_Factor(int Scale) throws ClassNotFoundException, IOException {
+	public int Get_CostofLiving_Factor(int Scale, int COLType) throws ClassNotFoundException, IOException {
 		//string that will hold sql query requestion
 		
 		int Factor = 0;
@@ -189,12 +189,25 @@ public class FactorGetter {
 			conn.setAutoCommit(true);
 
 			// a canned query to find book information (including author name) from title
-			stmt = conn.prepareStatement(
-					"select CostOfLivingIndex "
-							+ "from CostOfLiving "
-							+ "where Scale = ?"
-			);
-
+			if(COLType == 0) {
+				stmt = conn.prepareStatement(
+						"select CostOfLivingIndex "
+								+ "from CostOfLivingRent "
+								+ "where Scale = ?"
+					);
+			} else if(COLType == 1) {
+				stmt = conn.prepareStatement(
+						"select CostOfLivingIndex "
+								+ "from CostOfLivingMortgage "
+								+ "where Scale = ?"
+					);
+			} else {
+				stmt = conn.prepareStatement(
+						"select CostOfLivingIndex "
+								+ "from CostOfLivingNoMortgage "
+								+ "where Scale = ?"
+					);
+			}
 			// substitute the title entered by the user for the placeholder in the query
 			stmt.setInt(1, Scale);
 

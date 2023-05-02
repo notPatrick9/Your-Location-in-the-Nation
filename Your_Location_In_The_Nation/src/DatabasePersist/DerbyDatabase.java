@@ -492,6 +492,8 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt4 = null;
 				PreparedStatement stmt5 = null;
 				PreparedStatement stmt6 = null;
+				PreparedStatement stmt7 = null;
+				PreparedStatement stmt8 = null;
 				//this will create the table used for storing our users username and password
 				try {
 					stmt0 = conn.prepareStatement(
@@ -551,19 +553,41 @@ public class DerbyDatabase implements IDatabase {
 					stmt5.executeUpdate();
 					
 					stmt6 = conn.prepareStatement(
-							"create table CostOfLiving (" +
+							"create table CostOfLivingRent (" +
 								" Scale int, " +
 								" CostOfLivingIndex int "
 								+")"
 							);
 					stmt6.executeUpdate();
 					
+					stmt7 = conn.prepareStatement(
+							"create table CostOfLivingMortgage (" +
+								" Scale int, " +
+								" CostOfLivingIndex int "
+								+")"
+							);
+					stmt7.executeUpdate();
+					
+					stmt8 = conn.prepareStatement(
+							"create table CostOfLivingNoMortgage (" +
+								" Scale int, " +
+								" CostOfLivingIndex int "
+								+")"
+							);
+					stmt8.executeUpdate();
+					
 
 					return true;
 				} finally {
+					DBUtil.closeQuietly(stmt0);
 					DBUtil.closeQuietly(stmt1);
 					DBUtil.closeQuietly(stmt2);
 					DBUtil.closeQuietly(stmt3);
+					DBUtil.closeQuietly(stmt4);
+					DBUtil.closeQuietly(stmt5);
+					DBUtil.closeQuietly(stmt6);
+					DBUtil.closeQuietly(stmt7);
+					DBUtil.closeQuietly(stmt8);
 				}
 			}
 		});
@@ -581,7 +605,9 @@ public class DerbyDatabase implements IDatabase {
 				List<PopularLocations> PopularLocationsList;
 				List<AverageSalary> AverageSalaryList;
 				List<CrimeRate> CrimeRateList;
-				List<CostOfLiving> CostOfLivingList;
+				List<CostOfLiving> CostOfLivingListRent;
+				List<CostOfLiving> CostOfLivingListMortgage;
+				List<CostOfLiving> CostOfLivingListNoMortgage;
 				
 				
 				try {
@@ -591,7 +617,9 @@ public class DerbyDatabase implements IDatabase {
 					PopularLocationsList = InitialData.getPopularLocations();
 					AverageSalaryList = InitialData.getAverageSalary();
 					CrimeRateList = InitialData.getCrimeRate();
-					CostOfLivingList = InitialData.getCostOfLiving();
+					CostOfLivingListRent = InitialData.getCostOfLivingRent();
+					CostOfLivingListMortgage = InitialData.getCostOfLivingMortgage();
+					CostOfLivingListNoMortgage = InitialData.getCostOfLivingMortgage();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -602,7 +630,9 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement insertPopularLocation  = null;
 				PreparedStatement insertAverageSalary = null;
 				PreparedStatement insertCrimeRate = null;
-				PreparedStatement insertCOL = null;
+				PreparedStatement insertRent = null;
+				PreparedStatement insertMortgage = null;
+				PreparedStatement insertNoMortgage = null;
 
 				try {
 					// populate Locations table
@@ -679,15 +709,35 @@ public class DerbyDatabase implements IDatabase {
 					}
 					insertCrimeRate.executeBatch();
 					
-					// populate CostOfLiving table
-					insertCOL = conn.prepareStatement("insert into CostOfLiving (Scale, CostOfLivingIndex) values (?, ?)");
-					for (CostOfLiving C : CostOfLivingList) {
+					// populate Rent table
+					insertRent = conn.prepareStatement("insert into CostOfLivingRent (Scale, CostOfLivingIndex) values (?, ?)");
+					for (CostOfLiving C : CostOfLivingListRent) {
 //						
-						insertCOL.setInt(1, C.getScale());
-						insertCOL.setInt(2, C.getCostOfLivingIndex());
-						insertCOL.addBatch();
+						insertRent.setInt(1, C.getScale());
+						insertRent.setInt(2, C.getCostOfLivingIndex());
+						insertRent.addBatch();
 					}
-					insertCOL.executeBatch();
+					insertRent.executeBatch();
+					
+					// populate Mortgage table
+					insertMortgage = conn.prepareStatement("insert into CostOfLivingMortgage (Scale, CostOfLivingIndex) values (?, ?)");
+					for (CostOfLiving C : CostOfLivingListMortgage) {
+//						
+						insertMortgage.setInt(1, C.getScale());
+						insertMortgage.setInt(2, C.getCostOfLivingIndex());
+						insertMortgage.addBatch();
+					}
+					insertMortgage.executeBatch();
+					
+					// populate NoMortgage table
+					insertNoMortgage = conn.prepareStatement("insert into CostOfLivingNoMortgage (Scale, CostOfLivingIndex) values (?, ?)");
+					for (CostOfLiving C : CostOfLivingListNoMortgage) {
+//						
+						insertNoMortgage.setInt(1, C.getScale());
+						insertNoMortgage.setInt(2, C.getCostOfLivingIndex());
+						insertNoMortgage.addBatch();
+					}
+					insertNoMortgage.executeBatch();
 					
 					
 					return true;
@@ -695,6 +745,12 @@ public class DerbyDatabase implements IDatabase {
 					DBUtil.closeQuietly(insertUser);
 					DBUtil.closeQuietly(insertSavedLocation);
 					DBUtil.closeQuietly(insertPopularLocation);
+					DBUtil.closeQuietly(insertLocation);
+					DBUtil.closeQuietly(insertAverageSalary);
+					DBUtil.closeQuietly(insertCrimeRate);
+					DBUtil.closeQuietly(insertRent);
+					DBUtil.closeQuietly(insertMortgage);
+					DBUtil.closeQuietly(insertNoMortgage);
 				}
 			}
 		});

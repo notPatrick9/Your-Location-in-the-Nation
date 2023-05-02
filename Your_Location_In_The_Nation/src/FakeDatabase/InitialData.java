@@ -181,11 +181,11 @@ public static List<AverageSalary> getAverageSalary() throws IOException {
 }
 
 
-public static List<CostOfLiving> getCostOfLiving() throws IOException {
+public static List<CostOfLiving> getCostOfLivingRent() throws IOException {
 	
 	
 	List<CostOfLiving> CostOfLivingList = new ArrayList<CostOfLiving>();
-	ReadCSV readCostOfLiving = new ReadCSV("CostOfLivingScales.csv");
+	ReadCSV readCostOfLiving = new ReadCSV("RentScales.csv");
 	try {
 		
 		while (true) {
@@ -196,7 +196,61 @@ public static List<CostOfLiving> getCostOfLiving() throws IOException {
 			Iterator<String> i = tuple.iterator();
 			CostOfLiving COL = new CostOfLiving();
 			COL.setScale(Integer.parseInt(i.next()));
-			COL.setCostOfLivingIndex(Integer.parseInt(i.next()));
+			COL.setCostOfLivingIndex(Float.parseFloat(i.next()));
+			
+			
+			CostOfLivingList.add(COL);
+		}
+		return CostOfLivingList;
+	} finally {
+		readCostOfLiving.close();
+	}
+	
+}
+
+public static List<CostOfLiving> getCostOfLivingMortgage() throws IOException {
+	
+	
+	List<CostOfLiving> CostOfLivingList = new ArrayList<CostOfLiving>();
+	ReadCSV readCostOfLiving = new ReadCSV("MortgageScales.csv");
+	try {
+		
+		while (true) {
+			List<String> tuple = readCostOfLiving.next();
+			if (tuple == null) {
+				break;
+			}
+			Iterator<String> i = tuple.iterator();
+			CostOfLiving COL = new CostOfLiving();
+			COL.setScale(Integer.parseInt(i.next()));
+			COL.setCostOfLivingIndex(Float.parseFloat(i.next()));
+			
+			
+			CostOfLivingList.add(COL);
+		}
+		return CostOfLivingList;
+	} finally {
+		readCostOfLiving.close();
+	}
+	
+}
+
+public static List<CostOfLiving> getCostOfLivingNoMortgage() throws IOException {
+	
+	
+	List<CostOfLiving> CostOfLivingList = new ArrayList<CostOfLiving>();
+	ReadCSV readCostOfLiving = new ReadCSV("NoMortgageScales.csv");
+	try {
+		
+		while (true) {
+			List<String> tuple = readCostOfLiving.next();
+			if (tuple == null) {
+				break;
+			}
+			Iterator<String> i = tuple.iterator();
+			CostOfLiving COL = new CostOfLiving();
+			COL.setScale(Integer.parseInt(i.next()));
+			COL.setCostOfLivingIndex(Float.parseFloat(i.next()));
 			
 			
 			CostOfLivingList.add(COL);

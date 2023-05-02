@@ -33,7 +33,7 @@ public class GetLocation {
 		
 		CrimeFactor = FactorRetriver.Get_Crime_Factor(UserCrimeScale);
 		CostOfLivingFactor = FactorRetriver.Get_AvgSalary_Factor(UserAvgSalaryScale);
-		AvgSalaryPerHouseFactor = FactorRetriver.Get_CostofLiving_Factor(UserCostOfLivingScale);
+		AvgSalaryPerHouseFactor = FactorRetriver.Get_CostofLiving_Factor(UserCostOfLivingScale, COLType);
 		this.Locations = Locations;
 		TopLocations = new ArrayList<Location>();
 	}
