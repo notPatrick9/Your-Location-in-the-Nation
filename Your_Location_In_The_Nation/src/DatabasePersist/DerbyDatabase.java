@@ -501,9 +501,9 @@ public class DerbyDatabase implements IDatabase {
 							" State varchar(2), " +
 							" Zip varchar(5), " +
 							" Income int, " +
-							" Rent int, " +
-							" Mortgage int, " +
-							" NoMortgage int, " +
+							" Rent float(40,1), " +
+							" Mortgage float(40,1), " +
+							" NoMortgage float(40,1), " +
 							" CrimeRate int, " +
 							" Region varchar(40), " +
 							" Population int"
@@ -615,9 +615,9 @@ public class DerbyDatabase implements IDatabase {
 						insertLocation.setString(3, loc.getState());
 						insertLocation.setString(4, loc.getZipcode());
 						insertLocation.setInt(5, loc.getAvgSalaryPerHouse());
-						insertLocation.setInt(6, loc.getCostOfLivingRent());
-						insertLocation.setInt(7, loc.getCostOfLivingOwnWithMortgage());
-						insertLocation.setInt(8, loc.getCostOfLivingOwnNoMortgage());
+						insertLocation.setFloat(6, loc.getCostOfLivingRent());
+						insertLocation.setFloat(7, loc.getCostOfLivingOwnWithMortgage());
+						insertLocation.setFloat(8, loc.getCostOfLivingOwnNoMortgage());
 						insertLocation.setInt(9, loc.getCrimeRate());
 						insertLocation.setString(10, loc.getPopulation());
 						insertLocation.setInt(11, loc.getRegion());
