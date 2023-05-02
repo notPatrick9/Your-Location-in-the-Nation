@@ -8,6 +8,22 @@
         
         }
         
+        body{
+animation: transition 0.75s;
+}
+@keyframes transition {
+    from{
+opacity: 0;
+transform: translate(-10px);
+
+    }
+  to{
+    opacity: 1;
+    transform: translate(0);
+  }  
+}
+        
+        
         </style>
 </head>
 <body>
@@ -31,6 +47,9 @@
 		<input type="Submit" name="GotoSavedLocs" value="View Your Saved Locations!">
 		</div>
 		
+		<div class = "Login">
+		<input type="Submit" name="GotoLogin" value="Logout">
+		</div>
 	</form>
 
 

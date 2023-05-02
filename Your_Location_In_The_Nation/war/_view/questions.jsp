@@ -33,7 +33,7 @@ transform: translate(-10px);
 </head>
 <body>
 
-<h1>Your Location In Then Nation! </h1>
+<h1>Your Location In The Nation! </h1>
 <hr>
 <h3>Please answer each question.</h3>
 		<c:if test="${! empty errorMessage}">

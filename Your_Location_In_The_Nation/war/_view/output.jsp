@@ -30,7 +30,7 @@ transform: translate(-10px);
     transform: translate(0);
   }  
 =======
-<title>Florida</title>
+<title>Results</title>
 <style>
 .img-container{
     text-align: center;

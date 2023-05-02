@@ -35,6 +35,11 @@ public class IndexServlet extends HttpServlet {
 			return;
 		}
 		
+		else if(req.getParameter("GotoLogin") != null) {
+			resp.sendRedirect(req.getContextPath() + "/Login");
+			return;
+		}
+		
 	}
 	
 }
