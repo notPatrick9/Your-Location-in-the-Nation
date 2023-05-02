@@ -621,6 +621,7 @@ public class DerbyDatabase implements IDatabase {
 						insertLocation.setInt(9, loc.getCrimeRate());
 						insertLocation.setString(10, loc.getPopulation());
 						insertLocation.setInt(11, loc.getRegion());
+						insertLocation.addBatch();
 					}
 					insertLocation.executeBatch();
 					
@@ -677,6 +678,7 @@ public class DerbyDatabase implements IDatabase {
 						insertCrimeRate.addBatch();
 					}
 					insertCrimeRate.executeBatch();
+					
 					// populate CostOfLiving table
 					insertCOL = conn.prepareStatement("insert into CostOfLiving (Scale, CostOfLivingIndex) values (?, ?)");
 					for (CostOfLiving C : CostOfLivingList) {
