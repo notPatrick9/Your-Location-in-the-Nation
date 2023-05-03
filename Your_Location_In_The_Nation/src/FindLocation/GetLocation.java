@@ -17,7 +17,7 @@ public class GetLocation {
 	List<Location> Locations;
 	List<Location> TopLocations;
 	int CrimeFactor;
-	int CostOfLivingFactor;
+	float CostOfLivingFactor;
 	int CostOfLivingType;					//0 for rent, 1 for a mortgage, 2+ for own no mortgage
 	int AvgSalaryPerHouseFactor;
 	public GetLocation(int UserCrimeScale, int UserAvgSalaryScale, int UserCostOfLivingScale, int COLType, List<Location> Locations) throws ClassNotFoundException, IOException {
@@ -32,8 +32,8 @@ public class GetLocation {
 		FactorGetter FactorRetriver = new FactorGetter();
 		
 		CrimeFactor = FactorRetriver.Get_Crime_Factor(UserCrimeScale);
-		CostOfLivingFactor = FactorRetriver.Get_AvgSalary_Factor(UserAvgSalaryScale);
-		AvgSalaryPerHouseFactor = FactorRetriver.Get_CostofLiving_Factor(UserCostOfLivingScale, COLType);
+		AvgSalaryPerHouseFactor = FactorRetriver.Get_AvgSalary_Factor(UserAvgSalaryScale);
+		CostOfLivingFactor = FactorRetriver.Get_CostofLiving_Factor(UserCostOfLivingScale, COLType);
 		this.Locations = Locations;
 		TopLocations = new ArrayList<Location>();
 	}
