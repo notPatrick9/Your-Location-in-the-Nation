@@ -6,6 +6,6 @@ public class CostOfLivingOwnWithMortgageComparator implements Comparator<Locatio
 	@Override
 	//descending order
 	public int compare(Location L1, Location L2) {
-		return L2.getCostOfLivingOwnWithMortgage() - L1.getCostOfLivingOwnWithMortgage();
+		return (int)(L2.getCostOfLivingOwnWithMortgage() - L1.getCostOfLivingOwnWithMortgage());
 	}
 }

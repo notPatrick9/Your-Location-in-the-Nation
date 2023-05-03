@@ -53,7 +53,7 @@ public class QuestionsServlet extends HttpServlet {
         Location bestLocation = null;
 
         // decode POSTed form parameters and dispatch to controller
-<<<<<<< HEAD
+//<<<<<<< HEAD
         try {
             int crimeRateFactor = Integer.parseInt(req.getParameter("crimeRateFactor"));
             int averageSalaryFactor = Integer.parseInt(req.getParameter("averageSalaryFactor"));
@@ -71,12 +71,12 @@ public class QuestionsServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-=======
+//=======
         
         if(req.getParameter("Backtoindex") != null) {
 			resp.sendRedirect(req.getContextPath() + "/index");
 			return;
->>>>>>> refs/remotes/Ryan/master
+//>>>>>>> refs/remotes/Ryan/master
 		}
         else {
         	try {
@@ -94,7 +94,8 @@ public class QuestionsServlet extends HttpServlet {
                 if (crimeRateFactor + averageSalaryFactor + costOfLivingFactor != 10) {
                     errorMessage = "Please answer all the questions and make them equal to 10.";
                 } else {
-                    GetLocation locationGetter = new GetLocation(crimeRateFactor, averageSalaryFactor, costOfLivingFactor, LocationList);
+                    // TEMP COST OF LIVING TYPE 
+                	GetLocation locationGetter = new GetLocation(crimeRateFactor, averageSalaryFactor, costOfLivingFactor, 1, LocationList);
                  
                     bestLocation = locationGetter.FindBestLocation();
                     
@@ -110,7 +111,7 @@ public class QuestionsServlet extends HttpServlet {
                     
                 }
             
-            } catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException r) {
     		
     			e.printStackTrace();
     		}
@@ -132,7 +133,7 @@ public class QuestionsServlet extends HttpServlet {
     		// Forward to view to render the result HTML document
             req.getRequestDispatcher("/_view/questions.jsp").forward(req, resp);
         }
-        
+      }    
     }
     
  // gets double from the request with attribute named s

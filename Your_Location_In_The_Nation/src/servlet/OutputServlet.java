@@ -72,7 +72,7 @@ public class OutputServlet extends HttpServlet {
 		
 		req.setAttribute("CrimeRate", bestLoc.getCrimeRate());
 		req.setAttribute("AvgSalary", bestLoc.getAvgSalaryPerHouse());
-		req.setAttribute("CostOfLiving", bestLoc.getCostOfLiving());
+		//req.setAttribute("CostOfLiving", bestLoc.getCostOfLivingRent());
 		req.setAttribute("County", bestLoc.getCounty());
 		req.setAttribute("FunThingsToDo", FunThingsToDo);
 		
