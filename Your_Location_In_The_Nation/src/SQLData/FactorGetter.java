@@ -155,7 +155,7 @@ public class FactorGetter {
 		
 	}
 	//public static void main(String args[]) {
-	public int Get_CostofLiving_Factor(int Scale, int COLType) throws ClassNotFoundException, IOException {
+	public float Get_CostofLiving_Factor(int Scale, int COLType) throws ClassNotFoundException, IOException {
 		//string that will hold sql query requestion
 		
 		int Factor = 0;
