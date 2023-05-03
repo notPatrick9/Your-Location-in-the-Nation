@@ -470,21 +470,164 @@ public class DerbyDatabase implements IDatabase {
 	
 	}
 	
-	//need to reimplement this function for Locations to load a location
-	/*
-	private void loadAuthor(Author author, ResultSet resultSet, int index) throws SQLException {
-		author.setAuthorId(resultSet.getInt(index++));
-		author.setLastname(resultSet.getString(index++));
-		author.setFirstname(resultSet.getString(index++));
-	}
-	*/
+	@Override
+	public Location viewZipcodeinfo(String Zipcode) throws SQLException {
+		
+		Location Location = new Location();
+		
+		try {
+			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+		} catch (Exception e) {
+			System.err.println("Could not load Derby JDBC driver");
+			System.err.println(e.getMessage());
+			System.exit(1);
+		}
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+
+		
+			
+			
+		try {
+			// connect to the database
+			conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
+		}
+		catch(SQLException e) {
+			System.err.println("Bad Connection");
+		}
+		//for the query there are placeholder names for now where the real database column names will be 
+		try {
+
+			stmt = conn.prepareStatement(
+					"select Name, County, State, Zip, Income, Rent, Mortgage, NoMortgage, CrimeRate, Region, Population "
+					+ "from Locations"
+					+ "where Zipcode = ?"
+					);
+			stmt.setString(1, Zipcode);
+			
+			resultSet = stmt.executeQuery();
+			
+			if (resultSet.next()) {
+				//these are also placeholders here until the location model class gets updated
+				
+				//name
+				Location.setName(resultSet.getString(1));
+				//County
+				Location.setCounty(resultSet.getString(2));
+				//State
+				Location.setState(resultSet.getString(3));
+				//Income
+				Location.setZip(resultSet.getInt(4));
+				//Rent
+				Location.setIncome(resultSet.getInt(5);
+				//Mortgage
+				Location.setRent(resultSet.getInt(6);
+				//No mortgage
+				Location.setCostOfLivingMortgage(resultSet.getInt(7);
+				//CrimeRate
+				Location.setCostOfLivingNoMortgage(resultSet.getInt(8);
+				//Region
+				Location.setCrimeRate(resultSet.getInt(9);
+				//Population
+				Location.setRegion(resultSet.getString(10);
+				
+				Location.setPopulation(resultSet.getInt(10);
+				
+				
+				
+			}
+
+			
 	
-	//need to reimplement this function for all of our tables 
+	
+		
+		} finally {
+			DBUtil.closeQuietly(resultSet);
+			DBUtil.closeQuietly(stmt);
+		}
+		
+		return Location;
+		
+		
+		
+		
+		
+		
+	}
+	
+	//for later
+	//might implement this as a separate page, or possibly as a drop down on the index page
+	@Override
+	public List<String> getZipcodesForAreaName(String Name) throws SQLException {
+		List<String> Zipcodes = new ArrayList<String>();
+		
+		try {
+			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+		} catch (Exception e) {
+			System.err.println("Could not load Derby JDBC driver");
+			System.err.println(e.getMessage());
+			System.exit(1);
+		}
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+
+		
+			
+			
+		try {
+			// connect to the database
+			conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
+		}
+		catch(SQLException e) {
+			System.err.println("Bad Connection");
+		}
+		//for the query there are placeholder names for now where the real database column names will be 
+		try {
+
+			stmt = conn.prepareStatement(
+					"select Zipcode "
+					+ "from Locations"
+					+ "where Name = ?"
+					);
+			stmt.setString(1, Name);
+			
+			resultSet = stmt.executeQuery();
+			
+			while (resultSet.next()) {
+				//should add all zipcodes for the area into the list
+				Zipcodes.add(resultSet.getString(1));
+				}
+
+			
+	
+	
+		
+		} finally {
+			DBUtil.closeQuietly(resultSet);
+			DBUtil.closeQuietly(stmt);
+		}
+		
+		return Zipcodes;
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt0 = null;
 				PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
 				PreparedStatement stmt3 = null;
@@ -493,6 +636,27 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt6 = null;
 				//this will create the table used for storing our users username and password
 				try {
+					
+					stmt0 = conn.prepareStatement(
+							"create table LocationsDatabase (" +
+							" Name varchar(40), " +
+							" County varchar(40), " +
+							" State varchar(2), " +
+							" Zip varchar(5), " +
+							" Income int, " +
+							" Rent float(40,1), " +
+							" Mortgage float(40,1), " +
+							" NoMortgage float(40,1), " +
+							" CrimeRate int, " +
+							" Region varchar(40), " +
+							" Population int"
+							);
+					stmt0.executeUpdate();
+					
+					
+					
+					
+					
 					
 					stmt1 = conn.prepareStatement(
 						"create table UserDatabase (" +
@@ -535,20 +699,43 @@ public class DerbyDatabase implements IDatabase {
 					stmt5.executeUpdate();
 					
 					stmt6 = conn.prepareStatement(
-							"create table CostOfLiving (" +
+							"create table CostOfLivingRent (" +
 								" Scale int, " +
 								" CostOfLivingIndex int "
 								+")"
 							);
 					stmt6.executeUpdate();
 					
+					stmt7 = conn.prepareStatement(
+							"create table CostOfLivingMortgage (" +
+								" Scale int, " +
+								" CostOfLivingIndex int "
+								+")"
+							);
+					stmt7.executeUpdate();
+					
+					stmt8 = conn.prepareStatement(
+							"create table CostOfLivingNoMortgage (" +
+								" Scale int, " +
+								" CostOfLivingIndex int "
+								+")"
+							);
+					stmt8.executeUpdate();
+					
 
 					return true;
 				} finally {
+					DBUtil.closeQuietly(stmt0);
 					DBUtil.closeQuietly(stmt1);
 					DBUtil.closeQuietly(stmt2);
 					DBUtil.closeQuietly(stmt3);
+					DBUtil.closeQuietly(stmt4);
+					DBUtil.closeQuietly(stmt5);
+					DBUtil.closeQuietly(stmt6);
+					DBUtil.closeQuietly(stmt7);
+					DBUtil.closeQuietly(stmt8);
 				}
+			}
 			}
 		});
 	}
@@ -674,6 +861,12 @@ public class DerbyDatabase implements IDatabase {
 		
 		System.out.println("Success!");
 	}
+
+	
+
+	
+
+	
 
 	
 
