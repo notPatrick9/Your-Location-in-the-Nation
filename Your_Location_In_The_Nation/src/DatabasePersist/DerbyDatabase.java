@@ -485,7 +485,7 @@ public class DerbyDatabase implements IDatabase {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
-				preparedStatement stmt0 = null;
+				PreparedStatement stmt0 = null;
 				PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
 				PreparedStatement stmt3 = null;
@@ -649,8 +649,8 @@ public class DerbyDatabase implements IDatabase {
 						insertLocation.setFloat(7, loc.getCostOfLivingOwnWithMortgage());
 						insertLocation.setFloat(8, loc.getCostOfLivingOwnNoMortgage());
 						insertLocation.setInt(9, loc.getCrimeRate());
-						insertLocation.setString(10, loc.getPopulation());
-						insertLocation.setInt(11, loc.getRegion());
+						insertLocation.setString(10, loc.getRegion());
+						insertLocation.setInt(11, loc.getPopulation());
 						insertLocation.addBatch();
 					}
 					insertLocation.executeBatch();
