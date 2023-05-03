@@ -508,8 +508,9 @@ public class DerbyDatabase implements IDatabase {
 							" NoMortgage float(40,1), " +
 							" CrimeRate int, " +
 							" Region varchar(40), " +
-							" Population int"
-							);
+							" Population int" +
+							")"
+					);
 					stmt0.executeUpdate();
 					
 					stmt1 = conn.prepareStatement(
