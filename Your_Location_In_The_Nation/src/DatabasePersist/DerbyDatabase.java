@@ -636,7 +636,7 @@ public class DerbyDatabase implements IDatabase {
 
 				try {
 					// populate Locations table
-					insertLocation = conn.prepareStatement("insert into UserDatabase "
+					insertLocation = conn.prepareStatement("insert into LocationsDatabase "
 							+ "(Name, County, State, Zip, Income, Rent, Mortgage, NoMortgage, CrimeRate, Region, Population)"
 							+ "calues (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 					for (Location loc : LocationList) {
