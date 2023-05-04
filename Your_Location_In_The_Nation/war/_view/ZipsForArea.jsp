@@ -21,11 +21,11 @@
 			<div class="error">${errorMessage}</div>
 		</c:if>
 	
-		<form action="${pageContext.servletContext.contextPath}/searchzip" method="post">
+		<form action="${pageContext.servletContext.contextPath}/viewzips" method="post">
 			
 				<tr>
-					<td class="label">Enter the Zipcode that you would like more information about! </td>
-					<td><input type="text" name="Zipcode" size="12" value="${Zipcode}" /></td>
+					<td class="label">Enter the area that you would like to get zipcodes for! </td>
+					<td><input type="text" name="AreaName" size="12" value="${Zipcode}" /></td>
 				</tr>
 				
 				<input type="Submit" name="submit" value="Get Zipcodes!">

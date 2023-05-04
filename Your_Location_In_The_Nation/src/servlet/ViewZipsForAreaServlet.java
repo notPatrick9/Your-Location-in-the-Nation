@@ -36,7 +36,7 @@ public class ViewZipsForAreaServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("Popularlocations Servlet: doPost");
+		System.out.println("ZipsForArea Servlet: doPost");
 		//needs database attribute
 		String errorMessage;
     	String AreaName = req.getParameter("AreaName");

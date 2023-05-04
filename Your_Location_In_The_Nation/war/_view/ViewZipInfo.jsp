@@ -39,27 +39,27 @@
 					<tr>
 					<td class="label">Here is some information:</td>
 					<td class="label">Location Name: </td>
-					<td>${Location.Name}</td>
-					<td class="label">County: </td>
-					<td>${Location.County}</td>
+					<td>${Location.city}</td>
+					<td class="label">county: </td>
+					<td>${Location.county}</td>
 					<td class="label">State: </td>
-					<td>${Location.State}</td>
+					<td>${Location.state}</td>
 					<td class="label">Zipcode: </td>
-					<td>${Location.Zipcode}</td>
+					<td>${Location.zipcode}</td>
 					<td class="label">Income: </td>
-					<td>${Location.Income}</td>
+					<td>${avgsal}</td>
 					<td class="label">Rent: </td>
-					<td>${Location.Rent}</td>
-					<td class="label">Mortgage: </td>
-					<td>${Location.Mortgage}</td>
+					<td>${Location.costOfLivingRent}</td>
+					<td class="label">CostOfLivingOwnWithMortgage: </td>
+					<td>${Location.costOfLivingOwnWithMortgage}</td>
 					<td class="label">No mortgage: </td>
-					<td>${Location.NoMortgage}</td>
+					<td>${Location.costOfLivingOwnNoMortgage}</td>
 					<td class="label">CrimeRate: </td>
-					<td>${Location.CrimeRate}</td>
+					<td>${Location.crimeRate}</td>
 					<td class="label">Region: </td>
-					<td>${Location.Region}</td>
+					<td>${Location.region}</td>
 					<td class="label">Population: </td>
-					<td>${Location.Population}</td>
+					<td>${Location.population}</td>
 				</tr>
 			</c:if>
 				

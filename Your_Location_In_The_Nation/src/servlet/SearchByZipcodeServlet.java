@@ -59,6 +59,7 @@ public class SearchByZipcodeServlet extends HttpServlet {
 		}
 		else {
 			req.setAttribute("Location", Location);
+			req.setAttribute("avgsal", Location.getAvgSalaryPerHouse());
 		}
 	       
 	    

@@ -502,8 +502,8 @@ public class DerbyDatabase implements IDatabase {
 
 			stmt = conn.prepareStatement(
 					"select Name, County, State, Zip, Income, Rent, Mortgage, NoMortgage, CrimeRate, Region, Population "
-					+ "from Locations"
-					+ "where Zipcode = ?"
+					+ " from LocationsDatabase"
+					+ " where Zip = ?"
 					);
 			stmt.setString(1, Zipcode);
 			
@@ -513,27 +513,27 @@ public class DerbyDatabase implements IDatabase {
 				//these are also placeholders here until the location model class gets updated
 				
 				//name
-				Location.setName(resultSet.getString(1));
+				Location.setLocationName(resultSet.getString(1));
 				//County
 				Location.setCounty(resultSet.getString(2));
 				//State
 				Location.setState(resultSet.getString(3));
 				//Income
-				Location.setZip(resultSet.getInt(4));
+				Location.setZipcode(resultSet.getString(4));
 				//Rent
-				Location.setIncome(resultSet.getInt(5);
+				Location.setAvgSalaryPerHouse(resultSet.getInt(5));
 				//Mortgage
-				Location.setRent(resultSet.getInt(6);
+				Location.setCostOfLivingRent(resultSet.getInt(6));
 				//No mortgage
-				Location.setCostOfLivingMortgage(resultSet.getInt(7);
+				Location.setCostOfLivingOwnWithMortgage(resultSet.getInt(7));
 				//CrimeRate
-				Location.setCostOfLivingNoMortgage(resultSet.getInt(8);
+				Location.setCostOfLivingOwnNoMortgage(resultSet.getInt(8));
 				//Region
-				Location.setCrimeRate(resultSet.getInt(9);
+				Location.setCrimeRate(resultSet.getInt(9));
 				//Population
-				Location.setRegion(resultSet.getString(10);
+				Location.setRegion(resultSet.getString(10));
 				
-				Location.setPopulation(resultSet.getInt(10);
+				Location.setPopulation(resultSet.getInt(11));
 				
 				
 				
@@ -589,9 +589,9 @@ public class DerbyDatabase implements IDatabase {
 		try {
 
 			stmt = conn.prepareStatement(
-					"select Zipcode "
-					+ "from Locations"
-					+ "where Name = ?"
+					"select Zip "
+					+ " from LocationsDatabase "
+					+ " where Name = ?"
 					);
 			stmt.setString(1, Name);
 			
@@ -634,6 +634,8 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt4 = null;
 				PreparedStatement stmt5 = null;
 				PreparedStatement stmt6 = null;
+				PreparedStatement stmt7 = null;
+				PreparedStatement stmt8 = null;
 				//this will create the table used for storing our users username and password
 				try {
 					
@@ -644,13 +646,30 @@ public class DerbyDatabase implements IDatabase {
 							" State varchar(2), " +
 							" Zip varchar(5), " +
 							" Income int, " +
-							" Rent float(40,1), " +
-							" Mortgage float(40,1), " +
-							" NoMortgage float(40,1), " +
+							" Rent float, " +
+							" Mortgage float, " +
+							" NoMortgage float, " +
 							" CrimeRate int, " +
 							" Region varchar(40), " +
-							" Population int"
+							" Population int " + 
+							")"
 							);
+					/*
+					stmt0 = conn.prepareStatement(
+							"create table LocationsDatabase (" +
+									" Name varchar(40)," +
+									" County varchar(40) "+
+									" State varchar(2), " +
+									" Zip varchar(2), " +
+									" Income int, " +
+									" Rent float, " +
+									" Mortgage float, " +
+									" NoMortgage float, " +
+									" CrimeRate int, " +
+									" Region varchar, "
+									")"
+							);
+							*/
 					stmt0.executeUpdate();
 					
 					
@@ -736,7 +755,7 @@ public class DerbyDatabase implements IDatabase {
 					DBUtil.closeQuietly(stmt8);
 				}
 			}
-			}
+			
 		});
 	}
 	
@@ -752,7 +771,9 @@ public class DerbyDatabase implements IDatabase {
 				List<PopularLocations> PopularLocationsList;
 				List<AverageSalary> AverageSalaryList;
 				List<CrimeRate> CrimeRateList;
-				List<CostOfLiving> CostOfLivingList;
+				List<CostOfLiving> CostOfLivingListRent;
+				List<CostOfLiving> CostOfLivingListMortgage;
+				List<CostOfLiving> CostOfLivingListNoMortgage;
 				
 				
 				try {
@@ -762,19 +783,62 @@ public class DerbyDatabase implements IDatabase {
 					PopularLocationsList = InitialData.getPopularLocations();
 					AverageSalaryList = InitialData.getAverageSalary();
 					CrimeRateList = InitialData.getCrimeRate();
-					CostOfLivingList = InitialData.getCostOfLiving();
+					//Need to add these to intial data and get csvs
+					/*
+					CostOfLivingListRent = InitialData.getCostOfLivingRent();
+					CostOfLivingListMortgage = InitialData.getCostOfLivingMortgage();
+					CostOfLivingListNoMortgage = InitialData.getCostOfLivingMortgage();
+					*/
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
 
+				PreparedStatement insertLocation = null;
 				PreparedStatement insertUser = null;
 				PreparedStatement insertSavedLocation = null;
 				PreparedStatement insertPopularLocation  = null;
 				PreparedStatement insertAverageSalary = null;
 				PreparedStatement insertCrimeRate = null;
-				PreparedStatement insertCOL = null;
+				PreparedStatement insertRent = null;
+				PreparedStatement insertMortgage = null;
+				PreparedStatement insertNoMortgage = null;
+
 
 				try {
+					
+					
+					// populate Locations table
+					insertLocation = conn.prepareStatement("insert into LocationsDatabase "
+							+ "(Name, County, State, Zip, Income, Rent, Mortgage, NoMortgage, CrimeRate, Region, Population)"
+							+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					for (Location loc : LocationList) {
+						insertLocation.setString(1, loc.getCity());
+						insertLocation.setString(2, loc.getCounty());
+						insertLocation.setString(3, loc.getState());
+						insertLocation.setString(4, loc.getZipcode());
+						insertLocation.setInt(5, loc.getAvgSalaryPerHouse());
+						insertLocation.setFloat(6, loc.getCostOfLivingRent());
+						insertLocation.setFloat(7, loc.getCostOfLivingOwnWithMortgage());
+						insertLocation.setFloat(8, loc.getCostOfLivingOwnNoMortgage());
+						insertLocation.setInt(9, loc.getCrimeRate());
+						insertLocation.setString(10, loc.getRegion());
+						insertLocation.setInt(11, loc.getPopulation());
+						
+						insertLocation.addBatch();
+					}
+					insertLocation.executeBatch();
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 					// populate UserDatabase table
 					insertUser = conn.prepareStatement("insert into UserDatabase (Username, Password) values (?, ?)");
 					for (Users user : UsersList) {
@@ -828,17 +892,37 @@ public class DerbyDatabase implements IDatabase {
 						insertCrimeRate.addBatch();
 					}
 					insertCrimeRate.executeBatch();
-					// populate CostOfLiving table
-					insertCOL = conn.prepareStatement("insert into CostOfLiving (Scale, CostOfLivingIndex) values (?, ?)");
-					for (CostOfLiving C : CostOfLivingList) {
+					// populate Rent table
+				/*
+					insertRent = conn.prepareStatement("insert into CostOfLivingRent (Scale, CostOfLivingIndex) values (?, ?)");
+					for (CostOfLiving C : CostOfLivingListRent) {
 //						
-						insertCOL.setInt(1, C.getScale());
-						insertCOL.setInt(2, C.getCostOfLivingIndex());
-						insertCOL.addBatch();
+						insertRent.setInt(1, C.getScale());
+						insertRent.setInt(2, C.getCostOfLivingIndex());
+						insertRent.addBatch();
 					}
-					insertCOL.executeBatch();
+					insertRent.executeBatch();
 					
+					// populate Mortgage table
+					insertMortgage = conn.prepareStatement("insert into CostOfLivingMortgage (Scale, CostOfLivingIndex) values (?, ?)");
+					for (CostOfLiving C : CostOfLivingListMortgage) {
+//						
+						insertMortgage.setInt(1, C.getScale());
+						insertMortgage.setInt(2, C.getCostOfLivingIndex());
+						insertMortgage.addBatch();
+					}
+					insertMortgage.executeBatch();
 					
+					// populate NoMortgage table
+					insertNoMortgage = conn.prepareStatement("insert into CostOfLivingNoMortgage (Scale, CostOfLivingIndex) values (?, ?)");
+					for (CostOfLiving C : CostOfLivingListNoMortgage) {
+//						
+						insertNoMortgage.setInt(1, C.getScale());
+						insertNoMortgage.setInt(2, C.getCostOfLivingIndex());
+						insertNoMortgage.addBatch();
+					}
+					insertNoMortgage.executeBatch();
+					*/
 					return true;
 				} finally {
 					DBUtil.closeQuietly(insertUser);
