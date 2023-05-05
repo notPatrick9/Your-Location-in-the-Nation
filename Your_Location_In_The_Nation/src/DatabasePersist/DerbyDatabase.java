@@ -636,7 +636,8 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt6 = null;
 				PreparedStatement stmt7 = null;
 				PreparedStatement stmt8 = null;
-				//this will create the table used for storing our users username and password
+				
+				// Create Table for list of locations
 				try {
 					stmt0 = conn.prepareStatement(
 							"create table LocationsDatabase (" +
@@ -655,6 +656,7 @@ public class DerbyDatabase implements IDatabase {
 					);
 					stmt0.executeUpdate();
 					
+					//this will create the table used for storing our users username and password
 					stmt1 = conn.prepareStatement(
 						"create table UserDatabase (" +
 						" Username varchar(40)," +
@@ -764,13 +766,9 @@ public class DerbyDatabase implements IDatabase {
 					CostOfLivingListRent = InitialData.getCostOfLivingRent();
 					CostOfLivingListMortgage = InitialData.getCostOfLivingMortgage();
 					CostOfLivingListNoMortgage = InitialData.getCostOfLivingMortgage();
-					
-					//Need to add these to intial data and get csvs
-					/*
 					CostOfLivingListRent = InitialData.getCostOfLivingRent();
 					CostOfLivingListMortgage = InitialData.getCostOfLivingMortgage();
 					CostOfLivingListNoMortgage = InitialData.getCostOfLivingMortgage();
-					*/
 					
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
@@ -861,7 +859,6 @@ public class DerbyDatabase implements IDatabase {
 					}
 					insertCrimeRate.executeBatch();
 					
-				/*
 				 	// populate Rent table
 					insertRent = conn.prepareStatement("insert into CostOfLivingRent (Scale, CostOfLivingIndex) values (?, ?)");
 					for (CostOfLiving C : CostOfLivingListRent) {
@@ -891,8 +888,6 @@ public class DerbyDatabase implements IDatabase {
 						insertNoMortgage.addBatch();
 					}
 					insertNoMortgage.executeBatch();
-
-				 	*/
 					
 					return true;
 				} finally {
