@@ -1,15 +1,8 @@
 ----------------------------------------------------------------
-<<<<<<< HEAD
-Wed May 03 14:02:17 EDT 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0187-e2c7-7c5b-00000a8f23e8 
+Fri May 05 02:15:59 EDT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0187-ea8d-944e-00000a8bce08 
 on database directory C:\Users\devin\git\Your-Location-in-the-Nation\Your_Location_In_The_Nation\test.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/devin/eclipse-workspace/CS320_Lab02/CS320_Derby/lib/derby.jar
-=======
-Thu May 04 14:27:54 EDT 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0187-e805-3e46-00000e428af8 
-on database directory C:\Users\Ryan\git\Your_Location_In_The_Nation_Repo\Your_Location_In_The_Nation\test.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
-Loaded from file:/C:/CS320_2023/CS320_Derby/CS320_Derby/lib/derby.jar
->>>>>>> refs/remotes/Ryan/master
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_351-b10
 user.dir=C:\Users\devin\git\Your-Location-in-the-Nation\Your_Location_In_The_Nation

@@ -43,6 +43,7 @@ public class DerbyDatabase implements IDatabase {
 	@SuppressWarnings("resource")
 	
 	
+	// Getting a failed transaction here
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
 			return doExecuteTransaction(txn);
@@ -346,11 +347,6 @@ public class DerbyDatabase implements IDatabase {
 				SavedLocs.add(resultSet.getString(2));
 				
 			}
-
-			
-	
-	
-		
 		} finally {
 			DBUtil.closeQuietly(resultSet);
 			DBUtil.closeQuietly(stmt);
@@ -359,6 +355,7 @@ public class DerbyDatabase implements IDatabase {
 		return SavedLocs;
 			
 	}
+
 	//need to insert into SavedLocations, and popular Locations
 	@Override
 	public boolean SaveLocation(String Username, String Zipcode) throws SQLException {
@@ -413,11 +410,6 @@ public class DerbyDatabase implements IDatabase {
 						);
 					stmt.setString(1, Username);
 					stmt.setString(2, Zipcode);
-					
-					
-					
-					
-					
 					
 					//was boolean executed = 
 					stmt.execute();
@@ -486,9 +478,6 @@ public class DerbyDatabase implements IDatabase {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet resultSet = null;
-
-		
-			
 			
 		try {
 			// connect to the database
@@ -534,14 +523,7 @@ public class DerbyDatabase implements IDatabase {
 				Location.setRegion(resultSet.getString(10));
 				
 				Location.setPopulation(resultSet.getInt(11));
-				
-				
-				
 			}
-
-			
-	
-	
 		
 		} finally {
 			DBUtil.closeQuietly(resultSet);
@@ -549,12 +531,6 @@ public class DerbyDatabase implements IDatabase {
 		}
 		
 		return Location;
-		
-		
-		
-		
-		
-		
 	}
 	
 	//for later
