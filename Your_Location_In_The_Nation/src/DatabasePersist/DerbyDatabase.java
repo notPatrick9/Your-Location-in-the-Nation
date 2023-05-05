@@ -470,16 +470,158 @@ public class DerbyDatabase implements IDatabase {
 	
 	}
 	
-	//need to reimplement this function for Locations to load a location
-	/*
-	private void loadAuthor(Author author, ResultSet resultSet, int index) throws SQLException {
-		author.setAuthorId(resultSet.getInt(index++));
-		author.setLastname(resultSet.getString(index++));
-		author.setFirstname(resultSet.getString(index++));
-	}
-	*/
+	@Override
+	public Location viewZipcodeinfo(String Zipcode) throws SQLException {
+		
+		Location Location = new Location();
+		
+		try {
+			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+		} catch (Exception e) {
+			System.err.println("Could not load Derby JDBC driver");
+			System.err.println(e.getMessage());
+			System.exit(1);
+		}
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+
+		
+			
+			
+		try {
+			// connect to the database
+			conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
+		}
+		catch(SQLException e) {
+			System.err.println("Bad Connection");
+		}
+		//for the query there are placeholder names for now where the real database column names will be 
+		try {
+
+			stmt = conn.prepareStatement(
+					"select Name, County, State, Zip, Income, Rent, Mortgage, NoMortgage, CrimeRate, Region, Population "
+					+ " from LocationsDatabase"
+					+ " where Zip = ?"
+					);
+			stmt.setString(1, Zipcode);
+			
+			resultSet = stmt.executeQuery();
+			
+			if (resultSet.next()) {
+				//these are also placeholders here until the location model class gets updated
+				
+				//name
+				Location.setLocationName(resultSet.getString(1));
+				//County
+				Location.setCounty(resultSet.getString(2));
+				//State
+				Location.setState(resultSet.getString(3));
+				//Income
+				Location.setZipcode(resultSet.getString(4));
+				//Rent
+				Location.setAvgSalaryPerHouse(resultSet.getInt(5));
+				//Mortgage
+				Location.setCostOfLivingRent(resultSet.getInt(6));
+				//No mortgage
+				Location.setCostOfLivingOwnWithMortgage(resultSet.getInt(7));
+				//CrimeRate
+				Location.setCostOfLivingOwnNoMortgage(resultSet.getInt(8));
+				//Region
+				Location.setCrimeRate(resultSet.getInt(9));
+				//Population
+				Location.setRegion(resultSet.getString(10));
+				
+				Location.setPopulation(resultSet.getInt(11));
+				
+				
+				
+			}
+
+			
 	
-	//need to reimplement this function for all of our tables 
+	
+		
+		} finally {
+			DBUtil.closeQuietly(resultSet);
+			DBUtil.closeQuietly(stmt);
+		}
+		
+		return Location;
+		
+		
+		
+		
+		
+		
+	}
+	
+	//for later
+	//might implement this as a separate page, or possibly as a drop down on the index page
+	@Override
+	public List<String> getZipcodesForAreaName(String Name) throws SQLException {
+		List<String> Zipcodes = new ArrayList<String>();
+		
+		try {
+			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+		} catch (Exception e) {
+			System.err.println("Could not load Derby JDBC driver");
+			System.err.println(e.getMessage());
+			System.exit(1);
+		}
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+
+		
+			
+			
+		try {
+			// connect to the database
+			conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
+		}
+		catch(SQLException e) {
+			System.err.println("Bad Connection");
+		}
+		//for the query there are placeholder names for now where the real database column names will be 
+		try {
+
+			stmt = conn.prepareStatement(
+					"select Zip "
+					+ " from LocationsDatabase "
+					+ " where Name = ?"
+					);
+			stmt.setString(1, Name);
+			
+			resultSet = stmt.executeQuery();
+			
+			while (resultSet.next()) {
+				//should add all zipcodes for the area into the list
+				Zipcodes.add(resultSet.getString(1));
+				}
+
+			
+	
+	
+		
+		} finally {
+			DBUtil.closeQuietly(resultSet);
+			DBUtil.closeQuietly(stmt);
+		}
+		
+		return Zipcodes;
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
@@ -512,6 +654,44 @@ public class DerbyDatabase implements IDatabase {
 							")"
 					);
 					stmt0.executeUpdate();
+					
+					stmt0 = conn.prepareStatement(
+							"create table LocationsDatabase (" +
+							" Name varchar(40), " +
+							" County varchar(40), " +
+							" State varchar(2), " +
+							" Zip varchar(5), " +
+							" Income int, " +
+							" Rent float, " +
+							" Mortgage float, " +
+							" NoMortgage float, " +
+							" CrimeRate int, " +
+							" Region varchar(40), " +
+							" Population int " + 
+							")"
+							);
+					/*
+					stmt0 = conn.prepareStatement(
+							"create table LocationsDatabase (" +
+									" Name varchar(40)," +
+									" County varchar(40) "+
+									" State varchar(2), " +
+									" Zip varchar(2), " +
+									" Income int, " +
+									" Rent float, " +
+									" Mortgage float, " +
+									" NoMortgage float, " +
+									" CrimeRate int, " +
+									" Region varchar, "
+									")"
+							);
+							*/
+					stmt0.executeUpdate();
+					
+					
+					
+					
+					
 					
 					stmt1 = conn.prepareStatement(
 						"create table UserDatabase (" +
@@ -591,6 +771,7 @@ public class DerbyDatabase implements IDatabase {
 					DBUtil.closeQuietly(stmt8);
 				}
 			}
+			
 		});
 	}
 	
@@ -618,9 +799,18 @@ public class DerbyDatabase implements IDatabase {
 					PopularLocationsList = InitialData.getPopularLocations();
 					AverageSalaryList = InitialData.getAverageSalary();
 					CrimeRateList = InitialData.getCrimeRate();
+<<<<<<< HEAD
 					CostOfLivingListRent = InitialData.getCostOfLivingRent();
 					CostOfLivingListMortgage = InitialData.getCostOfLivingMortgage();
 					CostOfLivingListNoMortgage = InitialData.getCostOfLivingMortgage();
+=======
+					//Need to add these to intial data and get csvs
+					/*
+					CostOfLivingListRent = InitialData.getCostOfLivingRent();
+					CostOfLivingListMortgage = InitialData.getCostOfLivingMortgage();
+					CostOfLivingListNoMortgage = InitialData.getCostOfLivingMortgage();
+					*/
+>>>>>>> refs/remotes/Ryan/master
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -634,8 +824,13 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement insertRent = null;
 				PreparedStatement insertMortgage = null;
 				PreparedStatement insertNoMortgage = null;
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/Ryan/master
 
 				try {
+<<<<<<< HEAD
 					// populate Locations table
 					insertLocation = conn.prepareStatement("insert into LocationsDatabase "
 							+ "(Name, County, State, Zip, Income, Rent, Mortgage, NoMortgage, CrimeRate, Region, Population)"
@@ -655,6 +850,41 @@ public class DerbyDatabase implements IDatabase {
 						insertLocation.addBatch();
 					}
 					insertLocation.executeBatch();
+=======
+					
+					
+					// populate Locations table
+					insertLocation = conn.prepareStatement("insert into LocationsDatabase "
+							+ "(Name, County, State, Zip, Income, Rent, Mortgage, NoMortgage, CrimeRate, Region, Population)"
+							+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					for (Location loc : LocationList) {
+						insertLocation.setString(1, loc.getCity());
+						insertLocation.setString(2, loc.getCounty());
+						insertLocation.setString(3, loc.getState());
+						insertLocation.setString(4, loc.getZipcode());
+						insertLocation.setInt(5, loc.getAvgSalaryPerHouse());
+						insertLocation.setFloat(6, loc.getCostOfLivingRent());
+						insertLocation.setFloat(7, loc.getCostOfLivingOwnWithMortgage());
+						insertLocation.setFloat(8, loc.getCostOfLivingOwnNoMortgage());
+						insertLocation.setInt(9, loc.getCrimeRate());
+						insertLocation.setString(10, loc.getRegion());
+						insertLocation.setInt(11, loc.getPopulation());
+						
+						insertLocation.addBatch();
+					}
+					insertLocation.executeBatch();
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+>>>>>>> refs/remotes/Ryan/master
 					
 					// populate UserDatabase table
 					insertUser = conn.prepareStatement("insert into UserDatabase (Username, Password) values (?, ?)");
@@ -709,8 +939,13 @@ public class DerbyDatabase implements IDatabase {
 						insertCrimeRate.addBatch();
 					}
 					insertCrimeRate.executeBatch();
+<<<<<<< HEAD
 					
 					// populate Rent table
+=======
+					// populate Rent table
+				/*
+>>>>>>> refs/remotes/Ryan/master
 					insertRent = conn.prepareStatement("insert into CostOfLivingRent (Scale, CostOfLivingIndex) values (?, ?)");
 					for (CostOfLiving C : CostOfLivingListRent) {
 //						
@@ -719,6 +954,7 @@ public class DerbyDatabase implements IDatabase {
 						insertRent.addBatch();
 					}
 					insertRent.executeBatch();
+<<<<<<< HEAD
 					
 					// populate Mortgage table
 					insertMortgage = conn.prepareStatement("insert into CostOfLivingMortgage (Scale, CostOfLivingIndex) values (?, ?)");
@@ -739,8 +975,29 @@ public class DerbyDatabase implements IDatabase {
 						insertNoMortgage.addBatch();
 					}
 					insertNoMortgage.executeBatch();
+=======
+>>>>>>> refs/remotes/Ryan/master
 					
+					// populate Mortgage table
+					insertMortgage = conn.prepareStatement("insert into CostOfLivingMortgage (Scale, CostOfLivingIndex) values (?, ?)");
+					for (CostOfLiving C : CostOfLivingListMortgage) {
+//						
+						insertMortgage.setInt(1, C.getScale());
+						insertMortgage.setInt(2, C.getCostOfLivingIndex());
+						insertMortgage.addBatch();
+					}
+					insertMortgage.executeBatch();
 					
+					// populate NoMortgage table
+					insertNoMortgage = conn.prepareStatement("insert into CostOfLivingNoMortgage (Scale, CostOfLivingIndex) values (?, ?)");
+					for (CostOfLiving C : CostOfLivingListNoMortgage) {
+//						
+						insertNoMortgage.setInt(1, C.getScale());
+						insertNoMortgage.setInt(2, C.getCostOfLivingIndex());
+						insertNoMortgage.addBatch();
+					}
+					insertNoMortgage.executeBatch();
+					*/
 					return true;
 				} finally {
 					DBUtil.closeQuietly(insertUser);
@@ -769,6 +1026,12 @@ public class DerbyDatabase implements IDatabase {
 		
 		System.out.println("Success!");
 	}
+
+	
+
+	
+
+	
 
 	
 

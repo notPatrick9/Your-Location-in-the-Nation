@@ -19,6 +19,19 @@
   
   
   <servlet>
+    <servlet-name>SearchByZipcodeServlet</servlet-name>
+    <servlet-class>servlet.SearchByZipcodeServlet</servlet-class>
+  </servlet>
+  
+  
+   <servlet>
+    <servlet-name>ViewZipsForAreaServlet</servlet-name>
+    <servlet-class>servlet.ViewZipsForAreaServlet</servlet-class>
+  </servlet>
+  
+  
+  
+  <servlet>
     <servlet-name>QuestionsServlet</servlet-name>
     <servlet-class>servlet.QuestionsServlet</servlet-class>
   </servlet>
@@ -58,6 +71,15 @@
   </servlet-mapping>
   
   
+  <servlet-mapping>
+    <servlet-name>SearchByZipcodeServlet</servlet-name>
+    <url-pattern>/searchzip</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>ViewZipsForAreaServlet</servlet-name>
+    <url-pattern>/viewzips</url-pattern>
+  </servlet-mapping>
   
   <servlet-mapping>
     <servlet-name>OutputServlet</servlet-name>

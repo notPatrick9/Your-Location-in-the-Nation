@@ -16,6 +16,7 @@ import UserModel.Users;
 //need to implement later
 public class InitialData {
 	//Get initial data from Locations.csv
+<<<<<<< HEAD
 	public static List<Location> getLocations() throws IOException {
 		List<Location> LocationList = new ArrayList<Location>();
 		ReadCSV readLocations = new ReadCSV("Locations.csv");
@@ -39,14 +40,39 @@ public class InitialData {
 				Loc.setCrimeRate(Integer.parseInt(i.next()));
 				Loc.setRegion(i.next());
 				Loc.setPopulation(Integer.parseInt(i.next()));
+=======
+		public static List<Location> getLocations() throws IOException {
+			List<Location> LocationList = new ArrayList<Location>();
+			ReadCSV readLocations = new ReadCSV("Locations.csv");
+			try {
+>>>>>>> refs/remotes/Ryan/master
 				
-				LocationList.add(Loc);
+				while (true) {
+					List<String> tuple = readLocations.next();
+					if (tuple == null) {
+						break;
+					}
+					Iterator<String> i = tuple.iterator();
+					Location Loc = new Location();
+					Loc.setCity(i.next());
+					Loc.setCounty(i.next());
+					Loc.setState(i.next());
+					Loc.setZipcode(i.next());
+					Loc.setAvgSalaryPerHouse(Integer.parseInt(i.next()));
+					Loc.setCostOfLivingRent(Float.parseFloat(i.next()));
+					Loc.setCostOfLivingOwnWithMortgage(Float.parseFloat(i.next()));
+					Loc.setCostOfLivingOwnNoMortgage(Float.parseFloat(i.next()));
+					Loc.setCrimeRate(Integer.parseInt(i.next()));
+					Loc.setRegion(i.next());
+					Loc.setPopulation(Integer.parseInt(i.next()));
+					
+					LocationList.add(Loc);
+				}
+				return LocationList;
+			} finally {
+				readLocations.close();
 			}
-			return LocationList;
-		} finally {
-			readLocations.close();
 		}
-	}
 	//This will get intial data from the UserDatabase
 	public static List<Users> getUsers() throws IOException {
 		List<Users> UserList = new ArrayList<Users>();

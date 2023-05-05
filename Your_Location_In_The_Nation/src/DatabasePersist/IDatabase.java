@@ -3,6 +3,7 @@ package DatabasePersist;
 import java.sql.SQLException;
 import java.util.List;
 
+import LocationModel.Location;
 import UserModel.PopularLocations;
 import UserModel.SavedLocations;
 
@@ -23,5 +24,11 @@ public interface IDatabase {
 	//function for saving a location(will also save into popular location
 
 	public boolean SaveLocation(String Username, String Zipcode) throws SQLException;
+	
+	
+	public Location viewZipcodeinfo(String Zipcode) throws SQLException;
+	
+	public List<String> getZipcodesForAreaName(String Name) throws SQLException;
+	
 	
 }
