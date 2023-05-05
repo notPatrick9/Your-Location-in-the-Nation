@@ -196,7 +196,7 @@ public static List<CostOfLiving> getCostOfLivingRent() throws IOException {
 			Iterator<String> i = tuple.iterator();
 			CostOfLiving COL = new CostOfLiving();
 			COL.setScale(Integer.parseInt(i.next()));
-			COL.setCostOfLivingIndex(Integer.parseInt(i.next()));
+			COL.setCostOfLivingIndex(Float.parseFloat(i.next()));
 			
 			
 			CostOfLivingList.add(COL);
@@ -223,7 +223,7 @@ public static List<CostOfLiving> getCostOfLivingMortgage() throws IOException {
 			Iterator<String> i = tuple.iterator();
 			CostOfLiving COL = new CostOfLiving();
 			COL.setScale(Integer.parseInt(i.next()));
-			COL.setCostOfLivingIndex(Integer.parseInt(i.next()));
+			COL.setCostOfLivingIndex(Float.parseFloat(i.next()));
 			
 			
 			CostOfLivingList.add(COL);
@@ -250,7 +250,7 @@ public static List<CostOfLiving> getCostOfLivingNoMortgage() throws IOException 
 			Iterator<String> i = tuple.iterator();
 			CostOfLiving COL = new CostOfLiving();
 			COL.setScale(Integer.parseInt(i.next()));
-			COL.setCostOfLivingIndex(Integer.parseInt(i.next()));
+			COL.setCostOfLivingIndex(Float.parseFloat(i.next()));
 			
 			
 			CostOfLivingList.add(COL);

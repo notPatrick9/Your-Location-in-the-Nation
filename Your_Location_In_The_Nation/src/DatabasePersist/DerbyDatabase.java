@@ -622,9 +622,9 @@ public class DerbyDatabase implements IDatabase {
 							" State varchar(2), " +
 							" Zip varchar(5), " +
 							" Income int, " +
-							" Rent float(40,1), " +
-							" Mortgage float(40,1), " +
-							" NoMortgage float(40,1), " +
+							" Rent float, " +
+							" Mortgage float, " +
+							" NoMortgage float, " +
 							" CrimeRate int, " +
 							" Region varchar(40), " +
 							" Population int" +
@@ -764,7 +764,7 @@ public class DerbyDatabase implements IDatabase {
 					// populate Locations table
 					insertLocation = conn.prepareStatement("insert into LocationsDatabase "
 							+ "(Name, County, State, Zip, Income, Rent, Mortgage, NoMortgage, CrimeRate, Region, Population)"
-							+ "calues (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+							+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 					for (Location loc : LocationList) {
 						insertLocation.setString(1, loc.getCity());
 						insertLocation.setString(2, loc.getCounty());
@@ -840,7 +840,7 @@ public class DerbyDatabase implements IDatabase {
 					for (CostOfLiving C : CostOfLivingListRent) {
 //						
 						insertRent.setInt(1, C.getScale());
-						insertRent.setInt(2, C.getCostOfLivingIndex());
+						insertRent.setFloat(2, C.getCostOfLivingIndex());
 						insertRent.addBatch();
 					}
 					insertRent.executeBatch();
@@ -850,7 +850,7 @@ public class DerbyDatabase implements IDatabase {
 					for (CostOfLiving C : CostOfLivingListMortgage) {
 //						
 						insertMortgage.setInt(1, C.getScale());
-						insertMortgage.setInt(2, C.getCostOfLivingIndex());
+						insertMortgage.setFloat(2, C.getCostOfLivingIndex());
 						insertMortgage.addBatch();
 					}
 					insertMortgage.executeBatch();
@@ -860,7 +860,7 @@ public class DerbyDatabase implements IDatabase {
 					for (CostOfLiving C : CostOfLivingListNoMortgage) {
 //						
 						insertNoMortgage.setInt(1, C.getScale());
-						insertNoMortgage.setInt(2, C.getCostOfLivingIndex());
+						insertNoMortgage.setFloat(2, C.getCostOfLivingIndex());
 						insertNoMortgage.addBatch();
 					}
 					insertNoMortgage.executeBatch();
