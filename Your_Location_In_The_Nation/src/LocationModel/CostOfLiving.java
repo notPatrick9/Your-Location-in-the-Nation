@@ -2,7 +2,7 @@ package LocationModel;
 
 public class CostOfLiving {
 	private int Scale;
-	private int CostOfLivingIndex;
+	private float CostOfLivingIndex;
 	
 	public CostOfLiving() {
 		
@@ -14,10 +14,10 @@ public class CostOfLiving {
 	public void setScale(int scale) {
 		Scale = scale;
 	}
-	public int getCostOfLivingIndex() {
+	public float getCostOfLivingIndex() {
 		return CostOfLivingIndex;
 	}
-	public void setCostOfLivingIndex(int costOfLivingIndex) {
+	public void setCostOfLivingIndex(float costOfLivingIndex) {
 		CostOfLivingIndex = costOfLivingIndex;
 	}
 }

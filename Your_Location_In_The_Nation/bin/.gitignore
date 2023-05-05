@@ -1,7 +1,7 @@
-/FakeDatabase/
-/servlet/
-/FindLocation/
-/DatabasePersist/
-/LocationDatares/
-/System/
-/ThingsToDo/
+/testCreateUser.class
+/testFactorGetter.class
+/testGetRentScales.class
+/testLogin.class
+/testSaveLocation.class
+/testViewPopularLocation.class
+/testViewSavedLocations.class
