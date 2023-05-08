@@ -35,6 +35,21 @@ public class IndexServlet extends HttpServlet {
 			return;
 		}
 		
+		else if(req.getParameter("GotoLogin") != null) {
+			resp.sendRedirect(req.getContextPath() + "/Login");
+			return;
+		}
+		//new buttons 
+		else if(req.getParameter("GotoSearch") != null) {
+			resp.sendRedirect(req.getContextPath() + "/searchzip");
+			return;
+		}
+		else if(req.getParameter("GotoViewZips") != null) {
+			resp.sendRedirect(req.getContextPath() + "/viewzips");
+			return;
+		}
+		
+		
 	}
 	
 }

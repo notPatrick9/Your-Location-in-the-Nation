@@ -538,6 +538,10 @@ public class DerbyDatabase implements IDatabase {
 				
 				
 			}
+			//test for now
+			else {
+				Location = null;
+			}
 
 			
 	
@@ -597,10 +601,16 @@ public class DerbyDatabase implements IDatabase {
 			
 			resultSet = stmt.executeQuery();
 			
+			
+			
+			
+			
 			while (resultSet.next()) {
 				//should add all zipcodes for the area into the list
 				Zipcodes.add(resultSet.getString(1));
-				}
+			}
+			
+			
 
 			
 	
