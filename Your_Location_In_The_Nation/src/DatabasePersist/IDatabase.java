@@ -31,4 +31,9 @@ public interface IDatabase {
 	public List<String> getZipcodesForAreaName(String Name) throws SQLException;
 	
 	
+	public Location getLocation(int Income, float costOfliving, int CrimeRate, int CostOfLivingType, int mostImportantUserFact) throws SQLException;
+	
+	
+	
+	
 }

@@ -1,10 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-
-
-
-
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,20 +11,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import FakeDatabase.FakeData;
 import FindLocation.GetLocation;
+import FindLocation.UserScales;
 import LocationModel.Location;
+import SQLData.FactorGetter;
+import DatabasePersist.DerbyDatabase;
+
+
 
 public class QuestionsServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     
-    private FakeData database;
-    private List<Location> LocationList;
+    
+    
   
     @Override
     public void init() throws ServletException {
         super.init();
-        database = new FakeData();
-        LocationList = database.getLocationList();
+        
+        DerbyDatabase database = new DerbyDatabase();
     }
 
     @Override
@@ -45,33 +47,28 @@ public class QuestionsServlet extends HttpServlet {
             throws ServletException, IOException {
 
         System.out.println("Question Servlet: doPost");
-
+        System.out.print("\n" + req.getParameter("COLTypes"));
         // holds the error message text, if there is any
         String errorMessage = null;
-
+        String COLType = null;
         // result of calculation goes here
         Location bestLocation = null;
+        
+        int CostOfLivingType = 0;
+        int mostImportantUserFact;
+        
+        
+        DerbyDatabase database = new DerbyDatabase();
+        FactorGetter FactorRetriver = new FactorGetter();
+        
+        
+        
+        
+        
 
         // decode POSTed form parameters and dispatch to controller
 //<<<<<<< HEAD
-        try {
-            int crimeRateFactor = Integer.parseInt(req.getParameter("crimeRateFactor"));
-            int averageSalaryFactor = Integer.parseInt(req.getParameter("averageSalaryFactor"));
-            int costOfLivingFactor = Integer.parseInt(req.getParameter("costOfLivingFactor"));
-
-            if (crimeRateFactor + averageSalaryFactor + costOfLivingFactor != 10) {
-                errorMessage = "Please answer all the questions and make them equal to 10.";
-            } else {
-                GetLocation locationGetter = new GetLocation(crimeRateFactor, averageSalaryFactor, costOfLivingFactor, 1, LocationList);
-             
-                bestLocation = locationGetter.FindBestLocation();
-            }
-        } catch (NumberFormatException e) {
-            errorMessage = "Invalid int";
-        } catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-//=======
+        
         
         if(req.getParameter("Backtoindex") != null) {
 			resp.sendRedirect(req.getContextPath() + "/index");
@@ -83,7 +80,7 @@ public class QuestionsServlet extends HttpServlet {
                 int crimeRateFactor = getIntFromParameter(req.getParameter("crimeRate"));
                 int averageSalaryFactor = getIntFromParameter(req.getParameter("averageSalary"));
                 int costOfLivingFactor = getIntFromParameter(req.getParameter("costOfLiving"));
-                
+                COLType = req.getParameter("COLTypes");
                 
                 System.out.print(crimeRateFactor);
                 System.out.print(averageSalaryFactor);
@@ -93,11 +90,48 @@ public class QuestionsServlet extends HttpServlet {
                 
                 if (crimeRateFactor + averageSalaryFactor + costOfLivingFactor != 10) {
                     errorMessage = "Please answer all the questions and make them equal to 10.";
-                } else {
-                    // TEMP COST OF LIVING TYPE 
-                	GetLocation locationGetter = new GetLocation(crimeRateFactor, averageSalaryFactor, costOfLivingFactor, 1, LocationList);
-                 
-                    bestLocation = locationGetter.FindBestLocation();
+                } 
+                else {
+                    //get COL Type
+                	if(COLType == "Rent") {
+                		CostOfLivingType = 0;
+                	}
+                	else if(COLType == "Mortgage") {
+                		CostOfLivingType = 1;
+                	}
+                	else if(COLType == "NoMortgage") {
+                		CostOfLivingType = 2;
+                	}
+                	
+                	
+                	
+                	//need to get scales first
+                	int CrimeFactor = FactorRetriver.Get_Crime_Factor(crimeRateFactor);
+            		int AvgSalaryPerHouseFactor = FactorRetriver.Get_AvgSalary_Factor(averageSalaryFactor);
+            		float CostOfLivingFactor = FactorRetriver.Get_CostofLiving_Factor(costOfLivingFactor, CostOfLivingType);
+                	
+                	//most important user factor
+            		
+            		if(crimeRateFactor >= averageSalaryFactor) {
+            			//crime rate
+        		        if(crimeRateFactor >= costOfLivingFactor) mostImportantUserFact = 2;
+        		        //cost of living
+        		        else mostImportantUserFact = 1;
+        		    }
+        		    else {
+        		    	  //avg sal
+        		          if(averageSalaryFactor>=costOfLivingFactor) mostImportantUserFact = 0;
+        		          
+        		          //cost of living
+        		          else mostImportantUserFact = 1;
+        		       }
+            		
+            		
+                	
+                	
+                	
+                	
+                	bestLocation = database.getLocation(averageSalaryFactor, CostOfLivingFactor, CrimeFactor, CostOfLivingType, mostImportantUserFact);
                     
                     if(bestLocation != null) {
                     	 // store user object in session
@@ -113,8 +147,11 @@ public class QuestionsServlet extends HttpServlet {
             
             } catch (ClassNotFoundException r) {
     		
-    			e.printStackTrace();
-    		}
+    			r.printStackTrace();
+    		} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
     		// Add parameters as request attributes
     		// this creates attributes named "first" and "second for the response, and grabs the
@@ -134,7 +171,7 @@ public class QuestionsServlet extends HttpServlet {
             req.getRequestDispatcher("/_view/questions.jsp").forward(req, resp);
         }
       }    
-    }
+    
     
  // gets double from the request with attribute named s
  	private int getIntFromParameter(String s) {

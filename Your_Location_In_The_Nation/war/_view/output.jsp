@@ -105,23 +105,57 @@ h2 {
 <table>
 				
 				<tr>
-					<td class="label">Crime rate:</td>
-					<td>${CrimeRate}</td>
+					<td class="label">Name:</td>
+					<td>${bestLoc.locationName}</td>
 				</tr>
+				<tr>
+					<td class="label">County:</td>
+					<td>${bestLoc.county}</td>
+				</tr>
+				
+				<tr>
+					<td class="label">State:</td>
+					<td>${bestLoc.state}</td>
+				</tr>
+				<tr>
+					<td class="label">Zipcode:</td>
+					<td>${bestLoc.zipcode}</td>
+				</tr>
+				
 				<tr>
 					<td class="label">Average salary: </td>
 					<td>${AvgSalary}</td>
 				</tr>
 				<tr>
-					<td class="label">Cost of living:</td>
-					<td>${CostOfLiving}</td>
-					
+					<td class="label">Cost of Living(Rent): </td>
+					<td>${bestLoc.costOfLivingRent}</td>
 				</tr>
-				<tr>
-					<td class="label">County: </td>
-					<td>${County}</td>
 				
+				<tr>
+					<td class="label">Cost of Living(Mortgage): </td>
+					<td>${bestLoc.costOfLivingOwnWithMortgage}</td>
 				</tr>
+				
+				<tr>
+					<td class="label">Cost of Living(No Mortgage): </td>
+					<td>${bestLoc.costOfLivingOwnNoMortgage}</td>
+				</tr>
+				
+				<tr>
+					<td class="label">Crime rate:</td>
+					<td>${bestLoc.crimeRate}</td>
+				</tr>
+				
+				<tr>
+					<td class="label">Region:</td>
+					<td>${bestLoc.region}</td>
+				</tr>
+				
+				<tr>
+					<td class="label">Population:</td>
+					<td>${bestLoc.population}</td>
+				</tr>
+				
 				<tr> 
 					<td class="label">Fun things to do: </td>
 					<td>${FunThingsToDo}</td>

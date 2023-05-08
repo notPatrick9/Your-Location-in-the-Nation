@@ -164,6 +164,16 @@ img {
 					<td><input type="text" name="costOfLiving" size="12" value="${costOfLiving}" /></td>
 				</tr>
 			</table>
+			
+			<select name = "COLTypes" multiple>
+  				<option value="Rent">Rent</option>
+  				<option value="Mortgage">Mortgage</option>
+  				<option value="NoMortgage">NoMortgage</option>
+  				
+			</select>
+			
+			
+			
       
 			<input class="button button1" type="Submit" name="submit" value="Submit!">
       <br> 

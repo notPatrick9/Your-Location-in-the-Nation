@@ -627,6 +627,191 @@ public class DerbyDatabase implements IDatabase {
 		
 	}
 	
+	@SuppressWarnings("resource")
+	@Override
+	public Location getLocation(int Income, float costOfliving, int CrimeRate, int CostOfLivingType, int mostImportantUserFact) throws SQLException {
+		List<Location> Locations = new ArrayList<Location>();
+		Location bestLoc = null;
+		String costOfLivingQuery = null;
+		String UserFactor = null;
+		String orderBy = null;
+		
+		
+		
+		
+		
+		try {
+			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+		} catch (Exception e) {
+			System.err.println("Could not load Derby JDBC driver");
+			System.err.println(e.getMessage());
+			System.exit(1);
+		}
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+
+		
+			
+			
+		try {
+			// connect to the database
+			conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
+		}
+		catch(SQLException e) {
+			System.err.println("Bad Connection");
+		}
+		//for the query there are placeholder names for now where the real database column names will be 
+		try {
+			String orderby = null;
+			//income
+			if(mostImportantUserFact == 0) {
+				orderby = "order by Income ASC";
+				}
+			//COL
+			else if(mostImportantUserFact == 1) {
+				//Rent
+				if(CostOfLivingType == 0) {
+					orderby = "order by Rent DESC";
+				}
+				//Mortgage
+				else if(CostOfLivingType == 1) {
+					orderby = "order by Mortgage DESC";
+				}
+				else {
+					orderby = "order by NoMortgage DESC";
+				}
+					
+				
+			}
+			//CrimeRate
+			else if(mostImportantUserFact == 2) {
+				
+				orderby = "order by CrimeRate DESC";
+						
+			}
+			
+			
+			
+			
+			//query with cost of living types
+			//Rent
+			if(CostOfLivingType == 0) {
+				stmt = conn.prepareStatement(
+						"select Name, County, State, Zip, Income, Rent, Mortgage, NoMortgage, CrimeRate, Region, Population "
+						+ " from LocationsDatabase "
+						+ " where Income > ? and Rent < ? and CrimeRate < ? " +
+						orderby
+						);
+				
+				stmt.setInt(1, Income);
+				
+				stmt.setFloat(2, costOfliving);
+				stmt.setInt(3, CrimeRate);
+				
+				
+				
+				
+			}
+			//Mortgage
+			else if(CostOfLivingType == 1) {
+				stmt = conn.prepareStatement(
+						"select Name, County, State, Zip, Income, Rent, Mortgage, NoMortgage, CrimeRate, Region, Population "
+						+ " from LocationsDatabase "
+						+ " where Income > ? and Mortgage < ? and CrimeRate < ? "
+						+ orderby
+						);
+				
+				stmt.setInt(1, Income);
+				
+				stmt.setFloat(2, costOfliving);
+				stmt.setInt(3, CrimeRate);
+				
+				
+				
+			}
+			//NoMortgage
+			else if(CostOfLivingType == 2) {
+				stmt = conn.prepareStatement(
+						"select Name, County, State, Zip, Income, Rent, Mortgage, NoMortgage, CrimeRate, Region, Population "
+						+ " from LocationsDatabase "
+						+ " where Income > ? and NoMortgage < ? and CrimeRate < ? " 
+						+ orderby
+						);
+				
+				stmt.setInt(1, Income);
+				
+				stmt.setFloat(2, costOfliving);
+				stmt.setInt(3, CrimeRate);
+				
+				
+				
+			}
+			
+			//add orderby statement for most important user factor
+			
+		
+			
+			
+			
+			//execute the query
+			resultSet = stmt.executeQuery();
+			
+			
+			
+			while (resultSet.next()) {
+				//these are also placeholders here until the location model class gets updated
+				Location Location = new Location();
+				//name
+				Location.setLocationName(resultSet.getString(1));
+				//County
+				Location.setCounty(resultSet.getString(2));
+				//State
+				Location.setState(resultSet.getString(3));
+				//Income
+				Location.setZipcode(resultSet.getString(4));
+				//Rent
+				Location.setAvgSalaryPerHouse(resultSet.getInt(5));
+				//Mortgage
+				Location.setCostOfLivingRent(resultSet.getInt(6));
+				//No mortgage
+				Location.setCostOfLivingOwnWithMortgage(resultSet.getInt(7));
+				//CrimeRate
+				Location.setCostOfLivingOwnNoMortgage(resultSet.getInt(8));
+				//Region
+				Location.setCrimeRate(resultSet.getInt(9));
+				//Population
+				Location.setRegion(resultSet.getString(10));
+				
+				Location.setPopulation(resultSet.getInt(11));
+				
+				Locations.add(Location);
+				
+			}
+			
+			bestLoc = Locations.get(Locations.size() - 1);
+			
+			
+			
+			
+
+			
+	
+	
+		
+		} finally {
+			DBUtil.closeQuietly(resultSet);
+			DBUtil.closeQuietly(stmt);
+		}
+		return bestLoc;
+		
+		
+		
+		
+		
+	}
+	
 	
 	
 	
