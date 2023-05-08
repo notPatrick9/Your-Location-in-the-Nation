@@ -101,7 +101,7 @@ h2 {
 			<div class="error">${errorMessage}</div>
 </c:if>
 
-
+<!-- need to add animation -->
 <table>
 				
 				<tr>
