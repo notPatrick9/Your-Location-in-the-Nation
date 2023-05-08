@@ -270,7 +270,8 @@ public class DerbyDatabase implements IDatabase {
 		try {
 
 			stmt = conn.prepareStatement(
-					"select * from PopularLocations"
+					"select * from PopularLocations "
+					+ " order by NumberOfSaves DESC"
 					);
 			
 			resultSet = stmt.executeQuery();
@@ -289,7 +290,7 @@ public class DerbyDatabase implements IDatabase {
 				PopularLocs.add(PopLoc);
 			}
 			//ensures that it is returned with the location with the most saves at the front of the list, and descends down after each index
-			PopularLocs.sort(new PopLocComparator());
+			//PopularLocs.sort(new PopLocComparator());
 	
 	
 		
