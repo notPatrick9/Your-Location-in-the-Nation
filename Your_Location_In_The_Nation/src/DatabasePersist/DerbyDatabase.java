@@ -525,18 +525,10 @@ public class DerbyDatabase implements IDatabase {
 				
 				Location.setPopulation(resultSet.getInt(11));
 			}
-<<<<<<< HEAD
-=======
 			//test for now
 			else {
 				Location = null;
 			}
-
-			
-	
-	
->>>>>>> refs/remotes/Ryan/master
-		
 		} finally {
 			DBUtil.closeQuietly(resultSet);
 			DBUtil.closeQuietly(stmt);
@@ -610,9 +602,7 @@ public class DerbyDatabase implements IDatabase {
 		
 		
 	}
-	
-<<<<<<< HEAD
-=======
+
 	@SuppressWarnings("resource")
 	@Override
 	public Location getLocation(int Income, float costOfliving, int CrimeRate, int CostOfLivingType, int mostImportantUserFact) throws SQLException {
@@ -798,13 +788,6 @@ public class DerbyDatabase implements IDatabase {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
->>>>>>> refs/remotes/Ryan/master
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
