@@ -1035,7 +1035,6 @@ public class DerbyDatabase implements IDatabase {
 					insertNoMortgage = conn.prepareStatement("insert into CostOfLivingNoMortgage (Scale, CostOfLivingIndex) values (?, ?)");
 					for (CostOfLiving C : CostOfLivingListNoMortgage) {
 //						
-						System.out.println(C.getCostOfLivingIndex());
 						insertNoMortgage.setInt(1, C.getScale());
 						insertNoMortgage.setFloat(2, C.getCostOfLivingIndex());
 						insertNoMortgage.addBatch();

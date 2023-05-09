@@ -158,8 +158,6 @@ public class FactorGetter {
 	public float Get_CostofLiving_Factor(int Scale, int COLType) throws ClassNotFoundException, IOException {
 		//string that will hold sql query requestion
 		
-		System.out.println("scale is " + Scale + ", col type is " + COLType);
-		
 		float Factor = 0.0f;
 		//checks to see if user arguments were valid
 		if((Scale < 0 || Scale > 10)) {
@@ -204,7 +202,6 @@ public class FactorGetter {
 								+ "where Scale = ?"
 					);
 			} else {
-				System.out.println("TEST TEST TEST");
 				stmt = conn.prepareStatement(
 						"select CostOfLivingIndex "
 								+ "from CostOfLivingNoMortgage "
@@ -218,7 +215,6 @@ public class FactorGetter {
 			resultSet = stmt.executeQuery();
 
 			if(resultSet.next()) {
-				System.out.println("output is " + resultSet.getFloat(1));
 				Factor = resultSet.getFloat(1);
 			}
 		} catch (SQLException e) {
