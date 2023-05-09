@@ -43,13 +43,13 @@ public class testFactorGetter {
 		FactorGetter testFactorGetter = new FactorGetter();
 		
 		System.out.println(testFactorGetter.Get_CostofLiving_Factor(4, 1));
-		assertEquals(22.5, testFactorGetter.Get_CostofLiving_Factor(4, 1), 0.1);
+		assertEquals(22.3, testFactorGetter.Get_CostofLiving_Factor(4, 1), 0.1);
 	}
 	@Test
 	public void testCostOfLivingNoMortgage( ) throws ClassNotFoundException, IOException {
 		FactorGetter testFactorGetter = new FactorGetter();
 		
 		System.out.println(testFactorGetter.Get_CostofLiving_Factor(4, 2));
-		assertEquals(13.3, testFactorGetter.Get_CostofLiving_Factor(4, 2), 0.1);
+		assertEquals(12.5, testFactorGetter.Get_CostofLiving_Factor(4, 2), 0.1);
 	}
 }

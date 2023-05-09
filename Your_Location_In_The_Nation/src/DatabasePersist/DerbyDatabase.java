@@ -555,9 +555,6 @@ public class DerbyDatabase implements IDatabase {
 		PreparedStatement stmt = null;
 		ResultSet resultSet = null;
 
-		
-			
-			
 		try {
 			// connect to the database
 			conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
@@ -577,20 +574,10 @@ public class DerbyDatabase implements IDatabase {
 			
 			resultSet = stmt.executeQuery();
 			
-			
-			
-			
-			
 			while (resultSet.next()) {
 				//should add all zipcodes for the area into the list
 				Zipcodes.add(resultSet.getString(1));
 			}
-			
-			
-
-			
-	
-	
 		
 		} finally {
 			DBUtil.closeQuietly(resultSet);
@@ -933,7 +920,7 @@ public class DerbyDatabase implements IDatabase {
 					CostOfLivingListNoMortgage = InitialData.getCostOfLivingMortgage();
 					CostOfLivingListRent = InitialData.getCostOfLivingRent();
 					CostOfLivingListMortgage = InitialData.getCostOfLivingMortgage();
-					CostOfLivingListNoMortgage = InitialData.getCostOfLivingMortgage();
+					CostOfLivingListNoMortgage = InitialData.getCostOfLivingNoMortgage();
 					
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
@@ -1048,6 +1035,7 @@ public class DerbyDatabase implements IDatabase {
 					insertNoMortgage = conn.prepareStatement("insert into CostOfLivingNoMortgage (Scale, CostOfLivingIndex) values (?, ?)");
 					for (CostOfLiving C : CostOfLivingListNoMortgage) {
 //						
+						System.out.println(C.getCostOfLivingIndex());
 						insertNoMortgage.setInt(1, C.getScale());
 						insertNoMortgage.setFloat(2, C.getCostOfLivingIndex());
 						insertNoMortgage.addBatch();

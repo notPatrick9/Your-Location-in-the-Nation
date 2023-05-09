@@ -204,6 +204,7 @@ public class FactorGetter {
 								+ "where Scale = ?"
 					);
 			} else {
+				System.out.println("TEST TEST TEST");
 				stmt = conn.prepareStatement(
 						"select CostOfLivingIndex "
 								+ "from CostOfLivingNoMortgage "
