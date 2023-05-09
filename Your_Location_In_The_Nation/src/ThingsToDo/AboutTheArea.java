@@ -42,7 +42,7 @@ public class AboutTheArea {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String API_Key = "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";
+		String API_Key = "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";
 		URLConnection conn = (HttpURLConnection) url.openConnection();
 		
 		
@@ -55,7 +55,7 @@ public class AboutTheArea {
 		
 		String jsonInputString = "{\r\n"
 				+ "    \"model\": \"text-davinci-003\",\r\n"
-				+ "    \"prompt\": \"Give information and fun things to do for the zipcode " + Zipcode +"dont include name of the town its in\",\r\n"
+				+ "    \"prompt\": \"Give information and fun things to do for the zipcode in paragraph " + Zipcode +"dont include name of the town its in\",\r\n"
 				+ "    \"max_tokens\": 350,\r\n"
 				+ "    \"temperature\": 0\r\n"
 				+ "  }";

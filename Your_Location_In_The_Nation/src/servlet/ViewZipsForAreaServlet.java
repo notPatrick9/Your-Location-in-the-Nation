@@ -41,26 +41,39 @@ public class ViewZipsForAreaServlet extends HttpServlet {
 		String errorMessage;
     	String AreaName = req.getParameter("AreaName");
         List<String> Zips = null;
-		try {
-			 Zips = database.getZipcodesForAreaName(AreaName);
-			 //System.out.print("PopLoc" + PopularLocations.get(0).getNumberOfSaves());
-			  
-		     
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
         
+        if(req.getParameter("submit") != null) {
+        	try {
+   			 Zips = database.getZipcodesForAreaName(AreaName);
+   			 //System.out.print("PopLoc" + PopularLocations.get(0).getNumberOfSaves());
+   			  
+   		     
+   		} catch (SQLException e) {
+   			// TODO Auto-generated catch block
+   			e.printStackTrace();
+   		}
+           
 
-		if(Zips == null) {
-			errorMessage = "There is no area in our database that matched that zipcode";
-		}
-		else {
-			req.setAttribute("Zips", Zips);
-		}
-	       
-	    
-		req.getRequestDispatcher("/_view/ZipsForArea.jsp").forward(req, resp);
+   		if(Zips.isEmpty()) {
+   			errorMessage = "There is no zipcode in our database that matched that area";
+   			req.setAttribute("errorMessage", errorMessage);
+   			System.out.print(errorMessage);
+   		}
+   		else {
+   			req.setAttribute("Zips", Zips);
+   		}
+   	       
+   	    
+   		req.getRequestDispatcher("/_view/ZipsForArea.jsp").forward(req, resp);
+        }
+        
+        else if(req.getParameter("index")!= null) {
+        	resp.sendRedirect(req.getContextPath() + "/index");
+        	return;
+        }
+        
+        
+		
 	    
 	}
 }

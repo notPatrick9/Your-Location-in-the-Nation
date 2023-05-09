@@ -4,64 +4,196 @@
 
 <html>
 	<head>
+		
+		
 		<title>Zip Info</title>
+		
+		
+		
 		<style type="text/css">
-		.error {
-			color: red;
+		
+		* {background-color: lightblue}
+		
+		
+		
+		
+		.header {
+			color: #4CAF50;
+  			text-align: center;
+   			font-family: Arial, Helvetica, sans-serif;		
 		}
 		
-		td.label {
-			text-align: right;
+		.index {
+			position: relative;
+			left: -45%;
+			bottom: 60%;
+			background-color:  #4CAF50;
+  			color: black;
+  			border: 2px solid #4CAF50;
+			height: 50px;
+			width: 100px;
+			
+		}
+		
+		
+		.LocationTable{
+			position : absolute;
+			top: 70%;
+			left: 12%;
+			border: 1px solid;
+		
+		}
+		tr, th {
+			border: 1px solid;
+		}
+	
+		.error {
+			position: relative;
+			left: 130%;
+			color: red;
+			
+		
+		}
+		
+		.searchbar {
+			text-align: center;
+			height: 25px;
+			width: 450px;
+			
+			
+		}
+		.Enter {
+			background-color:  #4CAF50;
+  			color: black;
+  			border: 2px solid #4CAF50;
+			position: relative;
+			height: 75px;
+			width: 150px;
+			top: 10%;
+		}
+		.searchDiv {
+			
+  			margin: auto;
+  			position: absolute;
+  			text-align: center;
+  			top: 40%;
+  			bottom: 50%;
+  			left: 25%;
+  			
+  			width: 50%;  
+			
 		}
 		</style>
+		
+		
+		
+		
+	
+	
+	
+	
 	</head>
 
 	<body>
-		<c:if test="${! empty errorMessage}">
-			<div class="error">${errorMessage}</div>
-		</c:if>
+
 	
 		<form action="${pageContext.servletContext.contextPath}/searchzip" method="post">
 			
-				<tr>
-					<td class="label">Enter the Zipcode that you would like more information about! </td>
-					<td><input type="text" name="Zipcode" size="12" value="${Zipcode}" /></td>
-				</tr>
+				<div class = "searchDiv">
 				
-				<input type="Submit" name="submit" value="View Zipcode Info!">
+				<input class = "searchbar" type="text" name="Zipcode" size="75" value="${Zipcode}" />
+				
+				<br>
+				
+				<input class = "Enter" type="Submit" name="submit" value="Search">
+				
+				</div>
+				
+			<div class="header">
+				<p align="center">Enter the Zipcode that you would like more information about!</p>
+			
+				<input class = "index" type="Submit" name="index" value="Index">
+			
+			
+				<hr  color="black">
+		
+		
+			</div>
+				
 				
 			</form>
 				
 				
 				
-				<!-- These are just placeholders for now. The names in the Location model class will be different than these-->
-			<c:if test="${! empty Location}">
+				
+			
+					
+			<div class = "LocationTable">
+					
+				
+				<c:if test="${! empty errorMessage}">
+					<div class="error">${errorMessage}</div>
+				
+				</c:if>
+				
+				
+				
+				
+					
+					
+				<c:if test="${! empty Location}">
+				
+				
+				<table>
+					
 					<tr>
-					<td class="label">Here is some information:</td>
-					<td class="label">Location Name: </td>
-					<td>${Location.city}</td>
-					<td class="label">county: </td>
-					<td>${Location.county}</td>
-					<td class="label">State: </td>
-					<td>${Location.state}</td>
-					<td class="label">Zipcode: </td>
-					<td>${Location.zipcode}</td>
-					<td class="label">Income: </td>
-					<td>${avgsal}</td>
-					<td class="label">Rent: </td>
-					<td>${Location.costOfLivingRent}</td>
-					<td class="label">CostOfLivingOwnWithMortgage: </td>
-					<td>${Location.costOfLivingOwnWithMortgage}</td>
-					<td class="label">No mortgage: </td>
-					<td>${Location.costOfLivingOwnNoMortgage}</td>
-					<td class="label">CrimeRate: </td>
-					<td>${Location.crimeRate}</td>
-					<td class="label">Region: </td>
-					<td>${Location.region}</td>
-					<td class="label">Population: </td>
-					<td>${Location.population}</td>
-				</tr>
-			</c:if>
+						<th>Name</th>
+						<th>County</th>
+						<th>State</th>
+						<th>Zipcode</th>
+						<th>Income</th>
+						<th>Cost of Living(with rent)</th>
+						<th>Cost of Living(with mortgage)</th>
+						<th>Cost of Living(with no mortgage)</th>
+						<th>Crime Rate</th>
+						<th>Region</th>
+						<th>Population</th>
+					
+					
+					
+					</tr>
+					
+					
+					<tr>
+					
+						<th>${Location.locationName}</th>
+						<th>${Location.county}</th>
+						<th>${Location.state}</th>
+						<th>${Location.zipcode}</th>
+						<th>${avgsal}</th>
+						<th>${Location.costOfLivingRent}</th>
+						<th>${Location.costOfLivingOwnWithMortgage}</th>
+						<th>${Location.costOfLivingOwnNoMortgage}</th>
+						<th>${Location.crimeRate}</th>
+						<th>${Location.region}</th>
+						<th>${Location.population}</th>
+					
+					
+					
+					
+					</tr>
+					
+					
+					
+					
+					</table>
+				
+				</c:if>
+				
+				
+				</div>
+					
+		
 				
 			
 		

@@ -4,37 +4,132 @@
 
 <html>
 	<head>
-		<title>Zip Info</title>
+		
+		
+		<title>Zip for area</title>
+		
+		
+		
 		<style type="text/css">
-		.error {
-			color: red;
+		
+		* {background-color: lightblue}
+		
+		
+		
+		
+		.header {
+			color: #4CAF50;
+  			text-align: center;
+   			font-family: Arial, Helvetica, sans-serif;		
 		}
 		
-		td.label {
-			text-align: right;
+		.index {
+			position: relative;
+			left: -45%;
+			bottom: 60%;
+			background-color:  #4CAF50;
+  			color: black;
+  			border: 2px solid #4CAF50;
+			height: 50px;
+			width: 100px;
+			
+		}
+		
+		
+		.Zips{
+			position : absolute;
+			top: 70%;
+			left: 12%;
+			
+		
+		}
+	
+		.error {
+			position: relative;
+			left: 110%;
+			color: red;
+			
+		
+		}
+		
+		.searchbar {
+			text-align: center;
+			height: 25px;
+			width: 450px;
+			
+			
+		}
+		.Enter {
+			background-color:  #4CAF50;
+  			color: black;
+  			border: 2px solid #4CAF50;
+			position: relative;
+			height: 75px;
+			width: 150px;
+			top: 10%;
+		}
+		.searchDiv {
+			
+  			margin: auto;
+  			position: absolute;
+  			text-align: center;
+  			top: 40%;
+  			bottom: 50%;
+  			left: 25%;
+  			
+  			width: 50%;  
+			
 		}
 		</style>
+		
+		
+		
+		
+	
+	
+	
+	
 	</head>
 
 	<body>
-		<c:if test="${! empty errorMessage}">
-			<div class="error">${errorMessage}</div>
-		</c:if>
+
 	
 		<form action="${pageContext.servletContext.contextPath}/viewzips" method="post">
 			
-				<tr>
-					<td class="label">Enter the area that you would like to get zipcodes for! </td>
-					<td><input type="text" name="AreaName" size="12" value="${Zipcode}" /></td>
-				</tr>
+				<div class = "searchDiv">
 				
-				<input type="Submit" name="submit" value="Get Zipcodes!">
+				<input class = "searchbar" type="text" name="AreaName" size="75" value="${AreaName}" />
+				
+				<br>
+				
+				<input class = "Enter" type="Submit" name="submit" value="Search">
+				
+				</div>
+				
+			<div class="header">
+				<p align="center">Search for an area name to get zipcodes for the area!</p>
+			
+				<input class = "index" type="Submit" name="index" value="Index">
+			
+			
+				<hr  color="black">
+		
+		
+			</div>
+				
 				
 			</form>
 				
+			
 				
+		<div class = "Zips">
+			
+			<c:if test="${! empty errorMessage}">
+					<div class="error">${errorMessage}</div>
 				
-				<!-- These are just placeholders for now. The names in the Location model class will be different than these-->
+				</c:if>
+			
+			
 			<c:if test="${! empty Zips}">
 					<c:forEach items="${Zips}" var="Zips">
 			      <tr class="Row">
@@ -43,7 +138,9 @@
 			        </tr>
 			    </c:forEach>
 			</c:if>
-				
+			
+			
+		</div>
 			
 		
 	</body>

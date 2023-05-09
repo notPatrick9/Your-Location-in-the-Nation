@@ -26,7 +26,7 @@ public class OutputServlet extends HttpServlet {
         
     }
 	
-	
+	//need to add animation 
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -70,11 +70,17 @@ public class OutputServlet extends HttpServlet {
 		Zipcode = bestLoc.getZipcode();
 		
 		
-		req.setAttribute("CrimeRate", bestLoc.getCrimeRate());
+		
 		req.setAttribute("AvgSalary", bestLoc.getAvgSalaryPerHouse());
-		//req.setAttribute("CostOfLiving", bestLoc.getCostOfLivingRent());
-		req.setAttribute("County", bestLoc.getCounty());
+		
+		
+		
 		req.setAttribute("FunThingsToDo", FunThingsToDo);
+		
+		
+		
+		req.setAttribute("bestLoc", bestLoc);
+		
 		
 		// add result objects as attributes
 		// this adds the errorMessage text and the result to the response

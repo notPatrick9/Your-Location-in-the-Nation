@@ -38,32 +38,48 @@ public class SearchByZipcodeServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("Popularlocations Servlet: doPost");
+		System.out.println("SearchByZipcode Servlet: doPost");
 		//needs database attribute
 		String errorMessage;
     	String Zipcode = req.getParameter("Zipcode");
         Location Location = null;
-		try {
-			Location = database.viewZipcodeinfo(Zipcode);
-			 //System.out.print("PopLoc" + PopularLocations.get(0).getNumberOfSaves());
-			  
-		     req.setAttribute("Location", Location);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
+		//if user clicks submit
+        if(req.getParameter("submit") != null) {
+        	try {
+    			Location = database.viewZipcodeinfo(Zipcode);
+    			 //System.out.print("PopLoc" + PopularLocations.get(0).getNumberOfSaves());
+    			  
+    		     req.setAttribute("Location", Location);
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+            
 
-		if(Location == null) {
-			errorMessage = "No Location in our database matched that zipcode";
-		}
-		else {
-			req.setAttribute("Location", Location);
-			req.setAttribute("avgsal", Location.getAvgSalaryPerHouse());
-		}
-	       
-	    
-		req.getRequestDispatcher("/_view/ViewZipInfo.jsp").forward(req, resp);
+    		if(Location == null) {
+    			errorMessage = "No Location in our database matched that zipcode";
+    			System.out.print(errorMessage);
+    			req.setAttribute("errorMessage", errorMessage);
+    		}
+    		else {
+    			req.setAttribute("Location", Location);
+    			req.setAttribute("avgsal", Location.getAvgSalaryPerHouse());
+    		}
+    	       
+    	    
+    		req.getRequestDispatcher("/_view/ViewZipInfo.jsp").forward(req, resp);
+        	
+        	
+        }
+        
+        //if the user clicks to go back to the index
+        else if(req.getParameter("index") != null) {
+        	resp.sendRedirect(req.getContextPath() + "/index");
+        	return;
+        }
+        
+        
+        
 	    
 	}
 }
