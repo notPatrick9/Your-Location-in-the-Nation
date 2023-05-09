@@ -158,7 +158,9 @@ public class FactorGetter {
 	public float Get_CostofLiving_Factor(int Scale, int COLType) throws ClassNotFoundException, IOException {
 		//string that will hold sql query requestion
 		
-		int Factor = 0;
+		System.out.println("scale is " + Scale + ", col type is " + COLType);
+		
+		float Factor = 0.0f;
 		//checks to see if user arguments were valid
 		if((Scale < 0 || Scale > 10)) {
 			throw new IllegalArgumentException("Scale must be between 1-10");
@@ -215,7 +217,8 @@ public class FactorGetter {
 			resultSet = stmt.executeQuery();
 
 			if(resultSet.next()) {
-				Factor = resultSet.getInt(1);
+				System.out.println("output is " + resultSet.getFloat(1));
+				Factor = resultSet.getFloat(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

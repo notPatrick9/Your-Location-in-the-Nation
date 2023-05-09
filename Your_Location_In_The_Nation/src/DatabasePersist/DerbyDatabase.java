@@ -593,12 +593,6 @@ public class DerbyDatabase implements IDatabase {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
@@ -676,7 +670,7 @@ public class DerbyDatabase implements IDatabase {
 					stmt6 = conn.prepareStatement(
 							"create table CostOfLivingRent (" +
 								" Scale int, " +
-								" CostOfLivingIndex int "
+								" CostOfLivingIndex float "
 								+")"
 							);
 					stmt6.executeUpdate();
@@ -684,7 +678,7 @@ public class DerbyDatabase implements IDatabase {
 					stmt7 = conn.prepareStatement(
 							"create table CostOfLivingMortgage (" +
 								" Scale int, " +
-								" CostOfLivingIndex int "
+								" CostOfLivingIndex float "
 								+")"
 							);
 					stmt7.executeUpdate();
@@ -692,7 +686,7 @@ public class DerbyDatabase implements IDatabase {
 					stmt8 = conn.prepareStatement(
 							"create table CostOfLivingNoMortgage (" +
 								" Scale int, " +
-								" CostOfLivingIndex int "
+								" CostOfLivingIndex float "
 								+")"
 							);
 					stmt8.executeUpdate();
