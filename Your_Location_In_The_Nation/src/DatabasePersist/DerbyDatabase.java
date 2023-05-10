@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import FakeDatabase.InitialData;
 import LocationModel.AverageSalary;
@@ -19,9 +18,6 @@ import LocationModel.Location;
 import UserModel.PopularLocations;
 import UserModel.SavedLocations;
 import UserModel.Users;
-
-
-
 
 public class DerbyDatabase implements IDatabase {
 	static {
