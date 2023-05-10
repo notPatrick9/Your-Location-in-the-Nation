@@ -887,7 +887,7 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
-	//need to reimplement this for all of our tables
+	//need to re-implement this for all of our tables
 	
 	public void loadInitialData() {
 		executeTransaction(new Transaction<Boolean>() {
